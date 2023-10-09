@@ -1,0 +1,20 @@
+{
+  "hash": "d94ccc603124bdf11b22b9b3dbccb6c2",
+  "result": {
+    "markdown": "---\ntitle: \"Network Analysis in R\"\nsubtitle: \"Workshop\"\nauthor: David Schoch\ninstitute: GESIS\ndate: today\ndate-format: \"YYYY-MM-DD\"\nfooter: \"@schochastics\"\nembed-resources: false\nformat: fakegesis-revealjs\ncss: styles.css\n---\n\n::: {.cell}\n\n:::\n\n\n:::{.center}\n![](img/qr-code.png){width=\"400\"}  \n<https://schochastics.github.io/netAnaR2023>\n:::\n\n## My R universe\n\n<img src=\"img/hex.png\" width=\"400\">\n\n\n## My R universe\n\n<img src=\"img/hex_net.png\" width=\"605\">\n\n# A Short Introduction to Network Analysis\n\n# R Package Ecosystem for Networks\n\n##\n\n![](img/tidyverse-meme.jpg)\n\n## What is \"base R\" for networks?\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](netAnaR_files/figure-revealjs/cranet-1.png){width=960}\n:::\n:::\n\n\n\n## What is the \"tidyverse\" for networks?\n\n## Resources\n\n**My tutorials**:  \n\n- Network Visualization: <https://www.mr.schochastics.net/material/netVizR/>\n\n- Network Analysis: <https://www.mr.schochastics.net/material/netAnaR/>\n\n- Tidy Network Analysis: <https://www.mr.schochastics.net/material/tidynetAnaR/>",
+    "supporting": [
+      "netAnaR_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

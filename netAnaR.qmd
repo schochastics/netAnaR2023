@@ -8,8 +8,6 @@ date-format: "YYYY-MM-DD"
 footer: "@schochastics"
 embed-resources: false
 format: fakegesis-revealjs
-execute:
-  freeze: auto
 css: styles.css
 ---
 
@@ -70,7 +68,6 @@ ggraph(g, "stress") +
 
 
 ## What is the "tidyverse" for networks?
-
 
 ## Resources
 
