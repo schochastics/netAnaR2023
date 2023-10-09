@@ -41,7 +41,10 @@ library(ggraph)
 
 ##
 
+:::{.center}
 ![](img/tidyverse-meme.jpg)
+:::
+
 
 ## What is "base R" for networks?
 
@@ -68,6 +71,25 @@ ggraph(g, "stress") +
 
 
 ## What is the "tidyverse" for networks?
+
+**tidygraph**  
+
+> This package provides a tidy API for graph/network manipulation. While network data itself is **not tidy**, it can be envisioned as **two tidy tables**, one for node data and one for edge data. tidygraph provides a way to switch between the two tables and provides `dplyr` verbs for manipulating them.
+
+
+##
+
+![](img/tidygraph-meme.jpg)
+
+## What is the "tidyverse" for networks?
+
+> It more or less wraps the full functionality of `igraph` in a tidy API giving you access to almost all of the dplyr verbs plus a few more, developed for use with relational data.
+
+##
+
+:::{.center}
+![](img/igraph-meme.jpg)
+:::
 
 ## Resources
 
