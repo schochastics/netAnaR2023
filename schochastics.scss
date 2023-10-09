@@ -1,0 +1,116 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+// fonts
+$font-family-sans-serif: 'Josefin Sans', sans-serif !default;
+$font-family-monospace: 'IBM Plex Mono', sans-serif !default;
+
+// colors
+$body-bg: #333333 !default;
+$body-color: white !default;
+$text-muted: $body-color !default;
+$link-color: #9EEBCF !default;
+$selection-bg: #ffd700 !default;
+$input-panel-bg: rgba(233, 236, 239, 0.2) !default;
+
+$code-block-bg: #222222;
+$code-block-border-color: #222222;
+
+// headings
+$presentation-heading-font: "Acme", sans-serif !default;
+$presentation-heading-color: #9EEBCF !default;
+$presentation-font-size-root: 36px;
+
+/*-- scss:rules --*/
+.subtitle{
+  font-family: "Acme", sans-serif;
+}
+
+.reveal .slide-number {
+  font-family: $presentation-heading-font;
+}
+
+.center-x{
+    text-align: center;
+}
+
+.highlight{
+  color: $selection-bg;
+}
+
+.reveal pre code {
+  background-color: #222222;
+  margin-bottom: 0.2em;
+}
+
+.reveal .highlight code{
+  color: $selection-bg;
+}
+
+.reveal div.sourceCode {
+  border: none;
+  border-radius: 5px;
+}
+
+code span.co {
+  color: #666666;
+}
+/*.reveal code{
+  color: white;
+  // font-family: "IBM Plex Mono";
+  background-color:  #222222;
+  font-size: 0.9em;
+}*/
+
+.cran-pkg a{
+  font-family: "IBM Plex Mono";
+  color: $presentation-heading-color;
+}
+
+.text15{
+  font-size: 1.5em;
+}
+
+.text35{
+  font-size: 3.5em;
+}
+
+.text09{
+  font-size: 0.9em;
+}
+
+.text08{
+  font-size: 0.8em;
+}
+
+.text07{
+  font-size: 0.7em;
+}
+
+.text06{
+  font-size: 0.6em;
+}
+
+.text05{
+  font-size: 0.5em;
+}
+
+.text04{
+  font-size: 0.4em;
+}
+
+//margin between consecutive paragraphs
+.reveal p + p { margin-top: 1.5em; }
+
+//margin between consecutive paragraphs
+.fragment + .fragment { margin-top: 1em; }
+
+.frame-box{
+  border: 3px solid $presentation-heading-color;
+  border-radius: 15px;
+  margin-bottom: 1em;
+  max-width: 100%;
+}

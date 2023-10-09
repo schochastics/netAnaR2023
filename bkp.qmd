@@ -1,0 +1,102 @@
+---
+title: "Network Analysis in R"
+subtitle: "Workshop"
+author: David Schoch
+institute: GESIS
+date: today
+date-format: "YYYY-MM-DD"
+footer: "@schochastics"
+embed-resources: false
+format: fakegesis-revealjs
+css: styles.css
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: setup
+
+library(ggraph)
+
+```
+
+:::{.center}
+![](img/qr-code.png){width="400"}  
+<https://schochastics.github.io/netAnaR2023>
+:::
+
+## My R universe
+
+<img src="img/hex.png" width="400">
+
+
+## My R universe
+
+<img src="img/hex_net.png" width="605">
+
+# A Short Introduction to Network Analysis
+
+# R Package Ecosystem for Networks
+
+##
+
+:::{.center}
+![](img/tidyverse-meme.jpg)
+:::
+
+
+## What is "base R" for networks?
+
+```{r}
+#| label: cranet
+g <- readRDS("dependnet.RDS")
+ggraph(g, "stress") +
+    geom_edge_link0(
+        edge_color = "grey66", edge_width = 0.3,
+        arrow = arrow(
+            angle = 15, length = unit(0.15, "inches"),
+            ends = "last", type = "closed"
+        )
+    ) +
+    geom_node_point(shape = 21, aes(fill = dep, size = seed)) +
+    scale_fill_brewer(type = "qual", name = "") +
+    scale_size_manual(values = c(2, 5), guide = "none") +
+    guides(fill = guide_legend(override.aes = list(size = 5))) +
+    theme_void() +
+    theme(legend.position = "bottom") +
+    coord_equal(clip = "off")
+
+```
+
+
+## What is the "tidyverse" for networks?
+
+**tidygraph**  
+
+> This package provides a tidy API for graph/network manipulation. While network data itself is **not tidy**, it can be envisioned as **two tidy tables**, one for node data and one for edge data. tidygraph provides a way to switch between the two tables and provides `dplyr` verbs for manipulating them.
+
+
+##
+
+![](img/tidygraph-meme.jpg)
+
+## What is the "tidyverse" for networks?
+
+> It more or less wraps the full functionality of `igraph` in a tidy API giving you access to almost all of the dplyr verbs plus a few more, developed for use with relational data.
+
+##
+
+:::{.center}
+![](img/igraph-meme.jpg)
+:::
+
+## Resources
+
+**My tutorials**:  
+
+- Network Visualization: <https://www.mr.schochastics.net/material/netVizR/>
+
+- Network Analysis: <https://www.mr.schochastics.net/material/netAnaR/>
+
+- Tidy Network Analysis: <https://www.mr.schochastics.net/material/tidynetAnaR/>

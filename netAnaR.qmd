@@ -1,25 +1,23 @@
 ---
 title: "Network Analysis in R"
-subtitle: "Workshop"
-author: David Schoch
-institute: GESIS
-date: today
-date-format: "YYYY-MM-DD"
-footer: "@schochastics"
-embed-resources: false
-format: fakegesis-revealjs
-css: styles.css
+subtitle: ""
+author: "David Schoch"
+footer: ""
+institute: "Worksho series for Ukraine"
+shortcodes:
+  - misc.lua
+format: 
+  revealjs: 
+    menu: true
+    progress: false
+    theme: "schochastics.scss"
+    slide-number: c/t
+    show-slide-number: all
+    code-line-numbers: false
+execute: 
+  cache: true
+  echo: true
 ---
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-#| label: setup
-
-library(ggraph)
-
-```
 
 :::{.center}
 ![](img/qr-code.png){width="400"}  
@@ -37,66 +35,886 @@ library(ggraph)
 
 # A Short Introduction to Network Analysis
 
-# R Package Ecosystem for Networks
 
-##
+## Why study networks?
+conventional research methods are often individual based
+and our models tend to model relations between variables
 
-:::{.center}
-![](img/tidyverse-meme.jpg)
+:::{.fragment}
+**but nature and culture is structured as networks**
+:::
+
+:::{.fragment}
+- **society**
+- brain (neural networks)
+- organizations (who reports to whom)
+- economies (who sells to whom)
+- ecologies (who eats whom)
+:::
+
+:::{.fragment}
+**Position within a network is important for predicting outcomes**
+:::
+
+## From "ordinary" to network data
+
+<br>
+
+:::{.fragment}
+**atomic data**  
+individuals or entities
+:::
+
+:::{.fragment}
+**dyadic data**  
+dependent pairs of individuals (e.g. couples)  
+but treated as independent entities
+:::
+
+:::{.fragment}
+**networks**  
+interdependent and overlapping dyads    
+usual (statistical) independence assumptions do not hold
+:::
+
+## 4 pillars of network analysis 
+
+:::{.text15}
+
+ 1. Social network analysis is motivated by a structural intuition based on ties linking social actors
+ 
+ 2. It is grounded in systematic empirical data
+ 
+ 3. It draws heavily on graphic imagery
+ 
+ 4. It relies on the use of mathematical and/or computational models
+
 :::
 
 
-## What is "base R" for networks?
+## Levels of Analysis
 
-```{r}
-#| label: cranet
-g <- readRDS("dependnet.RDS")
-ggraph(g, "stress") +
-    geom_edge_link0(
-        edge_color = "grey66", edge_width = 0.3,
-        arrow = arrow(
-            angle = 15, length = unit(0.15, "inches"),
-            ends = "last", type = "closed"
-        )
-    ) +
-    geom_node_point(shape = 21, aes(fill = dep, size = seed)) +
-    scale_fill_brewer(type = "qual", name = "") +
-    scale_size_manual(values = c(2, 5), guide = "none") +
-    guides(fill = guide_legend(override.aes = list(size = 5))) +
-    theme_void() +
-    theme(legend.position = "bottom") +
-    coord_equal(clip = "off")
+<br>
 
+:::{.fragment}
+**dyad level**  
+Fundamental unit of network data collection  
+("Does sharing offices lead to friendship?") 
+:::
+
+:::{.fragment}
+**node level**  
+Aggregation of dyad level measurement  
+("Do actors with more friends have a stronger immune system?")
+:::
+
+:::{.fragment}
+**network level**  
+Assessing overal structure of a network  
+("Do well connected networks diffuse ideas faster?")
+:::
+
+:::{.fragment .text08}
+more levels are possible (triads, groups, ...)
+:::
+
+## Types of relations I
+
+<br>
+
+:::{.fragment}
+**Relational states**  
+
+- Similarities: location, participation, attribute  
+- Relational roles: kinship, other roles  
+- Relational cognition: affective, perceptual
+:::
+
+:::{.fragment}
+**Relational events**  
+
+- Interactions: sold to, talked to, helped, ...
+- Flows: information, belief, money
+:::
+
+## Types of relations II
+
+<br>
+
+:::{.fragment}
+**undirected**  
+symmetric relation
+:::
+
+:::{.fragment}
+**directed**  
+asymmetric relation, but can be bi-directional
+:::
+
+:::{.fragment}
+**valued**  
+strength of relation, frequency of contact, etc.
+:::
+
+:::{.fragment}
+**signed**  
+positive and negative relations
+:::
+
+:::{.fragment}
+**or a mixture thereof**
+:::
+
+## Goals of analysis
+
+:::{.fragment}
+**Network variables as independent/explanatory**  
+
+> *Using network theory to explain the consequences of network properties*
+
+social capital, brokerage, adoption of innovation
+:::
+
+:::{.fragment}
+**Network variables as dependent/outcomes**  
+
+> *Using ______ theory to explain the antecendents of a network*
+
+homophily, balance theory
+:::
+
+
+## A tiny bit of math
+
+network data are represented as **graphs**  
+"graph" and "network" are technically different
+
+:::{.frame-box}
+A graph $G$ consists of a tuple $(V,E)$ where  
+$V=\{1,2,\ldots,n\}$ are the nodes (or vertices)  
+$E\subseteq \{(i,j): i,j \in V\}$ are the edges (or ties)
+:::
+
+**Most methods rely on concepts from graph theory**
+
+# R ecosystem for networks
+
+
+
+
+## Which package to choose?
+
+<br>
+
+use `igraph` if
+
+- you need speed (large networks)
+- you need to use other SNA packages
+
+:::{.fragment}
+use `sna` if
+
+- you need to do modeling (e.g. ERGMs and RSIENA)
+:::
+
+:::{.fragment}
+**does not make a difference in most cases, never load them both!**
+
+```{r load igraph}
+#| eval: false
+#| echo: true
+library(igraph)
+```
+:::
+
+## Creating simple networks
+
+```{r make_graph}
+g1 <- make_graph(c(1,2, 1,3, 2,3, 2,4, 3,5, 4,5), n = 5, dir = FALSE)
+g2 <- graph_from_literal(Joey-Chandler:Monica-Ross, Joey-Ross-Rachel)
+```
+:::: {.columns}
+::: {.column width="50%"}
+```{r make_graph_lot}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 4
+V(g1)$name <- 1:5
+ggraph(g1,"stress") + 
+  geom_edge_link0() +
+  geom_node_point(shape=21,size=8,fill="grey66")+
+  geom_node_text(aes(label=name))+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r make_literal_lot}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 4
+
+ggraph(g2,"stress") + 
+  geom_edge_link0() +
+  geom_node_point(shape=21,size=8,fill="grey66")+
+  geom_node_text(aes(label=name))+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+
+::::
+
+## Special graphs
+
+```{r make_examples}
+g3 <- make_full_graph(n = 10)
+g4 <- make_ring(n = 10)
+g5 <- make_empty_graph(n = 10)
+```
+
+:::: {.columns}
+::: {.column width="33%"}
+```{r full_graph_plot}
+#| echo: false
+#| fig.width: 3
+#| fig.height: 3
+ggraph(g3,"stress") + 
+  geom_edge_link0() +
+  geom_node_point(shape=21,size=8,fill="grey66")+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+
+::: {.column width="33%"}
+
+```{r ring_plot}
+#| echo: false
+#| fig.width: 3
+#| fig.height: 3
+
+ggraph(g4,"stress") + 
+  geom_edge_link0() +
+  geom_node_point(shape=21,size=8,fill="grey66")+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+
+::: {.column width="33%"}
+
+```{r empty_plot}
+#| echo: false
+#| fig.width: 3
+#| fig.height: 3
+
+ggraph(g5,"nicely") + 
+  geom_edge_link0() +
+  geom_node_point(shape=21,size=8,fill="grey66")+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+
+
+::::
+
+```{r igraph_make}
+#| eval: false
+ls("package:igraph",pattern = "make_*")
+```
+
+## Random graphs
+
+```{r make_randoms}
+g6 <- sample_gnp(n = 100,p = 0.1)
+g7 <- sample_pa(n = 100, power = 1.5, m = 1, directed = FALSE)
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r er_plot}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 4
+ggraph(g6,"stress") + 
+  geom_edge_link0(edge_width=0.5,edge_color="grey66") +
+  geom_node_point(shape=21,size=3,fill="grey66")+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r pa_plot}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 4
+
+ggraph(g7,"stress") + 
+  geom_edge_link0(edge_width=0.5,edge_color="grey66") +
+  geom_node_point(shape=21,size=2,fill="grey66")+
+  theme_graph()+
+  coord_fixed(clip="off")
+```
+
+:::
+::::
+
+```{r igraph_sample}
+#| eval: false
+ls("package:igraph",pattern = "sample_*")
+```
+
+## igraph objects 
+
+
+```{r igraph_obj}
+g2
+```
+
+<br>
+
+```{r str_igraph}
+library(netUtils)
+str(g2)
+```
+
+## Attributes
+
+:::{.fragment}
+**node attributes**
+```{r vadd_attr}
+V(g2)$name
+V(g2)$gender <- c("M","M","F","M","F") 
+# g2 <- set_vertex_attr("gender", c("M","M","F","M","F"))
+```
+:::
+
+:::{.fragment}
+**edge attributes**
+
+```{r eadd_attr}
+E(g2)
+E(g2)$weight <- sample(1:5,size = 6, replace = TRUE)
+# g2 <- set_edge_attr("weight", sample(1:5,size = 6, replace = TRUE))
+```
+:::
+
+## Attributes
+
+```{r igraph_obj1}
+g2
+```
+
+<br>
+
+```{r str_igraph1}
+str(g2)
+```
+
+## Network representations: adjacency matrix
+
+```{r adj_mat}
+A <- matrix(
+  c(0, 1, 1,
+    1, 0, 1,
+    1, 1, 0),
+  nrow = 3, ncol = 3, byrow = TRUE)
+rownames(A) <- c("Bob","Ann","Steve")
+colnames(A) <- c("Bob","Ann","Steve")
+A
+```
+
+- $A_{ij}=1$ if there is an edge between $i$ and $j$
+- $A$ is symmetric for undirected networks 
+- If $A_{ij}>1$ then the values are interpreted as weights 
+
+## Network representation: edgelist
+
+<br>
+
+```{r edge_lst}
+el <- matrix(
+  c("Bob","Ann",
+    "Bob","Steve",
+    "Ann","Steve"),
+  nrow = 3,ncol = 2, byrow = TRUE)
+el
+```
+
+more efficient for sparse data (null edges aren't stored)
+
+## Networks from matrices and lists
+
+**adjacency matrix**
+```{r from_adj}
+graph_from_adjacency_matrix(
+  A,
+  mode = "undirected",
+  weighted = NULL,
+  diag = FALSE)
+```
+
+**edgelist**
+```{r from_edgelist}
+graph_from_edgelist(el, directed = FALSE)
+```
+
+```{r graph_from}
+#| eval: false
+ls("package:igraph",pattern = "graph_from_*")
+```
+
+## Reading network data
+
+<br>
+
+:::{.fragment}
+**Data is already in R (e.g. `networkdata`)**  
+No extra work
+:::
+
+:::{.fragment}
+**Data was processed in another SNA tool**  
+```{r read_graph}
+#| eval: false
+read_graph(file, format = c("edgelist", "pajek", "ncol", "lgl",
+  "graphml", "dimacs", "graphdb", "gml", "dl"), ...)
+```
+Some extra work (with some issues) 
+:::
+
+:::{.fragment}
+**Data is in a csv/spreadsheet/..**  
+`read.table()`, `read.csv()`, {{< CRAN readxl >}}, {{< CRAN readr >}},...
+:::
+
+## Preparing network data
+
+**adjacency matrix**
+
+:::{.fragment }
+Does the matrix have row/col names?
+```{r adj1}
+#| eval: false
+tab <- read.csv(file, header = TRUE, row.names = 1) 
+A <- as.matrix(tab)
+```
+:::
+
+:::{.fragment }
+Is the network directed/undirected?
+
+```{r adj2}
+#| eval: false
+graph_from_adjacency_matrix(A, mode = c("directed","undirected"))
+```
+:::
+
+:::{.fragment }
+Is the network weighted/unweighted?
+
+```{r adj3}
+#| eval: false
+graph_from_adjacency_matrix(A, weighted = c(NULL, TRUE))
+```
+:::
+
+:::{.fragment }
+Does the network contain loops?
+
+```{r adj4}
+#| eval: false
+graph_from_adjacency_matrix(A, diag = c(TRUE, FALSE))
+```
+:::
+
+## Preparing network data
+
+**edgelist**
+
+:::{.fragment}
+```{r el1}
+#| eval: false
+tab <- read.csv(file, header = c(TRUE, FALSE)) 
+el <- as.matrix(tab)
+
+```
+:::
+
+:::{.fragment}
+Is the network directed/undirected?
+
+```{r el2}
+#| eval: false
+g <- graph_from_edgelist(el, directed = c(TRUE, FALSE))
+```
+:::
+
+:::{.fragment}
+Is the network weighted/unweighted?
+
+```{r el3}
+#| eval: false
+# assuming the weights are the 3rd column in el
+g <- graph_from_edgelist(el[,1:2], directed = c(TRUE, FALSE))
+E(g)$weight <- el[,3]
+```
+:::
+
+## Preparing network data
+
+<br><br>
+
+:::{.frame-box}
+**some stepping stones**
+
+- Are weights actually weights or different types of edges?
+- You can't always tell from an edgelist if the network is directed
+- Isolated nodes are lost if an edgelist is used
+:::
+
+## Preparing network data with attributes {.smaller}
+
+**Organize network data in two separate files**
+
+::::{.columns}
+:::{.column width="50%"}
+```{r el_df}
+#| echo: false
+data("greys")
+head(igraph::as_data_frame(greys)) |> knitr::kable()
+```
+:::
+:::{.column width="50%"}
+```{r node_df}
+#| echo: false
+head(igraph::as_data_frame(greys,what = "vertices")[,c(1,2,4)]) |> 
+  knitr::kable(row.names=FALSE)
+```
+:::
+:::
+
+<br>
+
+```{r df1}
+#| eval: false
+graph_from_data_frame(el, directed = c(TRUE, FALSE), vertices)
+```
+
+# Descriptive Statistics and some graph theory
+
+## Toy example
+```{r load_greys}
+data("greys")
 ```
 
 
-## What is the "tidyverse" for networks?
+```{r plot_greys}
+#| echo: false
+#| fig.width: 12
+#| fig.height: 8
+#| fig.align: center
+ggraph(greys,"stress",bbox=10) + 
+  geom_edge_link0(edge_color="grey66")+
+  geom_node_point(shape=21,aes(fill=sex),size=5,show.legend = FALSE)+
+  geom_node_text(aes(label=name),repel = TRUE)+
+  scale_fill_manual(values=c("grey66","#E8813A","#4D189D"))+
+  theme_void()
+```
 
-**tidygraph**  
+## Density
 
-> This package provides a tidy API for graph/network manipulation. While network data itself is **not tidy**, it can be envisioned as **two tidy tables**, one for node data and one for edge data. tidygraph provides a way to switch between the two tables and provides `dplyr` verbs for manipulating them.
+<br>
+
+The **density** of a network is defined as the fraction of the potential edges in a network that are actually present.
+```{r density}
+c(graph.density(make_empty_graph(10)), 
+  graph.density(greys), 
+  graph.density(make_full_graph(10)))
+```
+
+## Shortest Paths
+
+A **shortest path** is a path that connects two nodes in a network with a minimal number of edges. The length of a shortest path is called the distance between two nodes.
+
+```{r shortest_path}
+shortest_paths(greys,from = "Alex Karev",to = "Owen Hunt",output = "vpath")
+```
+
+## Shortest Paths
+```{r greys_shortest_path}
+#| echo: false
+#| fig.width: 12
+#| fig.height: 8
+#| fig.align: center
+E(greys)$epath <- FALSE
+E(greys)$epath[as.integer(shortest_paths(greys,from = "Alex Karev",to = "Owen Hunt",output = "epath")$epath[[1]])] <- TRUE
+
+ggraph(greys,"stress",bbox=10) + 
+  geom_edge_link0(aes(color=epath,width=epath),show.legend = FALSE)+
+  geom_node_point(shape=21,aes(fill=sex),size=5,show.legend = FALSE)+
+  geom_node_text(aes(label=name),repel = TRUE)+
+  scale_fill_manual(values=c("grey66","#E8813A","#4D189D"))+
+  scale_edge_color_manual(values=c("grey66","firebrick3"))+
+  scale_edge_width_manual(values=c(0.5,1.5))+
+  theme_void()
+
+```
+
+## Distances
+
+```{r distances}
+distances(greys)[1:5,1:5]
+```
+
+The Grey's Anatomy network is **disconnected** ($4$ **connected components**)
+
+## Small world phenomenon
+<br>
+ One can find a short chain of acquaintances (i.e. a shortest path), often of no more than a handful of individuals, connecting almost any two people on the planet.
+
+- Milgram's small-world experiment: 6 ("6 degrees of separation")
+- Average distance between users on Facebook (2016): 4.57
 
 
-##
+## Erdős number
+Paul Erdős published ~1525 papers with ~500 collaborators  
+The Erdős number of an individual is their distance to Paul Erdős in the 
+co-authorship network
 
-![](img/tidygraph-meme.jpg)
-
-## What is the "tidyverse" for networks?
-
-> It more or less wraps the full functionality of `igraph` in a tidy API giving you access to almost all of the dplyr verbs plus a few more, developed for use with relational data.
-
-##
-
-:::{.center}
-![](img/igraph-meme.jpg)
+:::{.center-x}
+![](img/erdos_number.png)
 :::
 
-## Resources
+## Bacon number
+The Bacon number of an actor is their distance to Kevin Bacon in the movie co-appearance network.
+ 
+![](img/bacon_number.png)
 
-**My tutorials**:  
+[Oracle of Bacon](https://oracleofbacon.org/)
 
-- Network Visualization: <https://www.mr.schochastics.net/material/netVizR/>
+## Erdős-Bacon-Sabbath number
+:::{.center-x}
+![](img/ebs_number.png){width="400"}
+:::
 
-- Network Analysis: <https://www.mr.schochastics.net/material/netAnaR/>
+## Zlatan number
+The Zlatan number is the distance of football players to Zlatan Ibrahimovic in the "squad network" ([blog post](http://blog.schochastics.net/post/six-degrees-of-zlatan-ibrahimovic/))
 
-- Tidy Network Analysis: <https://www.mr.schochastics.net/material/tidynetAnaR/>
+:::{.center-x}
+![](img/zlatan_number.png){width="900"}
+:::
+
+## Diameter
+
+The length of the longest shortest path is called the **diameter** of the network.
+
+```{r diameter}
+diameter(greys)
+```
+
+```{r greys_diameter}
+#| echo: false
+#| fig.width: 12
+#| fig.height: 8
+#| fig.align: center
+E(greys)$epath <- FALSE
+E(greys)$epath[as.integer(shortest_paths(greys,from = "Finn Dandridge",to = "Colin Marlow",output = "epath")$epath[[1]])] <- TRUE
+
+ggraph(greys,"stress",bbox=10) + 
+  geom_edge_link0(aes(color=epath,width=epath),show.legend = FALSE)+
+  geom_node_point(shape=21,aes(fill=sex),size=5,show.legend = FALSE)+
+  geom_node_text(aes(label=name),repel = TRUE)+
+  scale_fill_manual(values=c("grey66","#E8813A","#4D189D"))+
+  scale_edge_color_manual(values=c("grey66","firebrick3"))+
+  scale_edge_width_manual(values=c(0.5,1.5))+
+  theme_void()
+
+```
+
+<!-- - Diameter = 1 &rArr;	You know everyone
+- Diameter = 2 &rArr;	Your friends know everyone
+- Diameter = 3 &rArr;	Your friends know someone who knows everyone -->
+
+## Transitivity
+
+**Transitivity** is a measure of the degree to which nodes in a graph tend to cluster together. This is also called the **clustering coefficient**. 
+
+**local**  
+gives an indication of the embeddedness of single nodes
+
+```{r ccoef_example}
+#| echo: false
+#| fig.width: 15
+#| fig.height: 5
+#| fig.align: center
+library(patchwork)
+g1 <- make_full_graph(4)
+V(g1)$focal <- FALSE
+V(g1)$focal[1] <- TRUE
+E(g1)$from1 <- FALSE
+E(g1)$from1[incident_edges(g1,1)[[1]]] <- TRUE
+xy <- graphlayouts::layout_with_stress(g1)
+xy <- graphlayouts::layout_rotate(xy,20)
+p1 <- ggraph(g1, "manual",x = xy[,1],y = xy[,2]) + 
+  geom_edge_link0(aes(edge_width=from1,edge_color=from1),show.legend = FALSE)+
+  geom_node_point(shape=21,aes(fill=focal),show.legend = FALSE,size=15,stroke=1.5)+
+  scale_fill_manual(values=c("grey66","#ffd700"))+
+  scale_edge_width_manual(values=c(2,0.5))+
+  scale_edge_color_manual(values=c("grey25","grey66")) + 
+  theme_graph()+
+  coord_cartesian(clip = "off")
+
+g2 <- delete.edges(g1,c(4,6))
+p2 <- ggraph(g2, "manual",x = xy[,1],y = xy[,2]) + 
+  geom_edge_link0(aes(edge_width=from1,edge_color=from1),show.legend = FALSE)+
+  geom_node_point(shape=21,aes(fill=focal),show.legend = FALSE,size=15,stroke=1.5)+
+  scale_fill_manual(values=c("grey66","#ffd700"))+
+  scale_edge_width_manual(values=c(2,0.5))+
+  scale_edge_color_manual(values=c("grey25","grey66")) + 
+  theme_graph()+
+  coord_cartesian(clip = "off")
+
+g3 <- delete.edges(g1,c(4,5,6))
+p3 <- ggraph(g3, "manual",x = xy[,1],y = xy[,2]) + 
+  geom_edge_link0(aes(edge_width=from1,edge_color=from1),show.legend = FALSE)+
+  geom_node_point(shape=21,aes(fill=focal),show.legend = FALSE,size=15,stroke=1.5)+
+  scale_fill_manual(values=c("grey66","#ffd700"))+
+  scale_edge_width_manual(values=c(0.5,0.5))+
+  scale_edge_color_manual(values=c("grey66","grey66")) + 
+  theme_graph()+
+  coord_cartesian(clip = "off")
+
+p1 + p2 + p3
+
+```
+
+:::: {.columns}
+
+::: {.column width="65%"}
+**global**  
+indication of the clustering in the network
+:::
+
+::: {.column width="35%"}
+$$
+\frac{3 \times \text{number of triangles} }{\text{total number of triplets}}
+$$
+
+:::
+
+::::
+
+## Transitivity
+```{r transitivity}
+data("coleman")
+g <- as.undirected(coleman[[1]])
+transitivity(g, type = "global")
+```
+
+```{r transitivity2}
+transitivity(g, type = "local", isolates = "zero")
+```
+
+In empirical networks, we often observe a tendency towards high transitivity ("the friend of a friend is a friend")  
+
+What do you think is the (local/global) transitivity of `greys`?
+
+## Transitivity
+<br>
+
+The value itself is not always enough to judge the level of transitivity of a network. We should also check if it deviates significantly from what would be expected by randomness
+
+```{r transitivity3}
+deg <- degree(g)
+# keep density fixed
+mean(replicate(500,transitivity(rewire(g,each_edge(1)),type = "global")))
+
+# keep degree sequence fixed
+mean(replicate(500,transitivity(sample_degseq(deg),type = "global")))
+```
+
+
+
+## Degree distribution
+
+<br>
+
+The **degree** of a node in a network is the number of connections it has to other nodes.
+
+The **degree distribution** is the probability distribution of the degrees over the whole network.
+
+Empirical degree distributions are generally right skewed.  
+(Many nodes have a few conncetions and few have many)
+"preferential attachment", "matthew effect", "the rich get richer"  
+
+## Scale free networks
+
+A **scale-free network** is a network whose degree distribution follows a **power law** (asymptotically). The fraction $P(k)$ of nodes in the network having degree $k$  is given by $P(k) \sim k^\boldsymbol{-\gamma}$
+![](img/scale_free_rare.png)
+![](img/scale_free_well.png)
+
+## Degree distribution
+
+<br>
+
+```{r deg_dist_graphs}
+er <- sample_gnp(n = 5000, p = 0.01)
+pa <- sample_pa(n = 5000, power = 1.5, m = 2, directed = FALSE)
+```
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r dd_er}
+plot(degree_distribution(er))
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r dd_pa}
+plot(degree_distribution(pa),log = "xy")
+```
+
+:::
+
+::::
+
+## Assortativity {.text09}
+
+Measures the level of homophily based on some node labeling or values. 
+
+:::{.fragment}
+**Assortativity based on numerical attribute**
+```{r assort_deg}
+assortativity(greys,degree(greys))
+```
+
+A negative value means that nodes with high degree tend to connect to nodes with low degree
+:::
+
+:::{.fragment}
+**Assortativity based on nominal attribute**
+```{r assort_smoke}
+data(s50)
+assortativity_nominal(s50[[3]],V(s50[[3]])$smoke)
+```
+A high value that means that connected nodes tend to have the same labels. In this case the smoking behaviour
+:::

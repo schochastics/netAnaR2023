@@ -1,0 +1,1304 @@
+---
+title: "Network Analysis in R"
+subtitle: "Network Visualization"
+author: "David Schoch"
+footer: "Network Analysis in {{< fa brands r-project >}}"
+institute: "Fall Seminar 2022"
+shortcodes:
+  - misc.lua
+format: 
+  revealjs: 
+    menu: true
+    progress: false
+    theme: "schochastics.scss"
+    slide-number: c/t
+    show-slide-number: all
+    code-line-numbers: false
+execute: 
+  cache: true
+---
+
+```{r setup}
+#| include: false
+library(kableExtra)
+library(ggplot2)
+library(networkdata)
+library(igraph)
+library(ggraph)
+library(graphlayouts)
+
+#base colors
+bg_col <- "#333333"
+main_col <-"#9EEBCF"
+text_col <- "white"
+highlight_col <- "#ffd700"
+```
+
+# A brief history of network visualization
+
+##
+
+:::{.center-x}
+![](img/netvishis00.jpg){width="750"}
+:::
+
+Württemberg family tree (1585)
+
+##
+
+:::{.center-x}
+![](img/euler_bridges.png)
+:::
+
+Bridges of Königsberg, Euler (1741)
+
+##
+
+:::{.center-x}
+![](img/netvizhis01.gif){width="600"}
+:::
+
+Moreno (1934)
+
+##
+
+:::{.center-x}
+![](img/netvizhis02.gif){width="400"}
+:::
+
+"Social Atom" representation Lundberg Steel (1938)
+
+##
+
+:::{.center-x}
+![](img/netvizhis05.png){width="900"}
+:::
+Davis et al (1941)
+
+##
+
+:::{.center-x}
+![](img/loomis1948.png){width="900"}
+:::
+Loomis (1948)
+
+
+##
+
+:::{.center-x}
+![](img/netvizhis03.gif){width="500"}
+:::
+First Graders Northway (1952)
+
+##
+
+:::{.center-x}
+![](img/netvizhis04.gif){width="500"}
+:::
+
+Klovdahl’s (1982) adaptation of biology imaging software for social networks (ORTEP)
+
+##
+
+:::{.center-x}
+![](img/vaseline.png){width="750"}
+:::
+Vaseline - Prescribe the nation
+
+##
+
+:::{.center-x}
+![](img/netfirework.jpeg){height="300" width="300"}
+![](img/netfirework.png){height="300" width="300"}
+
+![](img/netfirework2.png){height="300" width="300"}
+![](img/netfirework3.png){height="300" width="300"}
+:::
+Firework or network?
+
+## Visualizing "ordinary" data {.smaller}
+:::{ .absolute top=70 left=0}
+```{r mtcars1}
+#| echo: false
+
+mtcars[,1:5] |> 
+  head() |> 
+  knitr::kable() |>
+  column_spec(c(2,4), bold = T,color = "black", background = highlight_col)
+```
+:::
+
+:::{.fragment}
+:::{.absolute bottom=0 right=-120}
+```{r mtcars-plot-1}
+#| echo: false
+#| fig.width: 6
+#| fig.height: 4
+#| fig-alt: "A scatterplot of the variables mpg and disp from the mtcars dataset"
+mtcars |> 
+  ggplot(aes(mpg,disp))+
+  geom_point(size=4) + 
+  theme_minimal() +
+  theme(text = element_text(size = 18))
+```
+:::
+:::
+
+## Visualizing "ordinary" data {.smaller}
+:::{ .absolute top=70 left=0}
+```{r mtcars2}
+#| echo: false
+
+mtcars[,1:5] |> 
+  head() |> 
+  knitr::kable() |>
+  column_spec(2:4, bold = T,color = "black", background = highlight_col)
+```
+:::
+
+:::{.absolute bottom=0 right=-120}
+```{r mtcars-plot-2}
+#| echo: false
+#| fig.width: 6
+#| fig.height: 4
+#| fig-alt: "A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl."
+mtcars |> 
+  ggplot(aes(mpg,disp,col=as.factor(cyl)))+
+  geom_point(size=4) + 
+  theme_minimal() +
+  theme(text = element_text(size = 18),legend.position = "none")
+```
+:::
+
+## Visualizing "ordinary" data {.smaller}
+:::{ .absolute top=70 left=0}
+```{r mtcars3}
+#| echo: false
+
+mtcars[,1:5] |> 
+  head() |> 
+  knitr::kable() |>
+  column_spec(2:5, bold = T,color = "black", background = highlight_col)
+```
+:::
+
+:::{.absolute bottom=0 right=-120}
+```{r mtcars-plot-3}
+#| echo: false
+#| fig.width: 6
+#| fig.height: 4
+#| fig-alt: "A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl and the size is proportional to hp."
+mtcars |> 
+  ggplot(aes(mpg,disp,col=as.factor(cyl),size=hp))+
+  geom_point() + 
+  scale_size_continuous(range=c(3,9))+
+  theme_minimal() +
+  theme(text = element_text(size = 18),legend.position = "none")
+```
+:::
+
+## Visualizing "ordinary" data {.smaller}
+:::{ .absolute top=70 left=0}
+```{r mtcars4}
+#| echo: false
+
+mtcars[,1:5] |> 
+  head() |> 
+  knitr::kable() |>
+  column_spec(c(3,6), bold = T,color = "black", background = highlight_col)
+```
+:::
+
+:::{.absolute bottom=0 right=-120}
+```{r mtcars-plot-4}
+#| echo: false
+#| fig.width: 6
+#| fig.height: 4
+#| fig-alt: "A boxplot of the variable drat grouped by cyl from the mtcars dataset"
+mtcars %>% 
+  ggplot(aes(as.factor(cyl),drat))+
+  geom_boxplot() + 
+  theme_minimal() +
+  theme(
+    legend.position="none",
+    text = element_text(size = 18)
+  )+
+  labs(x="cyl")
+```
+:::
+
+## Visualizing networks is hard(er) {.smaller}
+
+**ordinary data**
+
+- clear data format (rows: observations, columns: variables)
+- plot style dependent on variable scale (barchart, scatterplot, boxplot,...) 
+- illustrate relations between variables
+- given relative positions
+
+:::{.fragment}
+**network data**
+
+- different data formats (adjacency matrix, edgelist, adjaceny list, ...)
+- how to choose a proper layout algorithm?
+- more degrees of freedom
+- can we draw any conclusions from a network plot?
+:::
+
+## network visualization tools
+<br>
+
+**gephi**  
+works quite well for visualizing large networks
+
+**visone**  
+well designed GUI and algorithms  
+({{< CRAN graphlayouts >}} implements most algorithms from it)
+
+**and many more**  
+cytoscape, NodeXL, GraphViz, python, ...
+
+# Network visualization in R
+
+## which package(s) to choose?
+
+<br>
+
+- {{< CRAN igraph >}}: great for analyses, but plotting can be tricky  
+  (check out <https://kateto.net/network-visualization>)
+- networks as ggplot2 objects: {{< CRAN ggnet2 >}}, {{< CRAN ggnetwork >}}
+- {{< CRAN ggraph >}}:  grammar of graphics for networks
+- interactive/3D: {{< CRAN visNetwork >}}, {{< CRAN threejs >}}
+
+## why ggraph?
+
+<br>
+<br>
+
+**maintained by RStudio**  
+stable and reliable (many other packages have been abandoned)  
+plays well with other packages
+
+**thoughtful API**  
+extension of ggplot2  
+grammar of graphics
+
+
+## Grammar of graphics
+
+Framework which follows a layered approach to describe and construct visualizations or graphics in a structured manner
+
+:::{.center-x}
+![](img/grammar.png){width="650"}
+:::
+
+## Grammar of graphics
+
+**Data**: Identify dimensions you want to visualize  
+
+**Aesthetics/scales**: Axes of data. Also size, shape, color, ...  
+
+**Geometries**: depiction of data points (points, bars, lines, ...)  
+
+**Facets**: Subplots based on specific dimensions?  
+
+**Statistics**: Show some statistical measures?  
+
+**Coordinates**: Type of coordinate system  (cartesian, polar,...)
+
+**Theme**: bling bling
+
+## Grammar of graphics (network edition)
+
+**Data**: Identify dimensions you want to visualize  
+
+**Aesthetics/scales**: Axes of data. Also size, shape, color, ...  
+
+**Geometries**: depiction of data points (points, bars, lines, ...)  
+
+~~**Facets**: Subplots based on specific dimensions?~~
+
+~~**Statistics**: Show some statistical measures?~~
+
+~~**Coordinates**: Type of coordinate system  (cartesian, polar,...)~~
+
+~~**Theme**: bling bling~~
+
+## network data: the graph?
+
+::: {.r-stack}
+```{r sw_init}
+#| echo: false
+#| fig.width: 6
+#| fig.height: 6
+
+sw1 <- starwars[[1]]
+V(sw1)$interactions <- graph.strength(sw1) 
+
+ggraph(sw1,"stress")+
+  geom_edge_link(edge_colour = text_col)+
+  geom_node_point(shape = 21,size = 5,fill = main_col)+
+  theme_graph(background = bg_col)
+```
+:::
+
+## network data: data frames! {.smaller}
+::: {.absolute left=-10% top=15%}
+```{r sw_tables_nodes}
+#| echo: false
+#| 
+node_tbl <- as_data_frame(sw1,"vertices") |> 
+  dplyr::filter(!is.na(homeworld),!is.na(species)) |> 
+  dplyr::select(name,sex,homeworld,species) |> 
+  head()
+
+knitr::kable(node_tbl,row.names = FALSE,format='html',caption="Nodes") |>  
+   kable_styling(full_width = FALSE)
+```
+:::
+
+::: {.absolute right=-10% top=15%}
+```{r sw_tables_edges}
+#| echo: false
+edge_tbl <- as_data_frame(sw1,"edges") |>
+  dplyr::slice_sample(n = 6) |> 
+  head() 
+
+knitr::kable(edge_tbl,row.names = FALSE,format='html',caption="Edges") |>  
+   kable_styling(full_width = FALSE)
+```
+:::
+
+:::{.absolute bottom=10% left=-10%}
++layout 
+:::
+
+:::{.absolute bottom=10% right=5%}
+see  {{< CRAN tidygraph >}}
+:::
+
+## first full example (don't panic!)
+
+```{r sw_plot}
+#| echo: true
+#| output-location: slide
+#| fig.width: 10
+#| fig.height: 6.5
+#| fig.align: "center"
+#| code-line-numbers: "8-21"
+# load and manipulate data
+data("starwars")
+sw1 <- starwars[[1]]
+sw_palette <- c("#1A5878", "#C44237", "#AD8941", "#E99093", "#50594B")
+V(sw1)$interactions <- graph.strength(sw1) 
+
+#plot
+ggraph(graph = sw1,layout = "stress") + 
+  geom_edge_link0(edge_colour = "grey25",
+                  aes(edge_width = weight)) +
+  geom_node_point(shape = 21, color = "black",stroke = 1,
+                  aes(fill = sex,size = interactions)) +
+  geom_node_text(color = "black", size = 4, repel = FALSE, 
+                 aes(filter = (interactions>=65),label = name))+
+  scale_edge_width(range = c(0.1,1.5),guide = "none")+
+  scale_size(range = c(3,10),guide = "none")+
+  scale_fill_manual(values = sw_palette, na.value = "grey",name = "")+
+  coord_fixed()+
+  theme_graph() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(override.aes = list(size=6)))
+```
+
+## 1) layout
+
+:::{.fragment}
+:::{.highlight}
+`ggraph(graph = sw1,layout = "stress", ...)`
+:::
+:::
+
+:::{.fragment}
+- graph: igraph object sw1 (can also be a tidygraph object)
+- layout: used algorithm
+- ...: additional parameters depend on algorithm
+:::
+
+:::{.fragment}
+```{r lay_algos,echo = FALSE,fig.width=16,fig.height=3}
+#| echo: false
+#| fig.width: 16
+#| fig.height: 3
+
+algos <- c("fr","gem","graphopt","kk","mds","circle","stress")
+pList <- purrr::map(algos,function(x)
+  ggraph(sw1,x)+
+    geom_edge_link(edge_width=0.2,edge_colour="grey25")+
+    geom_node_point(shape=21,size=2,fill="grey66")+
+    theme_graph(background = "white",title_colour = "black",title_size = 13)+
+    ggtitle(paste0(x,ifelse(x=="stress"," (graphlayouts)"," (igraph)")))+
+    coord_cartesian(clip = "off")
+)
+wrap_plots(pList,nrow = 1)
+```
+:::
+
+## Graph drawing
+
+Criteria for "pleasing" layouts:  
+
+- minimising edge crossings
+- minimising edge bends
+- maximising symmetry
+- maximising the minimum angle between edges leaving a node
+- maximising node/edge orthogonality
+
+:::{.center-x}
+![](img/graph_drawing_mini.png){width="750"}
+:::
+
+## Matrix representation
+
+Sometimes we do not need a node-edge diagram
+
+```{r matrix_rep1}
+#| fig.height: 5
+#| fig.width: 5
+#| echo: true
+#| fig.align: center
+g <- sample_islands(2,10,0.8,3)
+ggraph(g,"matrix")+
+  geom_edge_point(mirror = TRUE)
+```
+
+## Matrix representation
+
+But it can be tricky to find an adequate ordering 
+
+```{r matrix_rep2}
+#| fig.height: 5
+#| fig.width: 5
+#| echo: true
+#| fig.align: center
+g <- permute(g,sample(1:20))
+ggraph(g,"matrix")+
+  geom_edge_point(mirror = TRUE)
+```
+
+## Matrix representation
+
+If one is known, it can be supplied as an argument
+
+```{r matrix_rep3}
+#| fig.height: 5
+#| fig.width: 5
+#| echo: true
+#| fig.align: center
+ord <- membership(cluster_leading_eigen(g))
+ggraph(g,"matrix",sort.by = ord)+
+  geom_edge_point(mirror = TRUE)
+```
+
+## Matrix representation
+
+The {{< CRAN seriation >}} package has a nicer out of the box method
+
+```{r matrix_rep4}
+#| fig.height: 5
+#| fig.width: 5
+#| echo: true
+#| fig.align: center
+A <- as_adj(g, sparse = FALSE)
+ser <- order(ord)
+seriation::ggpimage(A[ser,ser])+theme(legend.position = "none")
+
+```
+
+
+## 2) edges: geoms
+
+:::{.fragment}
+:::{.text07 .highlight}
+`geom_edge_link0(edge_colour = "grey25", aes(edge_width = weight))`
+:::
+:::
+
+:::{.fragment}
+
+```{r geom_edges}
+#| echo: true
+ls("package:ggraph",pattern = "geom_edge_*")
+```
+
+:::
+
+:::{.fragment .text07}
+geom_edge_*type*: generate n points, draw path  
+geom_edge_*type*0: direct line  
+geom_edge_*type*2: can interpolate node parameters 
+:::
+:::{.fragment .text07}
+`geom_edge_link0()` and `geom_edge_parallel0()` suffice
+:::
+
+## 2) edges: geom type examples
+
+```{r geom_edge}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "1-6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3) 
+V(g)$type <- c("a", "b", "c")
+
+ggraph(g, "stress") +
+  geom_edge_link(edge_width = 2, aes(color = stat(index)))
+```
+
+## 2) edges: geom type examples
+
+```{r geom_edgen2}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3) 
+V(g)$type <- c("a", "b", "c")
+
+ggraph(g, "stress") +
+  geom_edge_link(edge_width = 2, aes(color = stat(index)), n = 3)
+```
+
+## 2) edges: geom type examples
+
+```{r geom_edge2}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3)
+V(g)$type <- c("a", "b", "c")
+
+ggraph(g, "stress") +
+  geom_edge_link2(edge_width = 2, aes(color = node.type))
+```
+
+## 2) edges: geom type examples
+
+```{r geom_edge2n2}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3)
+V(g)$type <- c("a", "b", "c")
+
+ggraph(g, "stress") +
+  geom_edge_link2(edge_width = 2, aes(color = node.type), n = 3)
+```
+
+## 2) edges: geom type examples
+
+```{r geom_edge0}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3)
+V(g)$type <- c("a", "b", "c")
+
+ggraph(g, "stress") +
+  geom_edge_link0(edge_width = 2)
+
+```
+
+## 2) edges: geom type examples
+
+```{r geom_parallel0}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+# add another edge between nodes one and two to obtain a multi edge.
+g <- add.edges(g, c(1,2))
+
+
+ggraph(g, "stress") +
+  geom_edge_parallel0(edge_width = 0.5)
+
+```
+
+## 2) edges: aesthetics
+
+:::{.fragment}
+:::{.text07 .highlight}
+`geom_edge_link0(edge_colour = "grey25", aes(edge_width = weight))`
+:::
+:::
+
+<br>
+
+:::{.fragment}
+**mapping aesthetics**  
+
+- **global**: all edges have the same appearance  <br>(e.g. `edge_colour = "grey25"`)  
+- **via attributes**: appearance depends on attribute  <br>(e.g. `aes(edge_width = weight)`)
+:::
+
+:::{.fragment}
+**available aesthetics**  
+edge_colo(u)r, edge_width, edge_linetype, edge_alpha  
+:::
+## 2) edges: aesthetics examples
+
+```{r edge_aes_dotted}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3) 
+E(g)$weight <- c(1, 2, 0.5)
+
+ggraph(g, "stress") +
+  geom_edge_link0(edge_linetype = "dotted")
+```
+
+## 2) edges: aesthetics examples
+
+```{r edge_aes_alpha}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3) 
+E(g)$weight <- c(1, 2, 0.5)
+
+ggraph(g, "stress") +
+  geom_edge_link0(edge_alpha = 0.5)
+```
+
+## 2) edges: aesthetics examples
+
+```{r edge_aes_alphaweight}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "6"
+# create a simple graph of three nodes where all nodes are connected
+g <- graph.full(3) 
+E(g)$weight <- c(1, 2, 0.5)
+
+ggraph(g, "stress") +
+  geom_edge_link0(aes(edge_alpha = weight, edge_width = weight))
+```
+
+## 2) edges: misc
+
+```{r geom_directed}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+
+g <- graph.full(3,directed = TRUE)
+
+ggraph(g, "stress") +
+  geom_edge_parallel0(edge_width = 0.5,
+    arrow = arrow(angle = 15, length = unit(0.15, "inches"),
+                  ends = "last", type = "closed"))
+
+```
+
+## 3) nodes: geoms
+
+:::{.fragment}
+
+:::{.text05 .highlight}
+`geom_node_point(shape = 21, color = "black",stroke = 1, aes(fill = sex,size = interactions))`
+:::
+
+:::
+
+:::{.fragment}
+```{r geom_nodes}
+#| echo: true
+ls("package:ggraph",pattern = "geom_node_*")
+```
+
+:::
+<br>
+
+:::{.fragment}
+- `geom_node_point()`: draw nodes as a simple point
+:::
+
+## 3) nodes: aesthetics
+
+:::{.fragment}
+:::{.text05 .highlight}
+`geom_node_point(shape = 21, color = "black",stroke = 1, aes(fill = sex,size = interactions))`
+:::
+:::
+
+<br>
+
+:::{.fragment}
+**mapping aesthetics**  
+
+- **global**: all nodes have the same appearance <br> (e.g. `shape = 21`)  
+- **via attributes**: appearance depends on attribute <br> (e.g. `aes(fill = sex)`)
+:::
+
+:::{.fragment}
+**available aesthetics**  
+alpha, colo(u)r, fill, shape, size, stroke  
+*(usage of colour, fill, and stroke depend on shape)*
+![](img/points-symbols.png){.absolute right=-50 bottom=20 width="300"}
+:::
+
+
+## 3) nodes: aesthetic examples
+
+```{r geom_node1}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+
+g <- graph.full(3)
+
+ggraph(g, "stress") +
+  geom_edge_link0() +
+  geom_node_point(size = 5, color = "red")
+```
+
+## 3) nodes: aesthetic examples
+
+```{r geom_node2}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "5"
+g <- graph.full(3)
+
+ggraph(g, "stress") +
+  geom_edge_link0() +
+  geom_node_point(size = 5, shape = 21, color = "red", fill = "black", stroke = 2)
+```
+
+## 3) nodes: aesthetic examples
+
+```{r geom_node3}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "5"
+g <- graph.full(3)
+
+ggraph(g, "stress") +
+  geom_edge_link0() +
+  geom_node_point(size = 5, shape = 22, color = "red", fill = "black", stroke = 2)
+```
+
+## 4) labels: geoms
+
+:::{.fragment}
+
+:::{.text06 .highlight}
+`geom_node_text(color = "grey25", size = 4, repel = FALSE, aes(filter = (interactions>=65),label = name))`
+:::
+:::
+
+<br>
+
+:::{.fragment}
+- `geom_node_text()`: add text to node
+- `geom_node_label()`: add text to node with frame
+:::
+<br><br>
+
+:::{.fragment}
+`geom_node_text` is the preferred choice
+:::
+
+## 4) labels: aesthetics
+
+:::{.fragment}
+
+:::{.text06 .highlight}
+`geom_node_text(color = "grey25", size = 4, repel = FALSE, aes(filter = (interactions>=65),label = name))`
+:::
+:::
+
+<br>
+
+:::{.fragment}
+**mapping aesthetics**  
+- **global**: specify font properties  
+- **via attributes**: set label to name attribute of node  
+- **filter**: only display for nodes (or edges!) that fulfil a given criterion
+:::
+
+<br>
+
+:::{.fragment}
+**available aesthetics**  
+many! but most important: label, colour, family, size, and repel
+:::
+
+## 4) labels: aesthetics examples
+
+```{r geom_node_text}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "7"
+g <- graph.full(3)
+V(g)$name <- c("David", "Termeh", "Luna")
+
+ggraph(g, "stress") +
+  geom_edge_link0() +
+  geom_node_point(size = 5, color = "grey66")+
+  geom_node_text(aes(label = name), color = "black") + coord_fixed(clip = "off")
+```
+
+## 4) labels: aesthetics examples
+
+```{r geom_node_label}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "7"
+g <- graph.full(3)
+V(g)$name <- c("David", "Termeh", "Luna")
+
+ggraph(g, "stress") +
+  geom_edge_link0() +
+  geom_node_point(size = 5, color = "grey66")+
+  geom_node_label(aes(label = name), color = "black") + coord_fixed(clip = "off")
+```
+
+
+## 5) scales
+
+:::{.fragment}
+:::{.text07 .highlight}
+`scale_edge_width(range = c(0.1,1.5),guide = "none")`  
+`scale_size(range = c(3,10),guide = "none")`  
+`scale_fill_manual(values = sw_palette, na.value = "grey",name = "")`
+:::
+:::
+<br>
+
+:::{.fragment}
+control aesthetics that are mapped within `aes()`  
+although optional, set one `scale_*` per parameter in any `aes()`
+
+**form of scale functions**  
+`scale_<aes>_<variable type>()`  
+
+**additional options**  
+`guide` (show legend or not), `name` (label in legend), `na.value` (value for NAs)
+:::
+
+## 5) scales: variable types
+
+:::{.fragment}
+**node size and edge width (and node/edge alpha)**  
+`scale_size()` and `scale_edge_width()`  
+most relevant parameter is `range = c(min,max)`  
+:::
+
+:::{.fragment}
+**continuous variable to colour**  
+`scale_(edge_)colour_gradient(low = ...,high = ...)`  
+:::
+
+:::{.fragment}
+**categorical variable to colour**  
+`scale_colour_brewer()`  
+`scale_colour_manual(values = ...)`
+:::
+
+:::{.fragment}
+**misc**: `scale_shape()` and `scale_edge_linetype()`
+:::
+    
+## 5) scales: examples
+
+```{r sw-scales1}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "4-5"
+ggraph(graph = sw1,layout = "stress") + 
+  geom_edge_link0(aes(edge_width = weight)) +
+  geom_node_point(size = 5, shape = 21, aes(fill = sex)) +
+  scale_edge_width(range = c(0.1,1.5),guide = "none")+
+  scale_fill_manual(values = sw_palette, na.value = "grey",name = "")+
+  theme(legend.position = "bottom") 
+```
+    
+## 5) scales: examples
+
+```{r sw-scales2}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "1-2"
+ggraph(graph = sw1,layout = "stress") + 
+  geom_edge_link0(aes(edge_width = weight), show.legend = FALSE) +
+  geom_node_point(size = 5, shape = 21, aes(fill = sex)) +
+  theme(legend.position = "bottom") 
+```
+    
+## 5) scales: examples
+
+```{r sw-scales3}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "5"
+ggraph(graph = sw1,layout = "stress") + 
+  geom_edge_link0(aes(edge_width = weight)) +
+  geom_node_point(size = 5, shape = 21, aes(fill = sex)) +
+  scale_edge_width(range = c(0.1,1.5),guide = "none")+
+  scale_fill_brewer(palette = "Set1", na.value = "grey",name = "")+
+  theme(legend.position = "bottom") 
+```
+    
+## 5) scales: examples
+
+```{r sw-scales4}
+#| echo: true
+#| fig.height: 4
+#| fig.width: 4
+#| fig.align: center
+#| code-line-numbers: "3,5"
+ggraph(graph = sw1,layout = "stress") + 
+  geom_edge_link0(aes(edge_width = weight)) +
+  geom_node_point(size = 5, fill = "grey25", aes(shape = sex)) +
+  scale_edge_width(range = c(0.1,1.5),guide = "none")+
+  scale_shape_manual(values=21:24, na.value = 25,name = "")+
+  theme(legend.position = "bottom") 
+```
+
+## 6) themes
+
+:::{.highlight .text08}
+`theme_graph() + theme(legend.position = "bottom")`
+:::
+
+**control the overall look of the plot**  
+
+- `theme()` has a lot of options but we really don't need them (except *legend.position*) 
+- `theme_graph()` erases all defaults (e.g. axis, grids, etc.)  
+
+<br>
+
+:::{.text08 .highlight}
+`guides(fill = guide_legend(override.aes = list(size=6)))`
+:::
+
+change appearance of geoms in legend (highly optional!)
+
+## summary {.smaller}
+
+**layout**  
+`ggraph(graph,layout = "stress") + `
+
+**edges**  
+`geom_edge_link0(<<global>>,aes(<<via variables>>)) + `
+
+**nodes**  
+`geom_node_point(<global>,aes(<via variables>)) + `  
+`geom_node_text(<global>,aes(<via variables>)) + `
+
+**scales**  
+`scale_<aes>_<variable type>() + ` (one per variable in `aes()`)
+
+**themes**  
+`theme_graph()`
+
+## first full example (revisited)
+
+```{r sw_plot2}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "1|2,3|4,5,6,7|8,9,10|11|12,13|14"
+ggraph(graph = sw1,layout = "stress") + 
+  geom_edge_link0(edge_colour = "grey25",
+                  aes(edge_width = weight)) +
+  geom_node_point(shape = 21, color = "black",stroke = 1,
+                  aes(fill = sex,size = interactions)) +
+  geom_node_text(color = "black", size = 4, repel = FALSE, 
+                 aes(filter = (interactions>=65),label = name))+
+  scale_edge_width(range = c(0.1,1.5),guide = "none")+
+  scale_size(range = c(3,10),guide = "none")+
+  scale_fill_manual(values = sw_palette, na.value = "grey",name = "")+
+  coord_fixed()+
+  theme_graph() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(override.aes = list(size = 6)))
+```
+
+## go beyond the standard layout
+
+layout stress is sufficient for most network visualization tasks
+
+```{r more_examples}
+#| echo: false
+#| fig.width: 20
+#| fig.height: 8
+#| fig.align: "center"
+V(flo_marriage)$size <- degree(flo_marriage)
+
+p1<-ggraph(flo_marriage,"stress") + 
+    geom_edge_link0(edge_width = 0.2) +
+    geom_node_point(
+        shape = 21, fill = "grey25", 
+        aes(size = size),show.legend = FALSE) +
+    geom_node_text(aes(label = name),size=8,repel=TRUE)+
+    theme_graph()+coord_fixed()
+
+V(karate)$grp <- as.character(membership(cluster_louvain(karate)))
+p2<-ggraph(karate,"stress") + 
+    geom_edge_link0(edge_width = 0.2) +
+    geom_node_point(
+        shape = 21, size = 8,
+        aes(fill = grp),show.legend = FALSE) +
+    theme_graph()+coord_fixed()
+
+p1+p2
+```
+
+
+## ego centric layout
+
+Emphasize the position of certain nodes in the network. 
+
+```{r ego_ani_code}
+#| echo: true
+#| output-location: slide
+#| fig.height: 6
+#| fig.width: 6
+#| fig.align: 'center'
+ggraph(sw1,layout = "focus",focus = 19)+
+  draw_circle(col = "#00BFFF", use = "focus",max.circle = 3)+
+  geom_edge_link0(edge_colour = "grey25",edge_alpha = 0.5)+
+  geom_node_point(shape = 21,size = 5,fill = "grey66")+
+  geom_node_text(aes(filter = (name=="ANAKIN"),label = name))+
+  theme_graph()+
+  coord_fixed()
+```
+
+<br>
+
+- `focus=...` : id to be put in the center (other nodes are on concentric circles around it)  
+- `draw_circle`: draw the concentric circles
+
+## centrality layout
+
+<br>
+
+concentric circle layout according to a centrality index
+
+```{r cent_ani}
+#| echo: true
+#| output-location: slide
+#| fig.height: 6
+#| fig.width: 6
+#| fig.align: 'center'
+strength <- graph.strength(sw1)
+ggraph(sw1,layout = "centrality",cent = strength)+
+  draw_circle(col = "#00BFFF", use = "cent")+
+  geom_edge_link0(edge_colour = "grey25",edge_alpha = 0.5)+
+  geom_node_point(shape = 21,size = 5,fill = "grey66")+
+  geom_node_text(aes(filter = (strength>=45),label = name),repel = TRUE)+
+  theme_graph()+
+  coord_fixed()
+```
+
+## backbone layout
+
+`layout_as_backbone()` can help emphasize hidden group structures
+
+```{r hairball_artificial}
+#| echo: true
+g <- sample_islands(9,40,0.4,15)
+g <- simplify(g)
+V(g)$grp <- as.character(rep(1:9,each = 40))
+```
+
+<br>
+try the standard first
+<br>
+
+```{r hairball_code}
+#| echo: true
+#| output-location: slide
+#| fig.height: 6
+#| fig.width: 6
+#| fig.align: 'center'
+ggraph(g,layout = "stress")+
+  geom_edge_link0(edge_colour = "black",edge_width = 0.1, edge_alpha = 0.5)+
+  geom_node_point(shape = 21, size = 3, aes(fill = grp))+
+  scale_fill_brewer(palette = "Set1")+
+  theme_graph()+
+  theme(legend.position = "none")
+```
+
+## backbone layout
+
+<br>
+<br>
+
+try to reveal the hidden group structure with `layout="backbone"`
+
+```{r backbone_code}
+#| echo: true
+#| output-location: slide
+#| fig.height: 6
+#| fig.width: 6
+#| fig.align: 'center'
+#| code-line-numbers: "1,2"
+ggraph(g, layout = "backbone")+
+  geom_edge_link0(edge_colour = "black",edge_width = 0.1, edge_alpha = 0.5)+
+  geom_node_point(shape = 21,size = 3, aes(fill = grp))+
+  scale_fill_brewer(palette = "Set1")+
+  theme_graph()+
+  theme(legend.position = "none")
+
+```
+
+## backbone layout
+
+![](img/facebook.png)
+facebook friendships of a university. Node colour corresponds to dormitory of students
+
+## large networks
+
+`layout="sparse_stress"` and `layout="pmds"` work well for up to 50k nodes
+
+:::{.text05}
+```{r runtimes}
+#| echo: false
+
+tibble::tribble(
+  ~graph, ~`stress`, ~`sparsestress(50)`, ~`sparsestress(100)`, ~`drl(igraph)`, ~`mds(igraph)`,
+  ~`pivotmds(50)`, ~`pivotmds(100)`,
+     "1138bus (n=1138, m=1458)", "2.6s",     "0.4s",      "0.7s",    "1.7s",    "1.4s",      "0.05s",       "0.08s",
+ "3elt (n=4720, m=13722)", "113s",     "3.4s",      "5.2s",    "8.4s",     "95s",   "1s",        "1.1s",
+  "power grid (n=4941, m=6594)", "134s",     "3.4s",      "5.6s",    "6.9s",    "114s",   "1s",        "1.1s",
+ "pesa (n=11738 m=67828)",    "-",    "18.3s",     "26.5s",     "21s",       "-",       "6.3s",        "6.8s",
+    "cond-mat(n=13861 m=44619)",    "-",    "22.9s",     "33.5s",   "24.8s",       "-",       "8.0s",        "8.7s"
+  ) %>% knitr::kable(format='html') %>%  column_spec(c(3,4,7,8), bold = T,color = "black", background = highlight_col)
+```
+:::
+
+:::{.fragment}
+![](img/squad_network2022.png){.absolute left=85 top=75 width=900 height=900}
+:::
+
+## layout summary
+
+**most useful layouts**  
+`layout = "stress"`: all purpose layout algorithm  
+`layout = "focus"`: ego-centric type layouts  
+`layout = "centrality"`: concentric centrality layout  
+`layout = "backbone"`: emphasize a group structure (**if it exists**)  
+`layout = "sparse_stress"`: large networks  
+
+**not covered here**  
+multilevel layouts  
+dynamic layouts  
+constrained stress layout algorithm
+
+## miscellaneous 
+
+Do not recompute layout continuously
+```{r create_layout}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "1,3"
+lay <- create_layout(g,"stress")
+
+ggraph(lay) + 
+  geom_edge_link0() +
+  geom_node_point()
+```
+
+But need to recompute the layout if attributes change!
+
+```{r create_layout2}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "1,3"
+lay <- layout_with_stress(g)
+
+ggraph(g, "manual", x = xy[,1],y = xy[,2]) + 
+  geom_edge_link0() +
+  geom_node_point()
+```
+
+
+## edgebundling & flow maps
+
+Using the package {{< CRAN edgebundle >}}
+
+```{r edgebundle}
+#| echo: false
+#| fig.width: 10
+#| fig.height: 4
+#| fig.align: 'center'
+
+library(edgebundle)
+g <- graph_from_edgelist(
+  matrix(c(1,12,2,11,3,10,4,9,5,8,6,7),ncol=2,byrow = T),F)
+xy <- cbind(c(rep(0,6),rep(1,6)),c(1:6,1:6))
+
+fbundle <- edge_bundle_force(g,xy,compatibility_threshold = 0.1)
+ggplot(fbundle)+
+  geom_path(aes(x,y,group=group,col=as.factor(group)),size = 2,show.legend = FALSE)+
+  geom_point(data=as.data.frame(xy),aes(V1,V2),size=8)+
+  theme_graph(background = "#333333") -> p1
+
+ggraph(g,"manual",x=xy[,1],y=xy[,2]) + 
+  geom_edge_link0(edge_width=2) + 
+  geom_node_point(shape=21,size=8,fill="black") + 
+  theme_graph(background = "#333333") -> p2
+
+p2 + p1
+```
+
+##
+
+![](img/flights_nobundle.png)
+
+##
+
+![](img/flights_fdeb.png)
+
+##
+
+![](img/flights_peb.png)
