@@ -2,8 +2,8 @@
 title: "Network Analysis in R"
 subtitle: ""
 author: "David Schoch"
-footer: ""
-institute: "Worksho series for Ukraine"
+footer: "@schochastics"
+institute: "Workshop series for Ukraine"
 shortcodes:
   - misc.lua
 format: 
@@ -19,7 +19,19 @@ execute:
   echo: true
 ---
 
-:::{.center}
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: setup
+
+library(ggraph)
+library(igraph)
+library(networkdata)
+library(netrankr)
+```
+
+:::{.center-x}
 ![](img/qr-code.png){width="400"}  
 <https://schochastics.github.io/netAnaR2023>
 :::
@@ -197,9 +209,38 @@ $E\subseteq \{(i,j): i,j \in V\}$ are the edges (or ties)
 
 **Most methods rely on concepts from graph theory**
 
-# R ecosystem for networks
+# R Ecosystem for Networks
+
+##
+
+:::{.center-x}
+![](img/tidyverse-meme.jpg)
+:::
 
 
+## What is "base R" for networks?
+
+```{r}
+#| label: cranet
+#| echo: false
+g <- readRDS("dependnet.RDS")
+ggraph(g, "stress") +
+    geom_edge_link0(
+        edge_color = "grey66", edge_width = 0.3,
+        arrow = arrow(
+            angle = 15, length = unit(0.15, "inches"),
+            ends = "last", type = "closed"
+        )
+    ) +
+    geom_node_point(shape = 21, aes(fill = dep, size = seed)) +
+    scale_fill_brewer(type = "qual", name = "") +
+    scale_size_manual(values = c(2, 5), guide = "none") +
+    guides(fill = guide_legend(override.aes = list(size = 5))) +
+    theme_void() +
+    theme(legend.position = "bottom") +
+    coord_equal(clip = "off")
+
+```
 
 
 ## Which package to choose?
@@ -219,12 +260,6 @@ use `sna` if
 
 :::{.fragment}
 **does not make a difference in most cases, never load them both!**
-
-```{r load igraph}
-#| eval: false
-#| echo: true
-library(igraph)
-```
 :::
 
 ## Creating simple networks
@@ -500,91 +535,6 @@ Some extra work (with some issues)
 `read.table()`, `read.csv()`, {{< CRAN readxl >}}, {{< CRAN readr >}},...
 :::
 
-## Preparing network data
-
-**adjacency matrix**
-
-:::{.fragment }
-Does the matrix have row/col names?
-```{r adj1}
-#| eval: false
-tab <- read.csv(file, header = TRUE, row.names = 1) 
-A <- as.matrix(tab)
-```
-:::
-
-:::{.fragment }
-Is the network directed/undirected?
-
-```{r adj2}
-#| eval: false
-graph_from_adjacency_matrix(A, mode = c("directed","undirected"))
-```
-:::
-
-:::{.fragment }
-Is the network weighted/unweighted?
-
-```{r adj3}
-#| eval: false
-graph_from_adjacency_matrix(A, weighted = c(NULL, TRUE))
-```
-:::
-
-:::{.fragment }
-Does the network contain loops?
-
-```{r adj4}
-#| eval: false
-graph_from_adjacency_matrix(A, diag = c(TRUE, FALSE))
-```
-:::
-
-## Preparing network data
-
-**edgelist**
-
-:::{.fragment}
-```{r el1}
-#| eval: false
-tab <- read.csv(file, header = c(TRUE, FALSE)) 
-el <- as.matrix(tab)
-
-```
-:::
-
-:::{.fragment}
-Is the network directed/undirected?
-
-```{r el2}
-#| eval: false
-g <- graph_from_edgelist(el, directed = c(TRUE, FALSE))
-```
-:::
-
-:::{.fragment}
-Is the network weighted/unweighted?
-
-```{r el3}
-#| eval: false
-# assuming the weights are the 3rd column in el
-g <- graph_from_edgelist(el[,1:2], directed = c(TRUE, FALSE))
-E(g)$weight <- el[,3]
-```
-:::
-
-## Preparing network data
-
-<br><br>
-
-:::{.frame-box}
-**some stepping stones**
-
-- Are weights actually weights or different types of edges?
-- You can't always tell from an edgelist if the network is directed
-- Isolated nodes are lost if an edgelist is used
-:::
-
 ## Preparing network data with attributes {.smaller}
 
 **Organize network data in two separate files**
@@ -681,42 +631,6 @@ distances(greys)[1:5,1:5]
 
 The Grey's Anatomy network is **disconnected** ($4$ **connected components**)
 
-## Small world phenomenon
-<br>
- One can find a short chain of acquaintances (i.e. a shortest path), often of no more than a handful of individuals, connecting almost any two people on the planet.
-
-- Milgram's small-world experiment: 6 ("6 degrees of separation")
-- Average distance between users on Facebook (2016): 4.57
-
-
-## Erdős number
-Paul Erdős published ~1525 papers with ~500 collaborators  
-The Erdős number of an individual is their distance to Paul Erdős in the 
-co-authorship network
-
-:::{.center-x}
-![](img/erdos_number.png)
-:::
-
-## Bacon number
-The Bacon number of an actor is their distance to Kevin Bacon in the movie co-appearance network.
- 
-![](img/bacon_number.png)
-
-[Oracle of Bacon](https://oracleofbacon.org/)
-
-## Erdős-Bacon-Sabbath number
-:::{.center-x}
-![](img/ebs_number.png){width="400"}
-:::
-
-## Zlatan number
-The Zlatan number is the distance of football players to Zlatan Ibrahimovic in the "squad network" ([blog post](http://blog.schochastics.net/post/six-degrees-of-zlatan-ibrahimovic/))
-
-:::{.center-x}
-![](img/zlatan_number.png){width="900"}
-:::
-
 ## Diameter
 
 The length of the longest shortest path is called the **diameter** of the network.
@@ -743,10 +657,6 @@ ggraph(greys,"stress",bbox=10) +
   theme_void()
 
 ```
-
-<!-- - Diameter = 1 &rArr;	You know everyone
-- Diameter = 2 &rArr;	Your friends know everyone
-- Diameter = 3 &rArr;	Your friends know someone who knows everyone -->
 
 ## Transitivity
 
@@ -845,9 +755,6 @@ mean(replicate(500,transitivity(rewire(g,each_edge(1)),type = "global")))
 # keep degree sequence fixed
 mean(replicate(500,transitivity(sample_degseq(deg),type = "global")))
 ```
-
-
-
 ## Degree distribution
 
 <br>
@@ -859,12 +766,6 @@ The **degree distribution** is the probability distribution of the degrees over 
 Empirical degree distributions are generally right skewed.  
 (Many nodes have a few conncetions and few have many)
 "preferential attachment", "matthew effect", "the rich get richer"  
-
-## Scale free networks
-
-A **scale-free network** is a network whose degree distribution follows a **power law** (asymptotically). The fraction $P(k)$ of nodes in the network having degree $k$  is given by $P(k) \sim k^\boldsymbol{-\gamma}$
-![](img/scale_free_rare.png)
-![](img/scale_free_well.png)
 
 ## Degree distribution
 
@@ -897,24 +798,656 @@ plot(degree_distribution(pa),log = "xy")
 
 ::::
 
-## Assortativity {.text09}
+## Centrality
 
-Measures the level of homophily based on some node labeling or values. 
+A **measure of centrality** is an index that assigns a numeric values to
+the nodes of the network. The higher the value, the more central the node. 
 
-:::{.fragment}
-**Assortativity based on numerical attribute**
-```{r assort_deg}
-assortativity(greys,degree(greys))
+"Being central" is a very ambiguous term hence there exists a large variety of indices that assess centrality with very different structural properties.
+
+```{r star_net}
+#| echo: false
+#| fig.align: center
+#| fig.width: 4
+#| fig.height: 4
+g<-graph.star(8,"undirected")
+V(g)$center <- c(T,rep(F,7))
+ggraph(g,"stress") + 
+  geom_edge_link0(edge_width = 2,edge_color="white")+
+  geom_node_point(shape=21,aes(fill=center,size=center),color="white") + 
+  theme_graph(background = "#333333")+
+  scale_fill_manual(values=c("grey66","#ffd700"))+
+  scale_size_manual(values=c(7,14))+
+  theme(legend.position = "none")
 ```
 
-A negative value means that nodes with high degree tend to connect to nodes with low degree
+
+##
+
+```{r periodic}
+#| echo: false
+knitr::include_graphics("img/periodic_table.png")
+```
+
+## Standard indices {.text09}
+
+**Degree**  
+Number of direct neighbors ("popularity")  
+
+**Closeness**  
+Reciprocal of the sum of the length of the shortest paths
+
+**Betweenness**  
+Number of shortest paths that pass through a node ("brokerage")
+
+**Eigenvector**  
+Being central means being connected to other central nodes
+
+**PageRank**  
+Similar to eigenvector, just for directed networks 
+
+## Toy example I
+
+```{r load_dbces}
+data("dbces11")
+```
+
+```{r dbces11_basic_plot}
+#| echo: false
+xy <- graphlayouts::layout_with_stress(dbces11)
+ggraph(dbces11,"manual",x=xy[,1],y=xy[,2])+
+  geom_edge_link0()+
+  geom_node_point(shape=21,size=10,fill="grey66")+
+  geom_node_text(aes(label=name))+
+  theme_void()+
+  coord_equal(clip = "off")
+```
+
+## Toy example I
+
+```{r load_dbces1}
+#| eval: false
+data("dbces11")
+```
+
+```{r dbces11_plot}
+#| echo: false
+V(dbces11)$cent <- NA
+V(dbces11)$cent[which.max(degree(dbces11))] <- "DC"
+V(dbces11)$cent[which.max(betweenness(dbces11))] <- "BC"
+V(dbces11)$cent[which.max(closeness(dbces11))] <- "CC"
+V(dbces11)$cent[which.max(eigen_centrality(dbces11)$vector)] <- "EC"
+V(dbces11)$cent[which.max(subgraph_centrality(dbces11))] <- "SC"
+
+ggraph(dbces11,"manual",x=xy[,1],y=xy[,2])+
+  geom_edge_link0()+
+  geom_node_point(shape=21,size=10,aes(fill=cent),show.legend = FALSE)+
+  geom_node_text(aes(filter=!is.na(cent),label=cent))+
+  theme_void()+
+  coord_equal(clip = "off")
+```
+
+
+## Implemented indices {.smaller}
+
+`igraph` contains the following 10 indices:
+
+- [degree (`degree()`)]{.highlight}
+- [weighted degree (`strength()`)]{.highlight}
+- [betweenness (`betweenness()`)]{.highlight}
+- [closeness (`closeness()`)]{.highlight}
+- [eigenvector (`eigen_centrality()`)]{.highlight}
+- alpha centrality (`alpha_centrality()`)
+- power centrality (`power_centrality()`)
+- [PageRank (`page_rank()`)]{.highlight}
+- eccentricity (`eccentricity()`)
+- hubs and authorities (`authority_score()` and `hub_score()`)
+- subgraph centrality (`subgraph_centrality()`)
+
+## Indices in the sna package
+
+The `sna` package implements roughly the same indices as but adds:
+
+- flow betweenness (`flowbet()`)
+- load centrality (`loadcent()`)
+- Gil-Schmidt Power Index (`gilschmidt()`)
+- information centrality (`infocent()`)
+- stress centrality (`stresscent()`)
+
+## Dedicated packages
+
+{{< CRAN centiserve >}}, {{< CRAN CINNA >}}  
+```{r centiserve}
+library(centiserve)
+as.character(lsf.str("package:centiserve"))
+```
+
+[centiserver](http://www.centiserver.org/) lists more than 400 indices
+
+CINNA:  
+Computing and comparing top informative centrality measures 
+
+## Alternatives?
+
+{{< CRAN netrankr >}}:  
+Tools which allow an indexfree assessment of centrality, including:  
+
+- partial centrality
+- expected centrality
+- probabilistic centrality
+
+:::{.callout-tip}
+## Help
+
+Tutorials and material for using netrankr can be found at [netrankr.schochastics.net](http://netrankr.schochastics.net/)
+
 :::
 
-:::{.fragment}
-**Assortativity based on nominal attribute**
-```{r assort_smoke}
-data(s50)
-assortativity_nominal(s50[[3]],V(s50[[3]])$smoke)
+# 
+
+## Cohesive groups
+
+Cohesive subgroups are subsets of actors among whom there are relatively strong, direct, intense, frequent, or positive ties. 
+
+Methods that formalize the intuitive and theoretical notion of social group using social network properties
+
+:::{.center-x}
+![](img/cohesive.png){width="950"}
+:::
+
+## Cliques
+
+A *clique* in a network is a set of nodes that form a complete subnetwork within a network (called a complete **subgraph**). 
+
+A **maximal clique** is a clique that cannot be extended to a bigger clique by addding more nodes to it. 
+
+```{r load_clique_graph}
+data("clique_graph")
 ```
-A high value that means that connected nodes tend to have the same labels. In this case the smoking behaviour
+
+```{r clique_graph}
+#| echo: false
+#| fig.align: center
+ggraph(clique_graph,"stress") +
+  geom_edge_link0(edge_color="grey66")+
+  geom_node_point(shape=21,size=8,fill="grey25")+
+  theme_graph()
+```
+
+## Cliques
+
+Maximal cliques can be calculated with `max_cliques()` 
+```{r calc_max_cliques}
+# only return cliques with three or more nodes
+cl <- max_cliques(clique_graph,min = 3)
+cl
+```
+
+## Cliques
+
+
+```{r clique_graph_2}
+#| echo: false
+#| fig.align: center
+
+xy <- graphlayouts::layout_with_stress(clique_graph)
+
+cl_df <- as.data.frame(do.call("rbind",
+  lapply(seq_along(cl),function(x){
+    cbind(xy[cl[[x]],],x)
+  })
+))
+
+ggraph(clique_graph,"stress") +
+  geom_edge_link0(edge_color="grey66")+
+  geom_node_point(shape=21,size=8,fill="grey25")+
+  ggforce::geom_mark_hull(data = cl_df,aes(V1,V2,fill=as.factor(x),group=x),show.legend = FALSE)+
+  scale_fill_manual(values=c("#E69F00", "#000000", "#56B4E9", "#009E73", "#F0E442", "#0072B2", 
+                             "#D55E00", "#CC79A7", "#666666"))+
+  theme_void()
+```
+
+## k-core decomposition
+
+A **k-core** is a subgraph in which every node has at least k neighbors within the subgraph. A k-core is thus a relaxed version of a clique.  
+
+```{r kcore}
+kcore <- coreness(clique_graph)
+kcore
+```
+
+```{r kcore_plot}
+#| echo: false
+#| fig.align: center
+cl_df <- as.data.frame(do.call("rbind",
+  lapply(sort(unique(kcore))[c(2,3,4)],function(x){
+    cbind(xy[kcore>=x,],x)
+    })
+))
+
+ggraph(clique_graph,"stress") +
+  geom_edge_link0(edge_color="grey66")+
+  geom_node_point(shape = 21,size = 8,fill="grey25")+
+  ggforce::geom_mark_hull(data = cl_df,aes(V1,V2,fill=as.factor(x),group=x),show.legend = FALSE)+
+  scale_fill_manual(values=c("red","blue","green"))+
+  theme_void()
+
+```
+
+## Clustering/Community detection
+
+**Minimum-cut method**  
+cut graph into partitions which minimizes some metric
+
+**Hierarchical clustering**  
+Agglomerative/Divisive methods to build a hierarchy of clusters  
+based on node similarity
+
+**Modularity Maximization**  
+Modularity is defined as the fraction of edges that fall within given groups minus the expected fraction if edges were random
+
+**Statistical inference**  
+[stochastic blockmodeling](https://graph-tool.skewed.de/) based on generative models
+
+## Min Cut clustering
+
+```{r mincut}
+g <- sample_islands(2,10,0.9,5)
+g <- simplify(g)
+```
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r mincut_plot}
+#| echo: false
+#| fig.width: 4
+#| fig.height: 4
+#| fig.align: center
+V(g)$name <- 1:vcount(g)
+ggraph(g,"stress") + 
+   geom_edge_link0(edge_width = 0.4) +
+   geom_node_point(shape=21, size = 5,fill= "grey66") +
+   geom_node_text(aes(label = name),size=3) +
+   theme_graph()
+```
+:::
+
+::: {.column width="50%"}
+```{r mincut_calc}
+min_cut(g,value.only = FALSE)
+```
+:::
+::::
+
+Really only works in very obvious cases.
+
+## Hierarchical clustering
+
+```{r hierarch_clust}
+#| fig.width: 8
+#| fig.height: 6
+#| fig.align: center
+D <- distances(g)
+hclust_avg <- hclust(as.dist(D), method = "average")
+cut_avg <- cutree(hclust_avg, k = 2)
+
+plot(hclust_avg)
+rect.hclust(hclust_avg , k = 2, border = 2:6)
+abline(h = 2, col = 'red')
+```
+
+
+## Clustering with igraph
+
+<br>
+
+- There is no agreed upon best method
+- Modularity maximization is still widely considered "state-of-the-art"
+- Generative models are, however, a strong contender  
+  (not implemented in R yet)
+
+```{r cluster_alg}
+ls("package:igraph",pattern = "cluster_")
+```
+
+## Clustering workflow
+
+```{r karate}
+data("karate")
+```
+
+```{r karate_plot}
+#| echo: false
+#| fig.align: center
+ggraph(karate,"stress")+
+  geom_edge_link0(edge_color="grey66")+
+  geom_node_point(shape=21,size=5,fill="grey66")+
+  theme_void()+
+  coord_equal()
+```
+
+## Clustering workflow
+
+```{r cluster_ex}
+# compute clustering
+clu <- cluster_louvain(karate)
+
+# cluster membership vector
+mem <- membership(clu)
+mem
+
+# clusters as list
+com <- communities(clu)
+com
+```
+
+## Clustering workflow
+
+<br>
+
+```{r karate_cluster}
+imc <- cluster_infomap(karate)
+lec <- cluster_leading_eigen(karate)
+loc <- cluster_louvain(karate)
+sgc <- cluster_spinglass(karate)
+wtc <- cluster_walktrap(karate)
+
+scores <- c(infomap = modularity(karate,membership(imc)),
+            eigen = modularity(karate,membership(lec)),
+            louvain = modularity(karate,membership(loc)),
+            spinglass = modularity(karate,membership(sgc)),
+            walk = modularity(karate,membership(wtc)))
+
+scores
+```
+
+## Cluster workflow
+
+```{r karate_plot_clu}
+#| echo: false
+#| fig.align: center
+V(karate)$clu <- membership(sgc)
+ggraph(karate,"stress")+
+  geom_edge_link0(edge_color="grey66")+
+  geom_node_point(shape=21,size=5,aes(fill=as.factor(clu)),show.legend=FALSE)+
+  theme_void()+
+  coord_equal()
+```
+# Beyond "standard" networks
+
+## Two-mode networks
+
+A **two-mode network** is a network that consists of two disjoint sets of nodes (like people and events)
+
+Common examples include:   
+
+- Affiliation networks (Membership in institutions)
+- Voting/Sponsorship networks (politicians and bills)
+- Citation network (authors and papers)
+- Co-Authorship networks (authors and papers)
+
+## Toy example
+
+```{r southern_dat_load}
+data("southern_women")
+```
+
+```{r southern_women}
+#| echo: false
+#| fig.align: center
+ggraph(southern_women,"stress")+
+  geom_edge_link(edge_color="grey66")+
+  geom_node_point(aes(fill=type,shape=type),size=8,show.legend = FALSE)+
+  geom_node_text(aes(label=name))+
+  scale_shape_manual(values=c(21,22))+
+  theme_void()
+
+```
+
+## Analyzing two-mode networks 
+
+<br>
+
+The adjacency matrix is called **incidence matrix**
+
+```{r incidence_southern}
+A <- as_incidence_matrix(southern_women)
+A[1:8, ]
+```
+
+{{< CRAN tnet >}} and {{< CRAN bipartite >}}  offer some methods to analyse two mode networks **directly**, by adapting tools for standard networks.
+
+## Projecting two-mode networks
+
+![](img/small_project.png)
+
+```{r proj_women}
+B <- A%*%t(A)
+B[1:5,1:5]
+```
+
+## Projecting two-mode networks
+```{r plot_weighted_proj}
+#| echo: false
+#| fig.align: center
+
+proj <- graph_from_adjacency_matrix(B,weighted = TRUE,diag = FALSE,mode = "undirected")
+
+ggraph(proj,"stress")+
+  geom_edge_link(aes(edge_width=weight),edge_color="grey66",show.legend = FALSE)+
+  geom_node_point(shape=21,fill="grey66",size=8,show.legend = FALSE)+
+  geom_node_text(aes(label=name))+
+  scale_edge_width(range = c(1,4))+
+  theme_void()+
+  coord_cartesian(clip = "off")
+
+```
+
+## Filtering projections
+
+![](img/proj_flow.png)
+
+**naïve**  
+delete all edge with a weight less than x
+
+**advanced**  
+statistical tools using null models: {{< CRAN backbone >}}  
+[Introduction to the package](https://arxiv.org/abs/1912.12779)
+
+## "Backbone" null models
+
+Compare an edge's observed weight in the projection to the distribution of weights expected in a projection obtained from a random bipartite network where both the row vertex degrees and column vertex degrees are ...
+
+**Fixed degree sequence model**  
+... *exactly* fixed at their original values
+
+**Stochastic degree sequence model**  
+... *approximately* fixed at their original values
+
+## "Backbone" example
+
+```{r southern_backbone}
+library(backbone)
+sw_bb <- sdsm(southern_women,alpha = 0.4)
+```
+
+```{r sw_bb_plot}
+#| echo: false
+#| fig.width: 12
+#| fig.height: 8
+#| fig.align: center
+ggraph(sw_bb,"stress")+
+  geom_edge_link(edge_width=0.6,edge_color="grey66",show.legend = FALSE)+
+  geom_node_point(shape=21,fill="grey66",size=8,show.legend = FALSE)+
+  geom_node_text(aes(label=name))+
+  scale_edge_width(range = c(1,4))+
+  theme_void()+
+  coord_cartesian(clip = "off")
+```
+
+
+## Application of projections
+
+**Co-voting behavior of US senators**
+
+![](img/senate.jpg)
+
+[Link to paper](https://www.nature.com/articles/s41598-020-74175-w)
+
+
+## Signed networks
+
+<br>
+
+Signed networks include two types of relations:  
+positive ("friends") and negative ("foes")
+
+typical research questions involve (implemented in {{< CRAN signnet >}}):
+
+- structural balance
+- blockmodeling
+- (centrality)
+
+## Structural balance theory
+<br>
+
+**developed by Heider in 1940s**:  
+
+- mental discomfort when actors hold contradictory beliefs
+- there is a preference for ’balance’ (consistency) states
+- states of imbalance and mental discomfort create ’tension’
+- imbalanced states are unstable
+- imbalanced states move towards balance
+
+**formalised with graph theory by Cartwright Harary (1950s)**
+
+## Structural balance theory
+
+:::{.center-x}
+![](img/balance_triples.png){width="900"}
+:::
+
+**Beyond triangles**  
+A network is balanced if it can be partitioned into two groups such that all intra group edges are positive and all inter group edges are negiative
+
+**Extended form of balance** (Davis 1960s)  
+A network is balanced if it can be partitioned into k groups ...
+
+
+## Toy example
+
+<br>
+
+```{r sign example}
+library(signnet)
+data("tribes")
+```
+
+:::{.columns}
+:::{.column width="49%"}
+```{r tribes_now}
+ggsigned(tribes)
+```
+:::
+
+:::{.column width="49%"}
+```{r tribes_w}
+ggsigned(tribes,weights = T)
+```
+:::
+:::
+
+## Measuring structural balance
+
+- **triangles**: Fraction of balanced triangles. 
+- **walks**: fraction of signed to unsigned walks
+- **frustration**: optimal partition such that the sum of intra group negative and inter group positive edges is minimized
+
+```{r balance_scores}
+balance_score(tribes,method = "triangles")
+balance_score(tribes,method = "walk")
+balance_score(tribes,method = "frustration")
+```
+
+
+## Blockmodeling
+
+In signed blockmodeling, the goal is to determine $k$ blocks of nodes such that all intra-block edges are positive and inter-block edges are negative
+
+```{r signed_bm}
+set.seed(141)
+bl <- signed_blockmodel(tribes,3)
+bl
+```
+
+```{r signed_bm_plot}
+#| fig.align: center
+#| fig.width: 6
+#| fig.height: 6
+#| output-location: slide
+ggblock(tribes,blocks = bl$membership,show_blocks = TRUE,show_labels = TRUE)
+```
+
+## Generalized blockmodeling
+
+The diagonal block structure is not always the most optimal representaion of the data
+```{r weird_signed}
+#| echo: false
+#| fig.height: 5
+#| fig.width: 10
+#| fig.align: center
+library(patchwork)
+g1 <- g2 <- g3 <- graph.full(5)
+
+V(g1)$name <- as.character(1:5)
+V(g2)$name <- as.character(6:10)
+V(g3)$name <- as.character(11:15)
+
+g <- Reduce("%u%",list(g1,g2,g3))
+E(g)$sign <- 1
+E(g)$sign[1:10] <- -1
+g <- add.edges(g,c(rbind(1:5,6:10)),attr = list(sign=-1))
+g <- add.edges(g,c(rbind(1:5,11:15)),attr = list(sign=-1))
+g <- add.edges(g,c(rbind(11:15,6:10)),attr = list(sign=1))
+
+p1<-ggsigned(g,weights = FALSE)
+p2<-ggblock(g,rep(1:3,each=5),show_blocks = TRUE)
+p1+p2
+```
+
+## Generalized blockmodeling
+
+The function `signed_blockmodel_general()` allows to specify arbitrary block structures.
+```{r gen_block_mat}
+set.seed(424) #for reproducibility
+blockmat <- matrix(c(1,-1,-1,-1,1,1,-1,1,-1),3,3,byrow = TRUE)
+blockmat
+
+general <- signed_blockmodel_general(g,blockmat,alpha = 0.5)
+traditional <- signed_blockmodel(g,k = 3,alpha = 0.5,annealing = TRUE)
+
+c(general$criterion,traditional$criterion)
+```
+
+## Generalized blockmodeling
+:::{.center-x}
+![](img/blockmodel_general.png){width="750"}
+:::
+
+## Other functions
+
+Most functions us the igraph name + `_signed`:
+
+- `as_adj_signed()`
+- `as_incidence_signed()`
+- `laplacian_matrix_signed()`
+- `triad_census_signed()`
+- `degree_signed()`
+- `eigen_centrality_signed()`
+- `sample_islands_signed()`
+
+## All signed triads
+
+:::{.center-x}
+![](img/signed_triads.png){width="600"}
 :::
