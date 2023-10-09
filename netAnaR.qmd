@@ -1,0 +1,34 @@
+---
+title: "Network Analysis in R"
+subtitle: "Workshop"
+author: David Schoch
+institute: GESIS
+date: today
+date-format: "YYYY-MM-DD"
+footer: "@schochastics"
+embed-resources: true
+format: fakegesis-revealjs
+---
+
+
+## My R universe
+
+<img src="img/hex.png" width="400">
+
+
+## My R universe
+
+<img src="img/hex_net.png" width="605">
+
+
+
+
+## Resources
+
+**My tutorials**:  
+
+- Network Visualization: <https://www.mr.schochastics.net/material/netVizR/>
+
+- Network Analysis: <https://www.mr.schochastics.net/material/netAnaR/>
+
+- Tidy Network Analysis: <https://www.mr.schochastics.net/material/tidynetAnaR/>
