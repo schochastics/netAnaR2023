@@ -6,7 +6,7 @@ institute: GESIS
 date: today
 date-format: "YYYY-MM-DD"
 footer: "@schochastics"
-embed-resources: true
+embed-resources: false
 format: fakegesis-revealjs
 execute:
   freeze: auto
@@ -17,6 +17,7 @@ css: styles.css
 #| echo: false
 #| warning: false
 #| message: false
+#| label: setup
 
 library(ggraph)
 
