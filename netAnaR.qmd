@@ -8,6 +8,8 @@ date-format: "YYYY-MM-DD"
 footer: "@schochastics"
 embed-resources: true
 format: fakegesis-revealjs
+execute:
+  freeze: auto
 ---
 
 
