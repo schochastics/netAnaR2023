@@ -19,7 +19,6 @@ library(netrankr)
 
 <img src="img/hex_bg.png" width="400">
 
-
 ## My R universe
 
 <img src="img/hex_net_bg.png" width="605">
