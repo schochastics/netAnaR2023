@@ -1,3 +1,23 @@
+---
+title: "Network Analysis in R"
+subtitle: ""
+author: "David Schoch"
+footer: "@schochastics"
+institute: "Workshop series for Ukraine"
+shortcodes:
+  - misc.lua
+format: 
+  revealjs: 
+    menu: true
+    progress: false
+    theme: "schochastics.scss"
+    slide-number: c/t
+    show-slide-number: all
+    code-line-numbers: false
+execute: 
+  cache: true
+  echo: true
+---
 ```{r}
 #| echo: false
 #| warning: false
