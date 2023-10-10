@@ -683,9 +683,9 @@ positive and negative relations</p>
 <div class="cell" data-hash="index_cache/revealjs/igraph_obj_03e5becdcc366c454c3ccd61c2e75fb0">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 3d98d67 UN-- 5 6 -- 
+<pre><code>IGRAPH 4ff3396 UN-- 5 6 -- 
 + attr: name (v/c)
-+ edges from 3d98d67 (vertex names):
++ edges from 4ff3396 (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -726,7 +726,7 @@ Ross--Rachel</code></pre>
 <div class="cell" data-hash="index_cache/revealjs/eadd_attr_675a13e573c5217b6ad51225080abeb5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 6/6 edges from 3d98d67 (vertex names):
+<pre><code>+ 6/6 edges from 4ff3396 (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -740,9 +740,9 @@ Ross--Rachel</code></pre>
 <div class="cell" data-hash="index_cache/revealjs/igraph_obj1_dc36023a86ae1913af3f66672ff400ce">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 3d98d67 UNW- 5 6 -- 
+<pre><code>IGRAPH 4ff3396 UNW- 5 6 -- 
 + attr: name (v/c), gender (v/c), weight (e/n)
-+ edges from 3d98d67 (vertex names):
++ edges from 4ff3396 (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -760,7 +760,7 @@ Nodes: 5, Edges: 6, Density: 0.6, Components: 1, Isolates: 0
  gender(c): M, M, F, M, F ...
 ---
 -Edge Attributes:
- weight(n): 5, 4, 3, 3, 5, 2 ...
+ weight(n): 4, 2, 4, 4, 1, 3 ...
 ---
 -Edges: 
  Joey--Chandler Joey--Monica Joey--Ross Chandler--Ross Monica--Ross
@@ -821,9 +821,9 @@ Steve   1   1     0</code></pre>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weighted =</span> <span class="cn">NULL</span>,</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH aef3505 UN-- 3 3 -- 
+<pre><code>IGRAPH e930fc9 UN-- 3 3 -- 
 + attr: name (v/c)
-+ edges from aef3505 (vertex names):
++ edges from e930fc9 (vertex names):
 [1] Bob--Ann   Bob--Steve Ann--Steve</code></pre>
 </div>
 </div>
@@ -831,9 +831,9 @@ Steve   1   1     0</code></pre>
 <div class="cell" data-hash="index_cache/revealjs/from_edgelist_206f3fa39884d8f27dc92ec578711a92">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_from_edgelist</span>(el, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH b4d484e UN-- 3 3 -- 
+<pre><code>IGRAPH adabc74 UN-- 3 3 -- 
 + attr: name (v/c)
-+ edges from b4d484e (vertex names):
++ edges from adabc74 (vertex names):
 [1] Bob--Ann   Bob--Steve Ann--Steve</code></pre>
 </div>
 </div>
@@ -1096,12 +1096,12 @@ indication of the clustering in the network</p>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># keep density fixed</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">500</span>,<span class="fu">transitivity</span>(<span class="fu">rewire</span>(g,<span class="fu">each_edge</span>(<span class="dv">1</span>)),<span class="at">type =</span> <span class="st">"global"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0684746</code></pre>
+<pre><code>[1] 0.0675402</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep degree sequence fixed</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">500</span>,<span class="fu">transitivity</span>(<span class="fu">sample_degseq</span>(deg),<span class="at">type =</span> <span class="st">"global"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0743822</code></pre>
+<pre><code>[1] 0.0742782</code></pre>
 </div>
 </div>
 </section>
@@ -1369,19 +1369,19 @@ Modularity is defined as the fraction of edges that fall within given groups min
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min_cut</span>(g,<span class="at">value.only =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$value
-[1] 3
+[1] 5
 
 $cut
-+ 3/81 edges from d4b07cf (vertex names):
-[1]  4--15  6--14 10--12
++ 5/83 edges from f5ac651 (vertex names):
+[1] 12--13 13--16 13--17 13--19 13--20
 
 $partition1
-+ 10/20 vertices, named, from d4b07cf:
- [1] 17 19 11 15 14 12 18 20 16 13
++ 1/20 vertex, named, from f5ac651:
+[1] 13
 
 $partition2
-+ 10/20 vertices, named, from d4b07cf:
- [1] 1  2  3  4  5  6  7  8  9  10</code></pre>
++ 19/20 vertices, named, from f5ac651:
+ [1] 1  2  3  4  5  6  7  8  9  10 11 12 14 15 16 17 18 19 20</code></pre>
 </div>
 </div>
 </div>
@@ -1439,7 +1439,7 @@ $partition2
 <span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">&lt;-</span> <span class="fu">membership</span>(clu)</span>
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>mem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 1 1 2 2 2 1 3 1 2 1 1 1 3 3 2 1 3 1 3 1 3 3 4 4 3 3 4 3 3 4 3 3</code></pre>
+<pre><code> [1] 1 1 1 1 2 2 2 1 3 1 2 1 1 1 3 3 2 1 3 1 3 1 3 4 4 4 3 4 4 3 3 4 3 3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clusters as list</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">communities</span>(clu)</span>
@@ -1452,10 +1452,10 @@ $`2`
 [1]  5  6  7 11 17
 
 $`3`
- [1]  9 15 16 19 21 23 24 27 28 30 31 33 34
+ [1]  9 15 16 19 21 23 27 30 31 33 34
 
 $`4`
-[1] 25 26 29 32</code></pre>
+[1] 24 25 26 28 29 32</code></pre>
 </div>
 </div>
 </section>
@@ -1478,7 +1478,7 @@ $`4`
 <span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  infomap     eigen   louvain spinglass      walk 
- 0.402038  0.393409  0.419790  0.419790  0.353222 </code></pre>
+ 0.402038  0.393409  0.415598  0.418803  0.353222 </code></pre>
 </div>
 </div>
 </section>
