@@ -1,24 +1,3 @@
----
-title: "Network Analysis in R"
-subtitle: ""
-author: "David Schoch"
-footer: "@schochastics"
-institute: "Workshop series for Ukraine"
-shortcodes:
-  - misc.lua
-format: 
-  revealjs: 
-    menu: true
-    progress: false
-    theme: "schochastics.scss"
-    slide-number: c/t
-    show-slide-number: all
-    code-line-numbers: false
-execute: 
-  cache: true
-  echo: true
----
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -38,12 +17,12 @@ library(netrankr)
 
 ## My R universe
 
-<img src="img/hex.png" width="400">
+<img src="img/hex_bg.png" width="400">
 
 
 ## My R universe
 
-<img src="img/hex_net.png" width="605">
+<img src="img/hex_net_bg.png" width="605">
 
 # A Short Introduction to Network Analysis
 
@@ -253,7 +232,7 @@ use `igraph` if
 - you need to use other SNA packages
 
 :::{.fragment}
-use `sna` if
+use `network`/`sna` if
 
 - you need to do modeling (e.g. ERGMs and RSIENA)
 :::

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="netAnaR_files/libs/clipboard/clipboard.min.js"></script>
-<script src="netAnaR_files/libs/quarto-html/tabby.min.js"></script>
-<script src="netAnaR_files/libs/quarto-html/popper.min.js"></script>
-<script src="netAnaR_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="netAnaR_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="netAnaR_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="netAnaR_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="netAnaR_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="David Schoch">
@@ -15,8 +15,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="netAnaR_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="netAnaR_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,11 +95,11 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="netAnaR_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="netAnaR_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="netAnaR_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="netAnaR_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="netAnaR_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -414,11 +414,11 @@ David Schoch
 <section id="my-r-universe" class="slide level2">
 <h2>My R universe</h2>
 
-<img src="img/hex.png" width="400" class="r-stretch"></section>
+<img src="img/hex_bg.png" width="400" class="r-stretch"></section>
 <section id="my-r-universe-1" class="slide level2">
 <h2>My R universe</h2>
 
-<img src="img/hex_net.png" width="605" class="r-stretch"></section>
+<img src="img/hex_net_bg.png" width="605" class="r-stretch"></section>
 <section>
 <section id="a-short-introduction-to-network-analysis" class="title-slide slide level1 center">
 <h1>A Short Introduction to Network Analysis</h1>
@@ -580,7 +580,7 @@ positive and negative relations</p>
 <section id="what-is-base-r-for-networks" class="slide level2">
 <h2>What is “base R” for networks?</h2>
 
-<img data-src="netAnaR_files/figure-revealjs/cranet-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/cranet-1.png" width="960" class="r-stretch"></section>
 <section id="which-package-to-choose" class="slide level2">
 <h2>Which package to choose?</h2>
 <p><br></p>
@@ -590,7 +590,7 @@ positive and negative relations</p>
 <li>you need to use other SNA packages</li>
 </ul>
 <div class="fragment">
-<p>use <code>sna</code> if</p>
+<p>use <code>network</code>/<code>sna</code> if</p>
 <ul>
 <li>you need to do modeling (e.g.&nbsp;ERGMs and RSIENA)</li>
 </ul>
@@ -601,21 +601,21 @@ positive and negative relations</p>
 </section>
 <section id="creating-simple-networks" class="slide level2">
 <h2>Creating simple networks</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/make_graph_f8f9a44997b3747b3bd6cf560348d204">
+<div class="cell" data-hash="index_cache/revealjs/make_graph_b4690d511c9d16027ef538c648a260be">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">make_graph</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">4</span>, <span class="dv">3</span>,<span class="dv">5</span>, <span class="dv">4</span>,<span class="dv">5</span>), <span class="at">n =</span> <span class="dv">5</span>, <span class="at">dir =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">graph_from_literal</span>(Joey<span class="sc">-</span>Chandler<span class="sc">:</span>Monica<span class="sc">-</span>Ross, Joey<span class="sc">-</span>Ross<span class="sc">-</span>Rachel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/make_graph_lot_449fd03df4af75c522097290028c9ba6">
+<div class="cell" data-hash="index_cache/revealjs/make_graph_lot_a7099c2ad2257368af94f3727c731cd0">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/make_graph_lot-1.png" width="384"></p>
+<p><img data-src="index_files/figure-revealjs/make_graph_lot-1.png" width="384"></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/make_literal_lot_9158f3a66d4a2695485491b1ec2c8e75">
+<div class="cell" data-hash="index_cache/revealjs/make_literal_lot_55630dc6f199bb9f7baef760dd9d2872">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/make_literal_lot-1.png" width="384"></p>
+<p><img data-src="index_files/figure-revealjs/make_literal_lot-1.png" width="384"></p>
 </div>
 </div>
 </div>
@@ -623,75 +623,75 @@ positive and negative relations</p>
 </section>
 <section id="special-graphs" class="slide level2">
 <h2>Special graphs</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/make_examples_344821a9b44dd498d45ee502a3b8a412">
+<div class="cell" data-hash="index_cache/revealjs/make_examples_1e0ecaa6bf78d0fea5106d813328d257">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">&lt;-</span> <span class="fu">make_ring</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>g5 <span class="ot">&lt;-</span> <span class="fu">make_empty_graph</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:33%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/full_graph_plot_02cdd2e15f730ad57920e16ce9ee605e">
+<div class="cell" data-hash="index_cache/revealjs/full_graph_plot_06c9a2d454de8fbcf802ce0b38a0a255">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/full_graph_plot-1.png" width="288"></p>
+<p><img data-src="index_files/figure-revealjs/full_graph_plot-1.png" width="288"></p>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/ring_plot_41e89a07f5844612451fbca7a8f68a67">
+<div class="cell" data-hash="index_cache/revealjs/ring_plot_d6c91012d134802bde2ed02bda827298">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/ring_plot-1.png" width="288"></p>
+<p><img data-src="index_files/figure-revealjs/ring_plot-1.png" width="288"></p>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/empty_plot_f137e8a83697949ca8917cf52059ff4b">
+<div class="cell" data-hash="index_cache/revealjs/empty_plot_1cfc96fcd1b9726aa083912ce9836c1a">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/empty_plot-1.png" width="288"></p>
+<p><img data-src="index_files/figure-revealjs/empty_plot-1.png" width="288"></p>
 </div>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="netAnaR_cache/revealjs/igraph_make_de67f3d37430da1684b59fcddfc05c13">
+<div class="cell" data-hash="index_cache/revealjs/igraph_make_e09e4d34cf56710059e0fef66a812a83">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:igraph"</span>,<span class="at">pattern =</span> <span class="st">"make_*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="random-graphs" class="slide level2">
 <h2>Random graphs</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/make_randoms_eaa19895ff444563656bd116134277b0">
+<div class="cell" data-hash="index_cache/revealjs/make_randoms_63993b0f652b44c4e99a3c31bca0df2e">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g6 <span class="ot">&lt;-</span> <span class="fu">sample_gnp</span>(<span class="at">n =</span> <span class="dv">100</span>,<span class="at">p =</span> <span class="fl">0.1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>g7 <span class="ot">&lt;-</span> <span class="fu">sample_pa</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">power =</span> <span class="fl">1.5</span>, <span class="at">m =</span> <span class="dv">1</span>, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/er_plot_60c6ada90bd052a14c70b432b5336b70">
+<div class="cell" data-hash="index_cache/revealjs/er_plot_ccfb1bc317e887f19884acfd6a9909ac">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/er_plot-1.png" width="384"></p>
+<p><img data-src="index_files/figure-revealjs/er_plot-1.png" width="384"></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/pa_plot_d6a4f55ff9e9308db9e8c0591089e076">
+<div class="cell" data-hash="index_cache/revealjs/pa_plot_f40f593c411fe769304da4ee91ba9a7c">
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/pa_plot-1.png" width="384"></p>
+<p><img data-src="index_files/figure-revealjs/pa_plot-1.png" width="384"></p>
 </div>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="netAnaR_cache/revealjs/igraph_sample_c2b574e33b21f37f7a81a06102714e73">
+<div class="cell" data-hash="index_cache/revealjs/igraph_sample_434b4d76929e1684bfdb19e47b1851a0">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:igraph"</span>,<span class="at">pattern =</span> <span class="st">"sample_*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="igraph-objects" class="slide level2">
 <h2>igraph objects</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/igraph_obj_d3908b8a3b7a08ec319802fd84082124">
+<div class="cell" data-hash="index_cache/revealjs/igraph_obj_03e5becdcc366c454c3ccd61c2e75fb0">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 072acab UN-- 5 6 -- 
+<pre><code>IGRAPH 3d98d67 UN-- 5 6 -- 
 + attr: name (v/c)
-+ edges from 072acab (vertex names):
++ edges from 3d98d67 (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
 </div>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/str_igraph_19473ef8c1ae860d081e9e69912f13c9">
+<div class="cell" data-hash="index_cache/revealjs/str_igraph_1f67a255b623823164f749d95ac9107f">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(netUtils)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(g2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -712,7 +712,7 @@ Ross--Rachel</code></pre>
 <h2>Attributes</h2>
 <div class="fragment">
 <p><strong>node attributes</strong></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/vadd_attr_02f11d0e81333df5aae2ed0228531af2">
+<div class="cell" data-hash="index_cache/revealjs/vadd_attr_b50eddd28ae36020d18b3902a5e691f3">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g2)<span class="sc">$</span>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Joey"     "Chandler" "Monica"   "Ross"     "Rachel"  </code></pre>
@@ -723,10 +723,10 @@ Ross--Rachel</code></pre>
 </div>
 <div class="fragment">
 <p><strong>edge attributes</strong></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/eadd_attr_3073fd717a0b6c8121cf5c168f3231de">
+<div class="cell" data-hash="index_cache/revealjs/eadd_attr_675a13e573c5217b6ad51225080abeb5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 6/6 edges from 072acab (vertex names):
+<pre><code>+ 6/6 edges from 3d98d67 (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -737,18 +737,18 @@ Ross--Rachel</code></pre>
 </section>
 <section id="attributes-1" class="slide level2">
 <h2>Attributes</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/igraph_obj1_2946801bbc9f859c01ce46e798409d91">
+<div class="cell" data-hash="index_cache/revealjs/igraph_obj1_dc36023a86ae1913af3f66672ff400ce">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 072acab UNW- 5 6 -- 
+<pre><code>IGRAPH 3d98d67 UNW- 5 6 -- 
 + attr: name (v/c), gender (v/c), weight (e/n)
-+ edges from 072acab (vertex names):
++ edges from 3d98d67 (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
 </div>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/str_igraph1_3b6641e3d74f40c2cf6810c34775476a">
+<div class="cell" data-hash="index_cache/revealjs/str_igraph1_fda9086db5d415bc1f20156e896c37c3">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(g2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>---------------------------------------------------------
@@ -760,7 +760,7 @@ Nodes: 5, Edges: 6, Density: 0.6, Components: 1, Isolates: 0
  gender(c): M, M, F, M, F ...
 ---
 -Edge Attributes:
- weight(n): 3, 1, 4, 2, 5, 5 ...
+ weight(n): 5, 4, 3, 3, 5, 2 ...
 ---
 -Edges: 
  Joey--Chandler Joey--Monica Joey--Ross Chandler--Ross Monica--Ross
@@ -770,7 +770,7 @@ Ross--Rachel</code></pre>
 </section>
 <section id="network-representations-adjacency-matrix" class="slide level2">
 <h2>Network representations: adjacency matrix</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/adj_mat_5f78ab3b5a4462de1b809fa11cf390f7">
+<div class="cell" data-hash="index_cache/revealjs/adj_mat_6adc2655fe61871d154ca659a9496426">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>,</span>
@@ -795,7 +795,7 @@ Steve   1   1     0</code></pre>
 <section id="network-representation-edgelist" class="slide level2">
 <h2>Network representation: edgelist</h2>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/edge_lst_c2e3678623df7f9f657f6eea30f9c95d">
+<div class="cell" data-hash="index_cache/revealjs/edge_lst_1131014f9143fd31cabb83c4b073de42">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>el <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"Bob"</span>,<span class="st">"Ann"</span>,</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bob"</span>,<span class="st">"Steve"</span>,</span>
@@ -814,30 +814,30 @@ Steve   1   1     0</code></pre>
 <section id="networks-from-matrices-and-lists" class="slide level2">
 <h2>Networks from matrices and lists</h2>
 <p><strong>adjacency matrix</strong></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/from_adj_b1b84ed9b8ec4588b2ab475e94154244">
+<div class="cell" data-hash="index_cache/revealjs/from_adj_1064f095417998454c20e9fd8da24f88">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_from_adjacency_matrix</span>(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  A,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"undirected"</span>,</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weighted =</span> <span class="cn">NULL</span>,</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 1c98609 UN-- 3 3 -- 
+<pre><code>IGRAPH aef3505 UN-- 3 3 -- 
 + attr: name (v/c)
-+ edges from 1c98609 (vertex names):
++ edges from aef3505 (vertex names):
 [1] Bob--Ann   Bob--Steve Ann--Steve</code></pre>
 </div>
 </div>
 <p><strong>edgelist</strong></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/from_edgelist_25a20b6b1076c6d394255f54e6f8ece8">
+<div class="cell" data-hash="index_cache/revealjs/from_edgelist_206f3fa39884d8f27dc92ec578711a92">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_from_edgelist</span>(el, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 43282b1 UN-- 3 3 -- 
+<pre><code>IGRAPH b4d484e UN-- 3 3 -- 
 + attr: name (v/c)
-+ edges from 43282b1 (vertex names):
++ edges from b4d484e (vertex names):
 [1] Bob--Ann   Bob--Steve Ann--Steve</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="netAnaR_cache/revealjs/graph_from_15a0089df65cda28cabc898ffe745b26">
+<div class="cell" data-hash="index_cache/revealjs/graph_from_5140566f5cf0af9719e5477d180d7cd0">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:igraph"</span>,<span class="at">pattern =</span> <span class="st">"graph_from_*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -850,7 +850,7 @@ No extra work</p>
 </div>
 <div class="fragment">
 <p><strong>Data was processed in another SNA tool</strong></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/read_graph_523cec45ccf51abab8876a06ea197a10">
+<div class="cell" data-hash="index_cache/revealjs/read_graph_d5f58b9b976f54ffae7a4995bda24b72">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_graph</span>(file, <span class="at">format =</span> <span class="fu">c</span>(<span class="st">"edgelist"</span>, <span class="st">"pajek"</span>, <span class="st">"ncol"</span>, <span class="st">"lgl"</span>,</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"graphml"</span>, <span class="st">"dimacs"</span>, <span class="st">"graphdb"</span>, <span class="st">"gml"</span>, <span class="st">"dl"</span>), ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -866,7 +866,7 @@ No extra work</p>
 <p><strong>Organize network data in two separate files</strong></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/el_df_7c3bc8bd5aaa3ad1efd98f0defc15880">
+<div class="cell" data-hash="index_cache/revealjs/el_df_f8a367251e38692dd381b4f6a8f530b3">
 <div class="cell-output-display">
 <table>
 <thead>
@@ -905,7 +905,7 @@ No extra work</p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/node_df_6ec3e8e85b33e8e7a0bc19a34ba93bed">
+<div class="cell" data-hash="index_cache/revealjs/node_df_8d6ada18a728b4c80fed52117c19a668">
 <div class="cell-output-display">
 <table>
 <thead>
@@ -953,7 +953,7 @@ No extra work</p>
 </div>
 </div>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/df1_1adaba0fbbc957b42c1c29177106984f">
+<div class="cell" data-hash="index_cache/revealjs/df1_887e1385f6e0e75bbbc9c53dabe4fd33">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_from_data_frame</span>(el, <span class="at">directed =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), vertices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
@@ -964,16 +964,16 @@ No extra work</p>
 </section>
 <section id="toy-example" class="slide level2">
 <h2>Toy example</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/load_greys_ee69192740195ad99d438bfaa522015a">
+<div class="cell" data-hash="index_cache/revealjs/load_greys_6dfc456efc9e43ff503f51d06fdf315d">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"greys"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/plot_greys-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/plot_greys-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
 <section id="density" class="slide level2">
 <h2>Density</h2>
 <p><br></p>
 <p>The <strong>density</strong> of a network is defined as the fraction of the potential edges in a network that are actually present.</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/density_11e03fa834d2d1244d9ec8bd4cbaa270">
+<div class="cell" data-hash="index_cache/revealjs/density_e24ec8ceb9aee7b6d9630de59d9ae762">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">graph.density</span>(<span class="fu">make_empty_graph</span>(<span class="dv">10</span>)), </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph.density</span>(greys), </span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph.density</span>(<span class="fu">make_full_graph</span>(<span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -985,7 +985,7 @@ No extra work</p>
 <section id="shortest-paths" class="slide level2">
 <h2>Shortest Paths</h2>
 <p>A <strong>shortest path</strong> is a path that connects two nodes in a network with a minimal number of edges. The length of a shortest path is called the distance between two nodes.</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/shortest_path_930b1b1db299c24cf027c0b49e44b968">
+<div class="cell" data-hash="index_cache/revealjs/shortest_path_eaaa0d7509bae53536d71eeed65bd738">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shortest_paths</span>(greys,<span class="at">from =</span> <span class="st">"Alex Karev"</span>,<span class="at">to =</span> <span class="st">"Owen Hunt"</span>,<span class="at">output =</span> <span class="st">"vpath"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$vpath
@@ -1009,10 +1009,10 @@ NULL</code></pre>
 <section id="shortest-paths-1" class="slide level2">
 <h2>Shortest Paths</h2>
 
-<img data-src="netAnaR_files/figure-revealjs/greys_shortest_path-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/greys_shortest_path-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
 <section id="distances" class="slide level2">
 <h2>Distances</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/distances_67ec88a8b4b1c1fbd1a57e092412f824">
+<div class="cell" data-hash="index_cache/revealjs/distances_85f665ef8a6842da317077836da3870e">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distances</span>(greys)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Addison Montgomery Adele Webber Teddy Altman Amelia Shepherd
@@ -1034,21 +1034,21 @@ Arizona Robbins                  0</code></pre>
 <section id="diameter" class="slide level2">
 <h2>Diameter</h2>
 <p>The length of the longest shortest path is called the <strong>diameter</strong> of the network.</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/diameter_fa80a9353636954048dc8f9c3077cb1c">
+<div class="cell" data-hash="index_cache/revealjs/diameter_a53c94d96f05d8355528b52350ccfa54">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(greys)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/greys_diameter-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/greys_diameter-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
 <section id="transitivity" class="slide level2">
 <h2>Transitivity</h2>
 <p><strong>Transitivity</strong> is a measure of the degree to which nodes in a graph tend to cluster together. This is also called the <strong>clustering coefficient</strong>.</p>
 <p><strong>local</strong><br>
 gives an indication of the embeddedness of single nodes</p>
 
-<img data-src="netAnaR_files/figure-revealjs/ccoef_example-1.png" width="1440" class="r-stretch quarto-figure-center"><div class="columns">
+<img data-src="index_files/figure-revealjs/ccoef_example-1.png" width="1440" class="r-stretch quarto-figure-center"><div class="columns">
 <div class="column" style="width:65%;">
 <p><strong>global</strong><br>
 indication of the clustering in the network</p>
@@ -1061,7 +1061,7 @@ indication of the clustering in the network</p>
 </section>
 <section id="transitivity-1" class="slide level2">
 <h2>Transitivity</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/transitivity_bee9636221312e1003a902072bcd25c3">
+<div class="cell" data-hash="index_cache/revealjs/transitivity_faf00730bdf15d07c78022185ff3ac14">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"coleman"</span>)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">as.undirected</span>(coleman[[<span class="dv">1</span>]])</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">transitivity</span>(g, <span class="at">type =</span> <span class="st">"global"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1069,7 +1069,7 @@ indication of the clustering in the network</p>
 <pre><code>[1] 0.440083</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="netAnaR_cache/revealjs/transitivity2_7ee3407df9927ecee2d2a11068b9449a">
+<div class="cell" data-hash="index_cache/revealjs/transitivity2_5330b411000352edce7cd3765c7f19b4">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transitivity</span>(g, <span class="at">type =</span> <span class="st">"local"</span>, <span class="at">isolates =</span> <span class="st">"zero"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 0.400000 1.000000 0.000000 0.500000 0.666667 1.000000 0.000000 0.000000
@@ -1091,17 +1091,17 @@ indication of the clustering in the network</p>
 <h2>Transitivity</h2>
 <p><br></p>
 <p>The value itself is not always enough to judge the level of transitivity of a network. We should also check if it deviates significantly from what would be expected by randomness</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/transitivity3_dd919ade6c92ee9216f1d953a4f226bf">
+<div class="cell" data-hash="index_cache/revealjs/transitivity3_087bb0a5df0d166ddba396b0da1d8d23">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>deg <span class="ot">&lt;-</span> <span class="fu">degree</span>(g)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># keep density fixed</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">500</span>,<span class="fu">transitivity</span>(<span class="fu">rewire</span>(g,<span class="fu">each_edge</span>(<span class="dv">1</span>)),<span class="at">type =</span> <span class="st">"global"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0679633</code></pre>
+<pre><code>[1] 0.0684746</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep degree sequence fixed</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">500</span>,<span class="fu">transitivity</span>(<span class="fu">sample_degseq</span>(deg),<span class="at">type =</span> <span class="st">"global"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0742958</code></pre>
+<pre><code>[1] 0.0743822</code></pre>
 </div>
 </div>
 </section>
@@ -1116,24 +1116,24 @@ indication of the clustering in the network</p>
 <section id="degree-distribution-1" class="slide level2">
 <h2>Degree distribution</h2>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/deg_dist_graphs_106abe5a77a88911b630c551cbedf85c">
+<div class="cell" data-hash="index_cache/revealjs/deg_dist_graphs_9d46709d58eb10492de72088fc54ad3a">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>er <span class="ot">&lt;-</span> <span class="fu">sample_gnp</span>(<span class="at">n =</span> <span class="dv">5000</span>, <span class="at">p =</span> <span class="fl">0.01</span>)</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>pa <span class="ot">&lt;-</span> <span class="fu">sample_pa</span>(<span class="at">n =</span> <span class="dv">5000</span>, <span class="at">power =</span> <span class="fl">1.5</span>, <span class="at">m =</span> <span class="dv">2</span>, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/dd_er_af5cfa945a20a71d90e142e6d0b6061b">
+<div class="cell" data-hash="index_cache/revealjs/dd_er_ad91cb3140a563029a869e31b8198bc4">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">degree_distribution</span>(er))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/dd_er-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/dd_er-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/dd_pa_30aa62f3a3e0da5ea0415f48194365ff">
+<div class="cell" data-hash="index_cache/revealjs/dd_pa_0e0eb859c3c5cf4c4aeb6eb3da1df6e3">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">degree_distribution</span>(pa),<span class="at">log =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/dd_pa-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/dd_pa-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1144,7 +1144,7 @@ indication of the clustering in the network</p>
 <p>A <strong>measure of centrality</strong> is an index that assigns a numeric values to the nodes of the network. The higher the value, the more central the node.</p>
 <p>“Being central” is a very ambiguous term hence there exists a large variety of indices that assess centrality with very different structural properties.</p>
 
-<img data-src="netAnaR_files/figure-revealjs/star_net-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/star_net-1.png" width="384" class="r-stretch quarto-figure-center"></section>
 <section id="section-1" class="slide level2">
 <h2></h2>
 
@@ -1164,18 +1164,18 @@ Similar to eigenvector, just for directed networks</p>
 </section>
 <section id="toy-example-i" class="slide level2">
 <h2>Toy example I</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/load_dbces_d80963fd3986b60d45ac6a5d398ac953">
+<div class="cell" data-hash="index_cache/revealjs/load_dbces_1bf60e99ba216a5c57adc4455974b630">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dbces11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/dbces11_basic_plot-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/dbces11_basic_plot-1.png" width="960" class="r-stretch"></section>
 <section id="toy-example-i-1" class="slide level2">
 <h2>Toy example I</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/load_dbces1_aa3408788ded8761051cfb955e2bd778">
+<div class="cell" data-hash="index_cache/revealjs/load_dbces1_b5e8c422e1f8279a052c9aadf552f3a7">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dbces11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/dbces11_plot-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/dbces11_plot-1.png" width="960" class="r-stretch"></section>
 <section id="implemented-indices" class="slide level2 smaller">
 <h2>Implemented indices</h2>
 <p><code>igraph</code> contains the following 10 indices:</p>
@@ -1207,7 +1207,7 @@ Similar to eigenvector, just for directed networks</p>
 <section id="dedicated-packages" class="slide level2">
 <h2>Dedicated packages</h2>
 <p><span class="cran-pkg"><a href="https://cran.r-project.org/package=centiserve">centiserve</a><i class="fa-brands fa-r-project fa-2xs"></i></span>, <span class="cran-pkg"><a href="https://cran.r-project.org/package=CINNA">CINNA</a><i class="fa-brands fa-r-project fa-2xs"></i></span></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/centiserve_ea957664bc4ef2149f6731afe317bd4e">
+<div class="cell" data-hash="index_cache/revealjs/centiserve_00f62a4a89d7bdaa31b1349d7b4e71b7">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(centiserve)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(<span class="fu">lsf.str</span>(<span class="st">"package:centiserve"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1268,15 +1268,15 @@ Tools which allow an indexfree assessment of centrality, including:</p>
 <h2>Cliques</h2>
 <p>A <em>clique</em> in a network is a set of nodes that form a complete subnetwork within a network (called a complete <strong>subgraph</strong>).</p>
 <p>A <strong>maximal clique</strong> is a clique that cannot be extended to a bigger clique by addding more nodes to it.</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/load_clique_graph_cf0107ecc613723588792215115629d4">
+<div class="cell" data-hash="index_cache/revealjs/load_clique_graph_e14882d7517d465f0dae4943299a4210">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"clique_graph"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/clique_graph-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/clique_graph-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="cliques-1" class="slide level2">
 <h2>Cliques</h2>
 <p>Maximal cliques can be calculated with <code>max_cliques()</code></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/calc_max_cliques_3c5424cbb9082b0645fd0c7b37ace739">
+<div class="cell" data-hash="index_cache/revealjs/calc_max_cliques_a35a17c8cf7765a147a6068872737336">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only return cliques with three or more nodes</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">max_cliques</span>(clique_graph,<span class="at">min =</span> <span class="dv">3</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>cl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1322,11 +1322,11 @@ Tools which allow an indexfree assessment of centrality, including:</p>
 <section id="cliques-2" class="slide level2">
 <h2>Cliques</h2>
 
-<img data-src="netAnaR_files/figure-revealjs/clique_graph_2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/clique_graph_2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="k-core-decomposition" class="slide level2">
 <h2>k-core decomposition</h2>
 <p>A <strong>k-core</strong> is a subgraph in which every node has at least k neighbors within the subgraph. A k-core is thus a relaxed version of a clique.</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/kcore_7efecebbd2ea2035958ab033b5023b24">
+<div class="cell" data-hash="index_cache/revealjs/kcore_2db145fe62c0f83ead46d0b91ff1a1d1">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>kcore <span class="ot">&lt;-</span> <span class="fu">coreness</span>(clique_graph)</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>kcore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1334,7 +1334,7 @@ Tools which allow an indexfree assessment of centrality, including:</p>
 </div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/kcore_plot-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/kcore_plot-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="clusteringcommunity-detection" class="slide level2">
 <h2>Clustering/Community detection</h2>
 <p><strong>Minimum-cut method</strong><br>
@@ -1349,38 +1349,38 @@ Modularity is defined as the fraction of edges that fall within given groups min
 </section>
 <section id="min-cut-clustering" class="slide level2">
 <h2>Min Cut clustering</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/mincut_d0d2c8e45494f1df06cf49f3cb61f786">
+<div class="cell" data-hash="index_cache/revealjs/mincut_d21c69bcbc85d89d6525d1a927b2771d">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">sample_islands</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="fl">0.9</span>,<span class="dv">5</span>)</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">simplify</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center" data-hash="netAnaR_cache/revealjs/mincut_plot_f4a779b7c551bfffa997cc8df8a11c96">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/mincut_plot_5895d567a800eeed0522a25818801f58">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="netAnaR_files/figure-revealjs/mincut_plot-1.png" width="384"></p>
+<p><img data-src="index_files/figure-revealjs/mincut_plot-1.png" width="384"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/mincut_calc_54b9f9a20b4cd35383fba13c2979f661">
+<div class="cell" data-hash="index_cache/revealjs/mincut_calc_611414f5ffdd54be8f964ee0327c8ffb">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min_cut</span>(g,<span class="at">value.only =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$value
-[1] 5
+[1] 3
 
 $cut
-+ 5/84 edges from b4fdf2e (vertex names):
-[1] 1--16 3--15 4--12 6--14 6--18
++ 3/81 edges from d4b07cf (vertex names):
+[1]  4--15  6--14 10--12
 
 $partition1
-+ 10/20 vertices, named, from b4fdf2e:
- [1] 19 14 11 12 17 16 13 18 15 20
++ 10/20 vertices, named, from d4b07cf:
+ [1] 17 19 11 15 14 12 18 20 16 13
 
 $partition2
-+ 10/20 vertices, named, from b4fdf2e:
++ 10/20 vertices, named, from d4b07cf:
  [1] 1  2  3  4  5  6  7  8  9  10</code></pre>
 </div>
 </div>
@@ -1390,7 +1390,7 @@ $partition2
 </section>
 <section id="hierarchical-clustering" class="slide level2">
 <h2>Hierarchical clustering</h2>
-<div class="cell" data-layout-align="center" data-hash="netAnaR_cache/revealjs/hierarch_clust_02453350560c9ef6b4efe3f13adeb252">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/hierarch_clust_46126597bbf6170b8d73d9c060830df9">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">distances</span>(g)</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>hclust_avg <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">as.dist</span>(D), <span class="at">method =</span> <span class="st">"average"</span>)</span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>cut_avg <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hclust_avg, <span class="at">k =</span> <span class="dv">2</span>)</span>
@@ -1400,7 +1400,7 @@ $partition2
 <span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="netAnaR_files/figure-revealjs/hierarch_clust-1.png" width="768" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/hierarch_clust-1.png" width="768" class="r-stretch quarto-figure-center"></section>
 <section id="clustering-with-igraph" class="slide level2">
 <h2>Clustering with igraph</h2>
 <p><br></p>
@@ -1410,7 +1410,7 @@ $partition2
 <li>Generative models are, however, a strong contender<br>
 (not implemented in R yet)</li>
 </ul>
-<div class="cell" data-hash="netAnaR_cache/revealjs/cluster_alg_4d40e619bb03a2ecb5240415b1f8e1b5">
+<div class="cell" data-hash="index_cache/revealjs/cluster_alg_e1f2f5074701c54826e88c9faf1a2ec7">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:igraph"</span>,<span class="at">pattern =</span> <span class="st">"cluster_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "cluster_edge_betweenness"  "cluster_fast_greedy"      
@@ -1424,14 +1424,14 @@ $partition2
 </section>
 <section id="clustering-workflow" class="slide level2">
 <h2>Clustering workflow</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/karate_ddc1ef1a110bbde27f6be576fbf571c0">
+<div class="cell" data-hash="index_cache/revealjs/karate_074e1001ec45242f7399710d626ed0a4">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"karate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/karate_plot-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/karate_plot-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="clustering-workflow-1" class="slide level2">
 <h2>Clustering workflow</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/cluster_ex_55bf20939e3d617bf025ebce94c30861">
+<div class="cell" data-hash="index_cache/revealjs/cluster_ex_78e053e90abb139ea69b535d30428110">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute clustering</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>clu <span class="ot">&lt;-</span> <span class="fu">cluster_louvain</span>(karate)</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1439,20 +1439,20 @@ $partition2
 <span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">&lt;-</span> <span class="fu">membership</span>(clu)</span>
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>mem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 1 1 2 2 2 1 3 3 2 1 1 1 3 3 2 1 3 1 3 1 3 3 4 4 3 3 4 3 3 4 3 3</code></pre>
+<pre><code> [1] 1 1 1 1 2 2 2 1 3 1 2 1 1 1 3 3 2 1 3 1 3 1 3 3 4 4 3 3 4 3 3 4 3 3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clusters as list</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">communities</span>(clu)</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`1`
- [1]  1  2  3  4  8 12 13 14 18 20 22
+ [1]  1  2  3  4  8 10 12 13 14 18 20 22
 
 $`2`
 [1]  5  6  7 11 17
 
 $`3`
- [1]  9 10 15 16 19 21 23 24 27 28 30 31 33 34
+ [1]  9 15 16 19 21 23 24 27 28 30 31 33 34
 
 $`4`
 [1] 25 26 29 32</code></pre>
@@ -1462,7 +1462,7 @@ $`4`
 <section id="clustering-workflow-2" class="slide level2">
 <h2>Clustering workflow</h2>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/karate_cluster_2c4e77a80fe04fa39638606e961fec21">
+<div class="cell" data-hash="index_cache/revealjs/karate_cluster_0477e39921d846e5bb74f59453dc8527">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">cluster_infomap</span>(karate)</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>lec <span class="ot">&lt;-</span> <span class="fu">cluster_leading_eigen</span>(karate)</span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="fu">cluster_louvain</span>(karate)</span>
@@ -1478,14 +1478,14 @@ $`4`
 <span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  infomap     eigen   louvain spinglass      walk 
- 0.402038  0.393409  0.418803  0.418803  0.353222 </code></pre>
+ 0.402038  0.393409  0.419790  0.419790  0.353222 </code></pre>
 </div>
 </div>
 </section>
 <section id="cluster-workflow" class="slide level2">
 <h2>Cluster workflow</h2>
 
-<img data-src="netAnaR_files/figure-revealjs/karate_plot_clu-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
+<img data-src="index_files/figure-revealjs/karate_plot_clu-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="beyond-standard-networks" class="title-slide slide level1 center">
 <h1>Beyond “standard” networks</h1>
@@ -1504,16 +1504,16 @@ $`4`
 </section>
 <section id="toy-example-1" class="slide level2">
 <h2>Toy example</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/southern_dat_load_4446ad4bb304b8d184ec1c798b385cfb">
+<div class="cell" data-hash="index_cache/revealjs/southern_dat_load_b3c7f13ea0e9c81ffac786b7a2771398">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"southern_women"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/southern_women-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/southern_women-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="analyzing-two-mode-networks" class="slide level2">
 <h2>Analyzing two-mode networks</h2>
 <p><br></p>
 <p>The adjacency matrix is called <strong>incidence matrix</strong></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/incidence_southern_ef0bf96b579a46bd3d27990882fe63e3">
+<div class="cell" data-hash="index_cache/revealjs/incidence_southern_d73a67fd9c25085a0000fc76877b7140">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">as_incidence_matrix</span>(southern_women)</span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1533,7 +1533,7 @@ ELEANOR      0   0    0    0    1    1    1    1   0    0    0   0     0   0
 <section id="projecting-two-mode-networks" class="slide level2">
 <h2>Projecting two-mode networks</h2>
 
-<img data-src="img/small_project.png" class="r-stretch"><div class="cell" data-hash="netAnaR_cache/revealjs/proj_women_d4e98d770719fb9f59770cb71a4a9c6d">
+<img data-src="img/small_project.png" class="r-stretch"><div class="cell" data-hash="index_cache/revealjs/proj_women_730584b9bd13317d0d15f90bd63b76e2">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> A<span class="sc">%*%</span><span class="fu">t</span>(A)</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>B[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1549,7 +1549,7 @@ CHARLOTTE      3     3       4      4         4</code></pre>
 <section id="projecting-two-mode-networks-1" class="slide level2">
 <h2>Projecting two-mode networks</h2>
 
-<img data-src="netAnaR_files/figure-revealjs/plot_weighted_proj-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/plot_weighted_proj-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="filtering-projections" class="slide level2">
 <h2>Filtering projections</h2>
 
@@ -1569,12 +1569,12 @@ statistical tools using null models: <span class="cran-pkg"><a href="https://cra
 </section>
 <section id="backbone-example" class="slide level2">
 <h2>“Backbone” example</h2>
-<div class="cell" data-hash="netAnaR_cache/revealjs/southern_backbone_56f3ea772076186f68627ed6c36bd53e">
+<div class="cell" data-hash="index_cache/revealjs/southern_backbone_f2bce2f5c6d92267909dffa65c00aa87">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(backbone)</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>sw_bb <span class="ot">&lt;-</span> <span class="fu">sdsm</span>(southern_women,<span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="netAnaR_files/figure-revealjs/sw_bb_plot-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/sw_bb_plot-1.png" width="1152" class="r-stretch quarto-figure-center"></section>
 <section id="application-of-projections" class="slide level2">
 <h2>Application of projections</h2>
 <p><strong>Co-voting behavior of US senators</strong></p>
@@ -1619,23 +1619,23 @@ A network is balanced if it can be partitioned into k groups …</p>
 <section id="toy-example-2" class="slide level2">
 <h2>Toy example</h2>
 <p><br></p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/sign example_84047e2d01e4e391fb1029c93e3f7d43">
+<div class="cell" data-hash="index_cache/revealjs/sign example_26924056d75e9633516f1fc920f9c07c">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(signnet)</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"tribes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:49%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/tribes_now_2b2710bc45f8e8d6f5329818910a781b">
+<div class="cell" data-hash="index_cache/revealjs/tribes_now_9db7c56155daa03d6aa7280908aa8b4a">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsigned</span>(tribes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/tribes_now-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/tribes_now-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column" style="width:49%;">
-<div class="cell" data-hash="netAnaR_cache/revealjs/tribes_w_c0fba6bac2da6338ece045e77585879d">
+<div class="cell" data-hash="index_cache/revealjs/tribes_w_6433b77de3c657c3026e0f46dbfd6072">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsigned</span>(tribes,<span class="at">weights =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="netAnaR_files/figure-revealjs/tribes_w-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/tribes_w-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1648,7 +1648,7 @@ A network is balanced if it can be partitioned into k groups …</p>
 <li><strong>walks</strong>: fraction of signed to unsigned walks</li>
 <li><strong>frustration</strong>: optimal partition such that the sum of intra group negative and inter group positive edges is minimized</li>
 </ul>
-<div class="cell" data-hash="netAnaR_cache/revealjs/balance_scores_7a946cc43f382a2e87df5b25930235f6">
+<div class="cell" data-hash="index_cache/revealjs/balance_scores_ea17c82d124baf18ab6b1de582b8ee6f">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">balance_score</span>(tribes,<span class="at">method =</span> <span class="st">"triangles"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.867647</code></pre>
@@ -1666,7 +1666,7 @@ A network is balanced if it can be partitioned into k groups …</p>
 <section id="blockmodeling" class="slide level2">
 <h2>Blockmodeling</h2>
 <p>In signed blockmodeling, the goal is to determine <span class="math inline">\(k\)</span> blocks of nodes such that all intra-block edges are positive and inter-block edges are negative</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/signed_bm_f159ea023be384b758f917981c3fa7d7">
+<div class="cell" data-hash="index_cache/revealjs/signed_bm_ee9f17081719c0ce091516b3b6259425">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">141</span>)</span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>bl <span class="ot">&lt;-</span> <span class="fu">signed_blockmodel</span>(tribes,<span class="dv">3</span>)</span>
 <span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>bl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1678,16 +1678,16 @@ $criterion
 [1] 2</code></pre>
 </div>
 </div>
-<div class="cell" data-layout-align="center" data-hash="netAnaR_cache/revealjs/signed_bm_plot_09a05e714668372e274c2d90879e105b">
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/signed_bm_plot_1aa8cb6302308139dd35f7f43a0e9d4c">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggblock</span>(tribes,<span class="at">blocks =</span> bl<span class="sc">$</span>membership,<span class="at">show_blocks =</span> <span class="cn">TRUE</span>,<span class="at">show_labels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
-<section id="blockmodeling-output" class="slide level2 output-location-slide"><h2>Blockmodeling</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="netAnaR_cache/revealjs/signed_bm_plot_09a05e714668372e274c2d90879e105b">
+<section id="blockmodeling-output" class="slide level2 output-location-slide"><h2>Blockmodeling</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="index_cache/revealjs/signed_bm_plot_1aa8cb6302308139dd35f7f43a0e9d4c">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="netAnaR_files/figure-revealjs/signed_bm_plot-1.png" width="576"></p>
+<p><img data-src="index_files/figure-revealjs/signed_bm_plot-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1695,11 +1695,11 @@ $criterion
 <h2>Generalized blockmodeling</h2>
 <p>The diagonal block structure is not always the most optimal representaion of the data</p>
 
-<img data-src="netAnaR_files/figure-revealjs/weird_signed-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="index_files/figure-revealjs/weird_signed-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="generalized-blockmodeling-1" class="slide level2">
 <h2>Generalized blockmodeling</h2>
 <p>The function <code>signed_blockmodel_general()</code> allows to specify arbitrary block structures.</p>
-<div class="cell" data-hash="netAnaR_cache/revealjs/gen_block_mat_6f5bf5ce499324c5b78d43ed5fbfa6ac">
+<div class="cell" data-hash="index_cache/revealjs/gen_block_mat_868e5e3d069b5cc4460de24e9c2f8d89">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">424</span>) <span class="co">#for reproducibility</span></span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>blockmat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>),<span class="dv">3</span>,<span class="dv">3</span>,<span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>blockmat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1750,19 +1750,19 @@ $criterion
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="netAnaR_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="index_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="netAnaR_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="netAnaR_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="netAnaR_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
