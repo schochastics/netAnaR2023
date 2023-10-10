@@ -384,6 +384,9 @@
       margin-right: 0; 
     }
   </style>
+  
+  <script src="index_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="index_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -1482,8 +1485,8 @@ $`4`
 </div>
 </div>
 </section>
-<section id="cluster-workflow" class="slide level2">
-<h2>Cluster workflow</h2>
+<section id="clustering-workflow-3" class="slide level2">
+<h2>Clustering workflow</h2>
 
 <img data-src="index_files/figure-revealjs/karate_plot_clu-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
 <section>
@@ -1723,26 +1726,1148 @@ $criterion
 <div class="center-x">
 <p><img data-src="img/blockmodel_general.png" width="750"></p>
 </div>
+</section></section>
+<section>
+<section id="is-there-a-tidyverse-for-networks" class="title-slide slide level1 center">
+<h1>Is there a “tidyverse” for networks?</h1>
+
 </section>
-<section id="other-functions" class="slide level2">
-<h2>Other functions</h2>
-<p>Most functions us the igraph name + <code>_signed</code>:</p>
+<section id="tidygraph-i" class="slide level2">
+<h2>tidygraph I</h2>
+<blockquote>
+<p>This package provides a tidy API for graph/network manipulation. While network data itself is <strong>not tidy</strong>, it can be envisioned as <strong>two tidy tables</strong>, one for node data and one for edge data. tidygraph provides a way to switch between the two tables and provides <code>dplyr</code> verbs for manipulating them.</p>
+</blockquote>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="img/tidygraph-meme.jpg" class="r-stretch"></section>
+<section id="tidygrabh-ii" class="slide level2">
+<h2>tidygrabh II</h2>
+<blockquote>
+<p>It more or less wraps the full functionality of <code>igraph</code> in a tidy API giving you access to almost all of the dplyr verbs plus a few more, developed for use with relational data.</p>
+</blockquote>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="center">
+<p><img data-src="img/igraph-meme.jpg"></p>
+</div>
+</section></section>
+<section>
+<section id="network-visualization" class="title-slide slide level1 center">
+<h1>Network Visualization</h1>
+
+</section>
+<section id="visualizing-ordinary-data" class="slide level2 smaller">
+<h2>Visualizing “ordinary” data</h2>
+<div class="absolute" style="top: 70px; left: 0px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars1_8113009f93a6a57d16c7669390a4b3cf">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mpg</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">cyl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">disp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">drat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">3.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">3.90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">22.8</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">108</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">3.85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">258</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">3.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.7</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">360</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">3.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">225</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">2.76</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="absolute" style="bottom: 0px; right: -120px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-1_bd1bc4dc6c657ca0639637fbd4c0fa93">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/mtcars-plot-1-1.png" alt="A scatterplot of the variables mpg and disp from the mtcars dataset" width="576"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-ordinary-data-1" class="slide level2 smaller">
+<h2>Visualizing “ordinary” data</h2>
+<div class="absolute" style="top: 70px; left: 0px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars2_cb95cc45326c57e3bfcab26f542a8980">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mpg</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">cyl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">disp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">drat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.0</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">3.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.0</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">3.90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">22.8</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">108</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">3.85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">258</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">3.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.7</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">8</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">360</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">3.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.1</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">225</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">2.76</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div class="absolute" style="bottom: 0px; right: -120px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-2_c025165550bf2a47906c1890ede33ca3">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/mtcars-plot-2-1.png" alt="A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl." width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-ordinary-data-2" class="slide level2 smaller">
+<h2>Visualizing “ordinary” data</h2>
+<div class="absolute" style="top: 70px; left: 0px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars3_5d7c74b783d60c662caebca6b92b9756">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mpg</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">cyl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">disp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">drat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.0</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">160</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">110</td>
+<td style="text-align: right;">3.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.0</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">160</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">110</td>
+<td style="text-align: right;">3.90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">22.8</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">108</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">93</td>
+<td style="text-align: right;">3.85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">21.4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">258</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">110</td>
+<td style="text-align: right;">3.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.7</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">8</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">360</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">175</td>
+<td style="text-align: right;">3.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.1</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">225</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">105</td>
+<td style="text-align: right;">2.76</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div class="absolute" style="bottom: 0px; right: -120px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-3_113cf25d1d36467ee7f9b7160af6d74e">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/mtcars-plot-3-1.png" alt="A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl and the size is proportional to hp." width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-ordinary-data-3" class="slide level2 smaller">
+<h2>Visualizing “ordinary” data</h2>
+<div class="absolute" style="top: 70px; left: 0px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars4_bedc67e7be0580fa2a8fc065b394535a">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mpg</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">cyl</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">disp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">drat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: right;">22.8</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">4</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: right;">21.4</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right;">258</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">8</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: right;">18.1</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6</td>
+<td style="text-align: right;">225</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right; font-weight: bold; color: black !important; background-color: #ffd700 !important;">2.76</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div class="absolute" style="bottom: 0px; right: -120px; ">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-4_8044a64ae0b314dc1472f1cdada1b71f">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/mtcars-plot-4-1.png" alt="A boxplot of the variable drat grouped by cyl from the mtcars dataset" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-networks-is-harder" class="slide level2 smaller">
+<h2>Visualizing networks is hard(er)</h2>
+<p><strong>ordinary data</strong></p>
 <ul>
-<li><code>as_adj_signed()</code></li>
-<li><code>as_incidence_signed()</code></li>
-<li><code>laplacian_matrix_signed()</code></li>
-<li><code>triad_census_signed()</code></li>
-<li><code>degree_signed()</code></li>
-<li><code>eigen_centrality_signed()</code></li>
-<li><code>sample_islands_signed()</code></li>
+<li>clear data format (rows: observations, columns: variables)</li>
+<li>plot style dependent on variable scale (barchart, scatterplot, boxplot,…)</li>
+<li>illustrate relations between variables</li>
+<li>given relative positions</li>
+</ul>
+<div class="fragment">
+<p><strong>network data</strong></p>
+<ul>
+<li>different data formats (adjacency matrix, edgelist, adjaceny list, …)</li>
+<li>how to choose a proper layout algorithm?</li>
+<li>more degrees of freedom</li>
+<li>can we draw any conclusions from a network plot?</li>
+</ul>
+</div>
+</section>
+<section id="which-packages-to-choose" class="slide level2">
+<h2>which package(s) to choose?</h2>
+<p><br></p>
+<ul>
+<li><span class="cran-pkg"><a href="https://cran.r-project.org/package=igraph">igraph</a><i class="fa-brands fa-r-project fa-2xs"></i></span>: great for analyses, but plotting can be tricky<br>
+(check out <a href="https://kateto.net/network-visualization" class="uri">https://kateto.net/network-visualization</a>)</li>
+<li>networks as ggplot2 objects: <span class="cran-pkg"><a href="https://cran.r-project.org/package=ggnet2">ggnet2</a><i class="fa-brands fa-r-project fa-2xs"></i></span>, <span class="cran-pkg"><a href="https://cran.r-project.org/package=ggnetwork">ggnetwork</a><i class="fa-brands fa-r-project fa-2xs"></i></span></li>
+<li><span class="cran-pkg"><a href="https://cran.r-project.org/package=ggraph">ggraph</a><i class="fa-brands fa-r-project fa-2xs"></i></span>: grammar of graphics for networks</li>
+<li>interactive/3D: <span class="cran-pkg"><a href="https://cran.r-project.org/package=visNetwork">visNetwork</a><i class="fa-brands fa-r-project fa-2xs"></i></span>, <span class="cran-pkg"><a href="https://cran.r-project.org/package=threejs">threejs</a><i class="fa-brands fa-r-project fa-2xs"></i></span></li>
 </ul>
 </section>
-<section id="all-signed-triads" class="slide level2">
-<h2>All signed triads</h2>
-<div class="center-x">
-<p><img data-src="img/signed_triads.png" width="600"></p>
+<section id="why-ggraph" class="slide level2">
+<h2>why ggraph?</h2>
+<p><br> <br></p>
+<p><strong>maintained by Posit</strong><br>
+stable and reliable (many other packages have been abandoned)<br>
+plays well with other packages</p>
+<p><strong>thoughtful API</strong><br>
+extension of ggplot2<br>
+grammar of graphics</p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/sw_plot_dcf14b8a234c76700f58db6dd24bcb50">
+<div class="sourceCode cell-code" id="cb95" data-code-line-numbers="8-21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="co"># load and manipulate data</span></span>
+<span id="cb95-2"><a href="#cb95-2"></a><span class="fu">data</span>(<span class="st">"starwars"</span>)</span>
+<span id="cb95-3"><a href="#cb95-3"></a>sw1 <span class="ot">&lt;-</span> starwars[[<span class="dv">1</span>]]</span>
+<span id="cb95-4"><a href="#cb95-4"></a>sw_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#1A5878"</span>, <span class="st">"#C44237"</span>, <span class="st">"#AD8941"</span>, <span class="st">"#E99093"</span>, <span class="st">"#50594B"</span>)</span>
+<span id="cb95-5"><a href="#cb95-5"></a><span class="fu">V</span>(sw1)<span class="sc">$</span>interactions <span class="ot">&lt;-</span> <span class="fu">graph.strength</span>(sw1) </span>
+<span id="cb95-6"><a href="#cb95-6"></a></span>
+<span id="cb95-7"><a href="#cb95-7"></a><span class="co">#plot</span></span>
+<span id="cb95-8"><a href="#cb95-8"></a><span class="fu">ggraph</span>(<span class="at">graph =</span> sw1,<span class="at">layout =</span> <span class="st">"stress"</span>) <span class="sc">+</span> </span>
+<span id="cb95-9"><a href="#cb95-9"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_colour =</span> <span class="st">"grey25"</span>,</span>
+<span id="cb95-10"><a href="#cb95-10"></a>                  <span class="fu">aes</span>(<span class="at">edge_width =</span> weight)) <span class="sc">+</span></span>
+<span id="cb95-11"><a href="#cb95-11"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>,<span class="at">stroke =</span> <span class="dv">1</span>,</span>
+<span id="cb95-12"><a href="#cb95-12"></a>                  <span class="fu">aes</span>(<span class="at">fill =</span> sex,<span class="at">size =</span> interactions)) <span class="sc">+</span></span>
+<span id="cb95-13"><a href="#cb95-13"></a>  <span class="fu">geom_node_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">repel =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb95-14"><a href="#cb95-14"></a>                 <span class="fu">aes</span>(<span class="at">filter =</span> (interactions<span class="sc">&gt;=</span><span class="dv">65</span>),<span class="at">label =</span> name))<span class="sc">+</span></span>
+<span id="cb95-15"><a href="#cb95-15"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">1.5</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb95-16"><a href="#cb95-16"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">10</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb95-17"><a href="#cb95-17"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sw_palette, <span class="at">na.value =</span> <span class="st">"grey"</span>,<span class="at">name =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb95-18"><a href="#cb95-18"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb95-19"><a href="#cb95-19"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb95-20"><a href="#cb95-20"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb95-21"><a href="#cb95-21"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size=</span><span class="dv">6</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="footer footer-default">
+
+</section>
+<section id="why-ggraph-output" class="slide level2 output-location-slide"><h2>why ggraph?</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="index_cache/revealjs/sw_plot_dcf14b8a234c76700f58db6dd24bcb50">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/sw_plot-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="layout" class="slide level2">
+<h2>1) layout</h2>
+<div class="fragment">
+<div class="highlight">
+<p><code>ggraph(graph = sw1,layout = "stress", ...)</code></p>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>graph: igraph object sw1 (can also be a tidygraph object)</li>
+<li>layout: used algorithm</li>
+<li>…: additional parameters depend on algorithm</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell" data-hash="index_cache/revealjs/lay_algos_064ad6bd006ae4be991a2a68a7a40e14">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/lay_algos-1.png" width="1536"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="edges-geoms" class="slide level2">
+<h2>2) edges: geoms</h2>
+<div class="fragment">
+<div class="text07 highlight">
+<p><code>geom_edge_link0(edge_colour = "grey25", aes(edge_width = weight))</code></p>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-hash="index_cache/revealjs/geom_edges_9e731162e41d18b27bc883ff94ef8cbb">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:ggraph"</span>,<span class="at">pattern =</span> <span class="st">"geom_edge_*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "geom_edge_arc"       "geom_edge_arc0"      "geom_edge_arc2"     
+ [4] "geom_edge_bend"      "geom_edge_bend0"     "geom_edge_bend2"    
+ [7] "geom_edge_density"   "geom_edge_diagonal"  "geom_edge_diagonal0"
+[10] "geom_edge_diagonal2" "geom_edge_elbow"     "geom_edge_elbow0"   
+[13] "geom_edge_elbow2"    "geom_edge_fan"       "geom_edge_fan0"     
+[16] "geom_edge_fan2"      "geom_edge_hive"      "geom_edge_hive0"    
+[19] "geom_edge_hive2"     "geom_edge_link"      "geom_edge_link0"    
+[22] "geom_edge_link2"     "geom_edge_loop"      "geom_edge_loop0"    
+[25] "geom_edge_parallel"  "geom_edge_parallel0" "geom_edge_parallel2"
+[28] "geom_edge_point"     "geom_edge_span"      "geom_edge_span0"    
+[31] "geom_edge_span2"     "geom_edge_tile"     </code></pre>
+</div>
+</div>
+</div>
+<div class="fragment text07">
+<p>geom_edge_<em>type</em>: generate n points, draw path<br>
+geom_edge_<em>type</em>0: direct line<br>
+geom_edge_<em>type</em>2: can interpolate node parameters</p>
+</div>
+<div class="fragment text07">
+<p><code>geom_edge_link0()</code> and <code>geom_edge_parallel0()</code> suffice</p>
+</div>
+</section>
+<section id="edges-geom-type-examples" class="slide level2">
+<h2>2) edges: geom type examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_edge_75930d9abd1eb3feccbecda5ed6664f0">
+<div class="sourceCode cell-code" id="cb98" data-code-line-numbers="1-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb98-2"><a href="#cb98-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>) </span>
+<span id="cb98-3"><a href="#cb98-3"></a><span class="fu">V</span>(g)<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb98-4"><a href="#cb98-4"></a></span>
+<span id="cb98-5"><a href="#cb98-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb98-6"><a href="#cb98-6"></a>  <span class="fu">geom_edge_link</span>(<span class="at">edge_width =</span> <span class="dv">2</span>, <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">stat</span>(index)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_edge-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-geom-type-examples-1" class="slide level2">
+<h2>2) edges: geom type examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_edgen2_68e4075e0579e46fd670045a4c8a804c">
+<div class="sourceCode cell-code" id="cb99" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb99-2"><a href="#cb99-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>) </span>
+<span id="cb99-3"><a href="#cb99-3"></a><span class="fu">V</span>(g)<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb99-4"><a href="#cb99-4"></a></span>
+<span id="cb99-5"><a href="#cb99-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb99-6"><a href="#cb99-6"></a>  <span class="fu">geom_edge_link</span>(<span class="at">edge_width =</span> <span class="dv">2</span>, <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">stat</span>(index)), <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_edgen2-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-geom-type-examples-2" class="slide level2">
+<h2>2) edges: geom type examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_edge2_bb7f0508f90f2fcc454aeefaaee2bfa4">
+<div class="sourceCode cell-code" id="cb100" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb100-2"><a href="#cb100-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb100-3"><a href="#cb100-3"></a><span class="fu">V</span>(g)<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb100-4"><a href="#cb100-4"></a></span>
+<span id="cb100-5"><a href="#cb100-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb100-6"><a href="#cb100-6"></a>  <span class="fu">geom_edge_link2</span>(<span class="at">edge_width =</span> <span class="dv">2</span>, <span class="fu">aes</span>(<span class="at">color =</span> node.type))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_edge2-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-geom-type-examples-3" class="slide level2">
+<h2>2) edges: geom type examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_edge2n2_0d75f4155b448629da01877845c5aef5">
+<div class="sourceCode cell-code" id="cb101" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb101-2"><a href="#cb101-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb101-3"><a href="#cb101-3"></a><span class="fu">V</span>(g)<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb101-4"><a href="#cb101-4"></a></span>
+<span id="cb101-5"><a href="#cb101-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb101-6"><a href="#cb101-6"></a>  <span class="fu">geom_edge_link2</span>(<span class="at">edge_width =</span> <span class="dv">2</span>, <span class="fu">aes</span>(<span class="at">color =</span> node.type), <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_edge2n2-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-geom-type-examples-4" class="slide level2">
+<h2>2) edges: geom type examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_edge0_3e2c38197c1ac6ea7a498753115a304a">
+<div class="sourceCode cell-code" id="cb102" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb102-2"><a href="#cb102-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb102-3"><a href="#cb102-3"></a><span class="fu">V</span>(g)<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb102-4"><a href="#cb102-4"></a></span>
+<span id="cb102-5"><a href="#cb102-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb102-6"><a href="#cb102-6"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_width =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_edge0-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-geom-type-examples-5" class="slide level2">
+<h2>2) edges: geom type examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_parallel0_0d248979ac6e70db2eb77f03de11babf">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add another edge between nodes one and two to obtain a multi edge.</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">add.edges</span>(g, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_parallel0</span>(<span class="at">edge_width =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_parallel0-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-aesthetics" class="slide level2">
+<h2>2) edges: aesthetics</h2>
+<div class="fragment">
+<div class="text07 highlight">
+<p><code>geom_edge_link0(edge_colour = "grey25", aes(edge_width = weight))</code></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><strong>mapping aesthetics</strong></p>
+<ul>
+<li><strong>global</strong>: all edges have the same appearance <br>(e.g.&nbsp;<code>edge_colour = "grey25"</code>)<br>
+</li>
+<li><strong>via attributes</strong>: appearance depends on attribute <br>(e.g.&nbsp;<code>aes(edge_width = weight)</code>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>available aesthetics</strong><br>
+edge_colo(u)r, edge_width, edge_linetype, edge_alpha</p>
+</div>
+</section>
+<section id="edges-aesthetics-examples" class="slide level2">
+<h2>2) edges: aesthetics examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/edge_aes_dotted_eaeec28b78d51ccc0ec00c84bcbfeacd">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>) </span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g)<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.5</span>)</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_linetype =</span> <span class="st">"dotted"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/edge_aes_dotted-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-aesthetics-examples-1" class="slide level2">
+<h2>2) edges: aesthetics examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/edge_aes_alpha_5258211c025d5146d5e9d355d7873c8b">
+<div class="sourceCode cell-code" id="cb105" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb105-2"><a href="#cb105-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>) </span>
+<span id="cb105-3"><a href="#cb105-3"></a><span class="fu">E</span>(g)<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.5</span>)</span>
+<span id="cb105-4"><a href="#cb105-4"></a></span>
+<span id="cb105-5"><a href="#cb105-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb105-6"><a href="#cb105-6"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/edge_aes_alpha-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-aesthetics-examples-2" class="slide level2">
+<h2>2) edges: aesthetics examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/edge_aes_alphaweight_4e3b00e68caab9630f9d16d18513b880">
+<div class="sourceCode cell-code" id="cb106" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="co"># create a simple graph of three nodes where all nodes are connected</span></span>
+<span id="cb106-2"><a href="#cb106-2"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>) </span>
+<span id="cb106-3"><a href="#cb106-3"></a><span class="fu">E</span>(g)<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.5</span>)</span>
+<span id="cb106-4"><a href="#cb106-4"></a></span>
+<span id="cb106-5"><a href="#cb106-5"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb106-6"><a href="#cb106-6"></a>  <span class="fu">geom_edge_link0</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight, <span class="at">edge_width =</span> weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/edge_aes_alphaweight-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="edges-misc" class="slide level2">
+<h2>2) edges: misc</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_directed_3efbc0f4d5f05f08e6e04f213dadb6ba">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>,<span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_parallel0</span>(<span class="at">edge_width =</span> <span class="fl">0.5</span>,</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">angle =</span> <span class="dv">15</span>, <span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"inches"</span>),</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ends =</span> <span class="st">"last"</span>, <span class="at">type =</span> <span class="st">"closed"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_directed-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="nodes-geoms" class="slide level2">
+<h2>3) nodes: geoms</h2>
+<div class="fragment">
+<div class="text05 highlight">
+<p><code>geom_node_point(shape = 21, color = "black",stroke = 1, aes(fill = sex,size = interactions))</code></p>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-hash="index_cache/revealjs/geom_nodes_3f7d77f5444424cf0d7fa363e7c67ee1">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:ggraph"</span>,<span class="at">pattern =</span> <span class="st">"geom_node_*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "geom_node_arc_bar" "geom_node_circle"  "geom_node_label"  
+[4] "geom_node_point"   "geom_node_range"   "geom_node_text"   
+[7] "geom_node_tile"    "geom_node_voronoi"</code></pre>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<ul>
+<li><code>geom_node_point()</code>: draw nodes as a simple point</li>
+</ul>
+</div>
+</section>
+<section id="nodes-aesthetics" class="slide level2">
+<h2>3) nodes: aesthetics</h2>
+<div class="fragment">
+<div class="text05 highlight">
+<p><code>geom_node_point(shape = 21, color = "black",stroke = 1, aes(fill = sex,size = interactions))</code></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><strong>mapping aesthetics</strong></p>
+<ul>
+<li><strong>global</strong>: all nodes have the same appearance <br> (e.g.&nbsp;<code>shape = 21</code>)<br>
+</li>
+<li><strong>via attributes</strong>: appearance depends on attribute <br> (e.g.&nbsp;<code>aes(fill = sex)</code>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>available aesthetics</strong><br>
+alpha, colo(u)r, fill, shape, size, stroke<br>
+<em>(usage of colour, fill, and stroke depend on shape)</em> <img data-src="img/points-symbols.png" class="absolute" style="bottom: 20px; right: -50px; width: 300px; "></p>
+</div>
+</section>
+<section id="nodes-aesthetic-examples" class="slide level2">
+<h2>3) nodes: aesthetic examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_node1_9ee2423b29c8332aeeb31262ba8feadf">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_node1-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="nodes-aesthetic-examples-1" class="slide level2">
+<h2>3) nodes: aesthetic examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_node2_189f578e4de1465c4231b76f11ceedcb">
+<div class="sourceCode cell-code" id="cb111" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb111-2"><a href="#cb111-2"></a></span>
+<span id="cb111-3"><a href="#cb111-3"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb111-4"><a href="#cb111-4"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb111-5"><a href="#cb111-5"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_node2-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="nodes-aesthetic-examples-2" class="slide level2">
+<h2>3) nodes: aesthetic examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_node3_e53e880c7c83543ba582d31aed406e7f">
+<div class="sourceCode cell-code" id="cb112" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb112-2"><a href="#cb112-2"></a></span>
+<span id="cb112-3"><a href="#cb112-3"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb112-4"><a href="#cb112-4"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb112-5"><a href="#cb112-5"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">22</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_node3-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="labels-geoms" class="slide level2">
+<h2>4) labels: geoms</h2>
+<div class="fragment">
+<div class="text06 highlight">
+<p><code>geom_node_text(color = "grey25", size = 4, repel = FALSE, aes(filter = (interactions&gt;=65),label = name))</code></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<ul>
+<li><code>geom_node_text()</code>: add text to node</li>
+<li><code>geom_node_label()</code>: add text to node with frame</li>
+</ul>
+</div>
+<p><br><br></p>
+<div class="fragment">
+<p><code>geom_node_text</code> is the preferred choice</p>
+</div>
+</section>
+<section id="labels-aesthetics" class="slide level2">
+<h2>4) labels: aesthetics</h2>
+<div class="fragment">
+<div class="text06 highlight">
+<p><code>geom_node_text(color = "grey25", size = 4, repel = FALSE, aes(filter = (interactions&gt;=65),label = name))</code></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><strong>mapping aesthetics</strong><br>
+- <strong>global</strong>: specify font properties<br>
+- <strong>via attributes</strong>: set label to name attribute of node<br>
+- <strong>filter</strong>: only display for nodes (or edges!) that fulfil a given criterion</p>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><strong>available aesthetics</strong><br>
+many! but most important: label, colour, family, size, and repel</p>
+</div>
+</section>
+<section id="labels-aesthetics-examples" class="slide level2">
+<h2>4) labels: aesthetics examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_node_text_af68bd2c0313f1aef4c607a37aa55f35">
+<div class="sourceCode cell-code" id="cb113" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb113-2"><a href="#cb113-2"></a><span class="fu">V</span>(g)<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"David"</span>, <span class="st">"Termeh"</span>, <span class="st">"Luna"</span>)</span>
+<span id="cb113-3"><a href="#cb113-3"></a></span>
+<span id="cb113-4"><a href="#cb113-4"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb113-5"><a href="#cb113-5"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb113-6"><a href="#cb113-6"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"grey66"</span>)<span class="sc">+</span></span>
+<span id="cb113-7"><a href="#cb113-7"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">coord_fixed</span>(<span class="at">clip =</span> <span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_node_text-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="labels-aesthetics-examples-1" class="slide level2">
+<h2>4) labels: aesthetics examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/geom_node_label_3cf51fd6a42f8e39f528b8cef1b70bd1">
+<div class="sourceCode cell-code" id="cb114" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.full</span>(<span class="dv">3</span>)</span>
+<span id="cb114-2"><a href="#cb114-2"></a><span class="fu">V</span>(g)<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"David"</span>, <span class="st">"Termeh"</span>, <span class="st">"Luna"</span>)</span>
+<span id="cb114-3"><a href="#cb114-3"></a></span>
+<span id="cb114-4"><a href="#cb114-4"></a><span class="fu">ggraph</span>(g, <span class="st">"stress"</span>) <span class="sc">+</span></span>
+<span id="cb114-5"><a href="#cb114-5"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb114-6"><a href="#cb114-6"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"grey66"</span>)<span class="sc">+</span></span>
+<span id="cb114-7"><a href="#cb114-7"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">coord_fixed</span>(<span class="at">clip =</span> <span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/geom_node_label-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="scales" class="slide level2">
+<h2>5) scales</h2>
+<div class="fragment">
+<div class="text07 highlight">
+<p><code>scale_edge_width(range = c(0.1,1.5),guide = "none")</code><br>
+<code>scale_size(range = c(3,10),guide = "none")</code><br>
+<code>scale_fill_manual(values = sw_palette, na.value = "grey",name = "")</code></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p>control aesthetics that are mapped within <code>aes()</code><br>
+although optional, set one <code>scale_*</code> per parameter in any <code>aes()</code></p>
+<p><strong>form of scale functions</strong><br>
+<code>scale_&lt;aes&gt;_&lt;variable type&gt;()</code></p>
+<p><strong>additional options</strong><br>
+<code>guide</code> (show legend or not), <code>name</code> (label in legend), <code>na.value</code> (value for NAs)</p>
+</div>
+</section>
+<section id="scales-variable-types" class="slide level2">
+<h2>5) scales: variable types</h2>
+<div class="fragment">
+<p><strong>node size and edge width (and node/edge alpha)</strong><br>
+<code>scale_size()</code> and <code>scale_edge_width()</code><br>
+most relevant parameter is <code>range = c(min,max)</code></p>
+</div>
+<div class="fragment">
+<p><strong>continuous variable to colour</strong><br>
+<code>scale_(edge_)colour_gradient(low = ...,high = ...)</code></p>
+</div>
+<div class="fragment">
+<p><strong>categorical variable to colour</strong><br>
+<code>scale_colour_brewer()</code><br>
+<code>scale_colour_manual(values = ...)</code></p>
+</div>
+<div class="fragment">
+<p><strong>misc</strong>: <code>scale_shape()</code> and <code>scale_edge_linetype()</code></p>
+</div>
+</section>
+<section id="scales-examples" class="slide level2">
+<h2>5) scales: examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/sw-scales1_d90f5b606b14656188bc29f383f73e8f">
+<div class="sourceCode cell-code" id="cb115" data-code-line-numbers="4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="fu">ggraph</span>(<span class="at">graph =</span> sw1,<span class="at">layout =</span> <span class="st">"stress"</span>) <span class="sc">+</span> </span>
+<span id="cb115-2"><a href="#cb115-2"></a>  <span class="fu">geom_edge_link0</span>(<span class="fu">aes</span>(<span class="at">edge_width =</span> weight)) <span class="sc">+</span></span>
+<span id="cb115-3"><a href="#cb115-3"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="fu">aes</span>(<span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb115-4"><a href="#cb115-4"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">1.5</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb115-5"><a href="#cb115-5"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sw_palette, <span class="at">na.value =</span> <span class="st">"grey"</span>,<span class="at">name =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb115-6"><a href="#cb115-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/sw-scales1-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="scales-examples-1" class="slide level2">
+<h2>5) scales: examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/sw-scales2_ba44e9af36961ebe3a2e31252eb80f12">
+<div class="sourceCode cell-code" id="cb116" data-code-line-numbers="1-2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1"></a><span class="fu">ggraph</span>(<span class="at">graph =</span> sw1,<span class="at">layout =</span> <span class="st">"stress"</span>) <span class="sc">+</span> </span>
+<span id="cb116-2"><a href="#cb116-2"></a>  <span class="fu">geom_edge_link0</span>(<span class="fu">aes</span>(<span class="at">edge_width =</span> weight), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb116-3"><a href="#cb116-3"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="fu">aes</span>(<span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb116-4"><a href="#cb116-4"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/sw-scales2-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="scales-examples-2" class="slide level2">
+<h2>5) scales: examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/sw-scales3_b74f5c01ea85e452363f89a8515cba0d">
+<div class="sourceCode cell-code" id="cb117" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="fu">ggraph</span>(<span class="at">graph =</span> sw1,<span class="at">layout =</span> <span class="st">"stress"</span>) <span class="sc">+</span> </span>
+<span id="cb117-2"><a href="#cb117-2"></a>  <span class="fu">geom_edge_link0</span>(<span class="fu">aes</span>(<span class="at">edge_width =</span> weight)) <span class="sc">+</span></span>
+<span id="cb117-3"><a href="#cb117-3"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="fu">aes</span>(<span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb117-4"><a href="#cb117-4"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">1.5</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb117-5"><a href="#cb117-5"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">na.value =</span> <span class="st">"grey"</span>,<span class="at">name =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb117-6"><a href="#cb117-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/sw-scales3-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="scales-examples-3" class="slide level2">
+<h2>5) scales: examples</h2>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/sw-scales4_7fc4c4513416e1efe2c6de73b0b88377">
+<div class="sourceCode cell-code" id="cb118" data-code-line-numbers="3,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a><span class="fu">ggraph</span>(<span class="at">graph =</span> sw1,<span class="at">layout =</span> <span class="st">"stress"</span>) <span class="sc">+</span> </span>
+<span id="cb118-2"><a href="#cb118-2"></a>  <span class="fu">geom_edge_link0</span>(<span class="fu">aes</span>(<span class="at">edge_width =</span> weight)) <span class="sc">+</span></span>
+<span id="cb118-3"><a href="#cb118-3"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"grey25"</span>, <span class="fu">aes</span>(<span class="at">shape =</span> sex)) <span class="sc">+</span></span>
+<span id="cb118-4"><a href="#cb118-4"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">1.5</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb118-5"><a href="#cb118-5"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values=</span><span class="dv">21</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">na.value =</span> <span class="dv">25</span>,<span class="at">name =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb118-6"><a href="#cb118-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/sw-scales4-1.png" width="384" class="r-stretch quarto-figure-center"></section>
+<section id="themes" class="slide level2">
+<h2>6) themes</h2>
+<div class="highlight text08">
+<p><code>theme_graph() + theme(legend.position = "bottom")</code></p>
+</div>
+<p><strong>control the overall look of the plot</strong></p>
+<ul>
+<li><code>theme()</code> has a lot of options but we really don’t need them (except <em>legend.position</em>)</li>
+<li><code>theme_graph()</code> erases all defaults (e.g.&nbsp;axis, grids, etc.)</li>
+</ul>
+<p><br></p>
+<div class="text08 highlight">
+<p><code>guides(fill = guide_legend(override.aes = list(size=6)))</code></p>
+</div>
+<p>change appearance of geoms in legend (highly optional!)</p>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>summary</h2>
+<p><strong>layout</strong><br>
+<code>ggraph(graph,layout = "stress") +</code></p>
+<p><strong>edges</strong><br>
+<code>geom_edge_link0(&lt;&lt;global&gt;&gt;,aes(&lt;&lt;via variables&gt;&gt;)) +</code></p>
+<p><strong>nodes</strong><br>
+<code>geom_node_point(&lt;global&gt;,aes(&lt;via variables&gt;)) +</code><br>
+<code>geom_node_text(&lt;global&gt;,aes(&lt;via variables&gt;)) +</code></p>
+<p><strong>scales</strong><br>
+<code>scale_&lt;aes&gt;_&lt;variable type&gt;() +</code> (one per variable in <code>aes()</code>)</p>
+<p><strong>themes</strong><br>
+<code>theme_graph()</code></p>
+</section>
+<section id="first-full-example-revisited" class="slide level2">
+<h2>first full example (revisited)</h2>
+<div class="cell" data-hash="index_cache/revealjs/sw_plot2_52dd7bff406309a855fae20e5c25ea0b">
+<div class="sourceCode cell-code" id="cb119" data-code-line-numbers="1|2,3|4,5,6,7|8,9,10|11|12,13|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="fu">ggraph</span>(<span class="at">graph =</span> sw1,<span class="at">layout =</span> <span class="st">"stress"</span>) <span class="sc">+</span> </span>
+<span id="cb119-2"><a href="#cb119-2"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_colour =</span> <span class="st">"grey25"</span>,</span>
+<span id="cb119-3"><a href="#cb119-3"></a>                  <span class="fu">aes</span>(<span class="at">edge_width =</span> weight)) <span class="sc">+</span></span>
+<span id="cb119-4"><a href="#cb119-4"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>,<span class="at">stroke =</span> <span class="dv">1</span>,</span>
+<span id="cb119-5"><a href="#cb119-5"></a>                  <span class="fu">aes</span>(<span class="at">fill =</span> sex,<span class="at">size =</span> interactions)) <span class="sc">+</span></span>
+<span id="cb119-6"><a href="#cb119-6"></a>  <span class="fu">geom_node_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">repel =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb119-7"><a href="#cb119-7"></a>                 <span class="fu">aes</span>(<span class="at">filter =</span> (interactions<span class="sc">&gt;=</span><span class="dv">65</span>),<span class="at">label =</span> name))<span class="sc">+</span></span>
+<span id="cb119-8"><a href="#cb119-8"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">1.5</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb119-9"><a href="#cb119-9"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">10</span>),<span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb119-10"><a href="#cb119-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sw_palette, <span class="at">na.value =</span> <span class="st">"grey"</span>,<span class="at">name =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb119-11"><a href="#cb119-11"></a>  <span class="fu">coord_fixed</span>()<span class="sc">+</span></span>
+<span id="cb119-12"><a href="#cb119-12"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb119-13"><a href="#cb119-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb119-14"><a href="#cb119-14"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">6</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="go-beyond-the-standard-layout" class="slide level2">
+<h2>go beyond the standard layout</h2>
+<p>layout stress is sufficient for most network visualization tasks</p>
+
+<img data-src="index_files/figure-revealjs/more_examples-1.png" width="1920" class="r-stretch quarto-figure-center"></section>
+<section id="ego-centric-layout" class="slide level2">
+<h2>ego centric layout</h2>
+<p>Emphasize the position of certain nodes in the network.</p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/ego_ani_code_855fe68d06c32d4e6833cc2c63d17d8b">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(sw1,<span class="at">layout =</span> <span class="st">"focus"</span>,<span class="at">focus =</span> <span class="dv">19</span>)<span class="sc">+</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_circle</span>(<span class="at">col =</span> <span class="st">"#00BFFF"</span>, <span class="at">use =</span> <span class="st">"focus"</span>,<span class="at">max.circle =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_colour =</span> <span class="st">"grey25"</span>,<span class="at">edge_alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="dv">21</span>,<span class="at">size =</span> <span class="dv">5</span>,<span class="at">fill =</span> <span class="st">"grey66"</span>)<span class="sc">+</span></span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">filter =</span> (name<span class="sc">==</span><span class="st">"ANAKIN"</span>),<span class="at">label =</span> name))<span class="sc">+</span></span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()<span class="sc">+</span></span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<p><br></p>
+<ul>
+<li><code>focus=...</code> : id to be put in the center (other nodes are on concentric circles around it)<br>
+</li>
+<li><code>draw_circle</code>: draw the concentric circles</li>
+</ul>
+</section>
+<section id="ego-centric-layout-output" class="slide level2 output-location-slide"><h2>ego centric layout</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="index_cache/revealjs/ego_ani_code_855fe68d06c32d4e6833cc2c63d17d8b">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/ego_ani_code-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="centrality-layout" class="slide level2">
+<h2>centrality layout</h2>
+<p><br></p>
+<p>concentric circle layout according to a centrality index</p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/cent_ani_a5fe04c18d00040db7c321a3ab7e3ebe">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>strength <span class="ot">&lt;-</span> <span class="fu">graph.strength</span>(sw1)</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(sw1,<span class="at">layout =</span> <span class="st">"centrality"</span>,<span class="at">cent =</span> strength)<span class="sc">+</span></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_circle</span>(<span class="at">col =</span> <span class="st">"#00BFFF"</span>, <span class="at">use =</span> <span class="st">"cent"</span>)<span class="sc">+</span></span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_colour =</span> <span class="st">"grey25"</span>,<span class="at">edge_alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="dv">21</span>,<span class="at">size =</span> <span class="dv">5</span>,<span class="at">fill =</span> <span class="st">"grey66"</span>)<span class="sc">+</span></span>
+<span id="cb121-6"><a href="#cb121-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">filter =</span> (strength<span class="sc">&gt;=</span><span class="dv">45</span>),<span class="at">label =</span> name),<span class="at">repel =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb121-7"><a href="#cb121-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()<span class="sc">+</span></span>
+<span id="cb121-8"><a href="#cb121-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="centrality-layout-output" class="slide level2 output-location-slide"><h2>centrality layout</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="index_cache/revealjs/cent_ani_a5fe04c18d00040db7c321a3ab7e3ebe">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/cent_ani-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="backbone-layout" class="slide level2">
+<h2>backbone layout</h2>
+<p><code>layout_as_backbone()</code> can help emphasize hidden group structures</p>
+<div class="cell" data-hash="index_cache/revealjs/hairball_artificial_f97e9c999cd23cf728df268778ed035c">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">sample_islands</span>(<span class="dv">9</span>,<span class="dv">40</span>,<span class="fl">0.4</span>,<span class="dv">15</span>)</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">simplify</span>(g)</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g)<span class="sc">$</span>grp <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,<span class="at">each =</span> <span class="dv">40</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br> try the standard first <br></p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/hairball_code_e1470425a4559c62fcf6f293b48cebcb">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(g,<span class="at">layout =</span> <span class="st">"stress"</span>)<span class="sc">+</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_colour =</span> <span class="st">"black"</span>,<span class="at">edge_width =</span> <span class="fl">0.1</span>, <span class="at">edge_alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">fill =</span> grp))<span class="sc">+</span></span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)<span class="sc">+</span></span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()<span class="sc">+</span></span>
+<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="backbone-layout-output" class="slide level2 output-location-slide"><h2>backbone layout</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="index_cache/revealjs/hairball_code_e1470425a4559c62fcf6f293b48cebcb">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/hairball_code-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="backbone-layout-1" class="slide level2">
+<h2>backbone layout</h2>
+<p><br> <br></p>
+<p>try to reveal the hidden group structure with <code>layout="backbone"</code></p>
+<div class="cell" data-layout-align="center" data-hash="index_cache/revealjs/backbone_code_1ae5becb3fd3acf58a247b0559a65de0">
+<div class="sourceCode cell-code" id="cb124" data-code-line-numbers="1,2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1"></a><span class="fu">ggraph</span>(g, <span class="at">layout =</span> <span class="st">"backbone"</span>)<span class="sc">+</span></span>
+<span id="cb124-2"><a href="#cb124-2"></a>  <span class="fu">geom_edge_link0</span>(<span class="at">edge_colour =</span> <span class="st">"black"</span>,<span class="at">edge_width =</span> <span class="fl">0.1</span>, <span class="at">edge_alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb124-3"><a href="#cb124-3"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="dv">21</span>,<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">fill =</span> grp))<span class="sc">+</span></span>
+<span id="cb124-4"><a href="#cb124-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)<span class="sc">+</span></span>
+<span id="cb124-5"><a href="#cb124-5"></a>  <span class="fu">theme_graph</span>()<span class="sc">+</span></span>
+<span id="cb124-6"><a href="#cb124-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="backbone-layout-1-output" class="slide level2 output-location-slide"><h2>backbone layout</h2><div class="cell output-location-slide" data-layout-align="center" data-hash="index_cache/revealjs/backbone_code_1ae5becb3fd3acf58a247b0559a65de0">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/backbone_code-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="backbone-layout-2" class="slide level2">
+<h2>backbone layout</h2>
+<p><img data-src="img/facebook.png"> facebook friendships of a university. Node colour corresponds to dormitory of students</p>
+</section>
+<section id="large-networks" class="slide level2">
+<h2>large networks</h2>
+<p><code>layout="sparse_stress"</code> and <code>layout="pmds"</code> work well for up to 50k nodes</p>
+<div class="text05">
+<div class="cell" data-hash="index_cache/revealjs/runtimes_98e2e463376b4e5c7937db7471c68fd6">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">graph</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">stress</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sparsestress(50)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sparsestress(100)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">drl(igraph)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">mds(igraph)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">pivotmds(50)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">pivotmds(100)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1138bus (n=1138, m=1458)</td>
+<td style="text-align: left;">2.6s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">0.4s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">0.7s</td>
+<td style="text-align: left;">1.7s</td>
+<td style="text-align: left;">1.4s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">0.05s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">0.08s</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3elt (n=4720, m=13722)</td>
+<td style="text-align: left;">113s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.4s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">5.2s</td>
+<td style="text-align: left;">8.4s</td>
+<td style="text-align: left;">95s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">1s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">1.1s</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">power grid (n=4941, m=6594)</td>
+<td style="text-align: left;">134s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">3.4s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">5.6s</td>
+<td style="text-align: left;">6.9s</td>
+<td style="text-align: left;">114s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">1s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">1.1s</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pesa (n=11738 m=67828)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">18.3s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">26.5s</td>
+<td style="text-align: left;">21s</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6.3s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">6.8s</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cond-mat(n=13861 m=44619)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">22.9s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">33.5s</td>
+<td style="text-align: left;">24.8s</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">8.0s</td>
+<td style="text-align: left; font-weight: bold; color: black !important; background-color: #ffd700 !important;">8.7s</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><img data-src="img/squad_network2022.png" class="absolute" style="top: 75px; left: 85px; width: 900px; height: 900px; "></p>
+</div>
+</section>
+<section id="layout-summary" class="slide level2">
+<h2>layout summary</h2>
+<p><strong>most useful layouts</strong><br>
+<code>layout = "stress"</code>: all purpose layout algorithm<br>
+<code>layout = "focus"</code>: ego-centric type layouts<br>
+<code>layout = "centrality"</code>: concentric centrality layout<br>
+<code>layout = "backbone"</code>: emphasize a group structure (<strong>if it exists</strong>)<br>
+<code>layout = "sparse_stress"</code>: large networks</p>
+<p><strong>not covered here</strong><br>
+multilevel layouts<br>
+dynamic layouts<br>
+constrained stress layout algorithm</p>
+</section>
+<section id="miscellaneous" class="slide level2">
+<h2>miscellaneous</h2>
+<p>Do not recompute layout continuously</p>
+<div class="cell" data-hash="index_cache/revealjs/create_layout_8103ea8064c530f81efbac647b9ecb73">
+<div class="sourceCode cell-code" id="cb125" data-code-line-numbers="1,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1"></a>lay <span class="ot">&lt;-</span> <span class="fu">create_layout</span>(g,<span class="st">"stress"</span>)</span>
+<span id="cb125-2"><a href="#cb125-2"></a></span>
+<span id="cb125-3"><a href="#cb125-3"></a><span class="fu">ggraph</span>(lay) <span class="sc">+</span> </span>
+<span id="cb125-4"><a href="#cb125-4"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb125-5"><a href="#cb125-5"></a>  <span class="fu">geom_node_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But need to recompute the layout if attributes change!</p>
+<div class="cell" data-hash="index_cache/revealjs/create_layout2_d8168fd8b9dd7575ff32df72696079e0">
+<div class="sourceCode cell-code" id="cb126" data-code-line-numbers="1,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1"></a>lay <span class="ot">&lt;-</span> <span class="fu">layout_with_stress</span>(g)</span>
+<span id="cb126-2"><a href="#cb126-2"></a></span>
+<span id="cb126-3"><a href="#cb126-3"></a><span class="fu">ggraph</span>(g, <span class="st">"manual"</span>, <span class="at">x =</span> xy[,<span class="dv">1</span>],<span class="at">y =</span> xy[,<span class="dv">2</span>]) <span class="sc">+</span> </span>
+<span id="cb126-4"><a href="#cb126-4"></a>  <span class="fu">geom_edge_link0</span>() <span class="sc">+</span></span>
+<span id="cb126-5"><a href="#cb126-5"></a>  <span class="fu">geom_node_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="edgebundling-flow-maps" class="slide level2">
+<h2>edgebundling &amp; flow maps</h2>
+<p>Using the package <span class="cran-pkg"><a href="https://cran.r-project.org/package=edgebundle">edgebundle</a><i class="fa-brands fa-r-project fa-2xs"></i></span></p>
+
+<img data-src="index_files/figure-revealjs/edgebundle-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="img/flights_nobundle.png" class="r-stretch"></section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+
+<img data-src="img/flights_fdeb.png" class="r-stretch"></section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+
+<img data-src="img/flights_peb.png" class="r-stretch"><div class="footer footer-default">
 <p><span class="citation" data-cites="schochastics">@schochastics</span></p>
 </div>
 </section></section>
