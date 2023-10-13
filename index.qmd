@@ -2,7 +2,7 @@
 title: "Network Analysis in R"
 subtitle: ""
 author: "David Schoch"
-footer: "@schochastics"
+footer: "{{< fa brands r-project >}} https://schochastics.github.io/netAnaR2023 {{< fa brands r-project >}}"
 institute: "Workshop series for Ukraine"
 shortcodes:
   - misc.lua
@@ -96,21 +96,6 @@ but treated as independent entities
 interdependent and overlapping dyads    
 usual (statistical) independence assumptions do not hold
 :::
-
-## 4 pillars of network analysis 
-
-:::{.text15}
-
- 1. Social network analysis is motivated by a structural intuition based on ties linking social actors
- 
- 2. It is grounded in systematic empirical data
- 
- 3. It draws heavily on graphic imagery
- 
- 4. It relies on the use of mathematical and/or computational models
-
-:::
-
 
 ## Levels of Analysis
 
@@ -746,23 +731,10 @@ transitivity(g, type = "global")
 transitivity(g, type = "local", isolates = "zero")
 ```
 
-In empirical networks, we often observe a tendency towards high transitivity ("the friend of a friend is a friend")  
-
-What do you think is the (local/global) transitivity of `greys`?
-
-## Transitivity
 <br>
 
-The value itself is not always enough to judge the level of transitivity of a network. We should also check if it deviates significantly from what would be expected by randomness
+In empirical networks, we often observe a tendency towards high transitivity ("the friend of a friend is a friend")  
 
-```{r transitivity3}
-deg <- degree(g)
-# keep density fixed
-mean(replicate(500,transitivity(rewire(g,each_edge(1)),type = "global")))
-
-# keep degree sequence fixed
-mean(replicate(500,transitivity(sample_degseq(deg),type = "global")))
-```
 ## Degree distribution
 
 <br>
@@ -947,7 +919,7 @@ Tools which allow an indexfree assessment of centrality, including:
 :::{.callout-tip}
 ## Help
 
-Tutorials and material for using netrankr can be found at [netrankr.schochastics.net](http://netrankr.schochastics.net/)
+Tutorials and material for using netrankr can be found at [https://schochastics.github.io/netrankr/](https://schochastics.github.io/netrankr/)
 
 :::
 
@@ -1056,54 +1028,6 @@ Modularity is defined as the fraction of edges that fall within given groups min
 
 **Statistical inference**  
 [stochastic blockmodeling](https://graph-tool.skewed.de/) based on generative models
-
-## Min Cut clustering
-
-```{r mincut}
-g <- sample_islands(2,10,0.9,5)
-g <- simplify(g)
-```
-:::: {.columns}
-
-::: {.column width="50%"}
-```{r mincut_plot}
-#| echo: false
-#| fig.width: 4
-#| fig.height: 4
-#| fig.align: center
-V(g)$name <- 1:vcount(g)
-ggraph(g,"stress") + 
-   geom_edge_link0(edge_width = 0.4) +
-   geom_node_point(shape=21, size = 5,fill= "grey66") +
-   geom_node_text(aes(label = name),size=3) +
-   theme_graph()
-```
-:::
-
-::: {.column width="50%"}
-```{r mincut_calc}
-min_cut(g,value.only = FALSE)
-```
-:::
-::::
-
-Really only works in very obvious cases.
-
-## Hierarchical clustering
-
-```{r hierarch_clust}
-#| fig.width: 8
-#| fig.height: 6
-#| fig.align: center
-D <- distances(g)
-hclust_avg <- hclust(as.dist(D), method = "average")
-cut_avg <- cutree(hclust_avg, k = 2)
-
-plot(hclust_avg)
-rect.hclust(hclust_avg , k = 2, border = 2:6)
-abline(h = 2, col = 'red')
-```
-
 
 ## Clustering with igraph
 
@@ -1293,16 +1217,6 @@ ggraph(sw_bb,"stress")+
   coord_cartesian(clip = "off")
 ```
 
-
-## Application of projections
-
-**Co-voting behavior of US senators**
-
-![](img/senate.jpg)
-
-[Link to paper](https://www.nature.com/articles/s41598-020-74175-w)
-
-
 ## Signed networks
 
 <br>
@@ -1451,8 +1365,9 @@ c(general$criterion,traditional$criterion)
 
 
 ##
-
+:::{.center-x}
 ![](img/tidygraph-meme.jpg)
+:::
 
 ## tidygrabh II
 
@@ -1460,7 +1375,7 @@ c(general$criterion,traditional$criterion)
 
 ##
 
-:::{.center}
+:::{.center-x}
 ![](img/igraph-meme.jpg)
 :::
 
@@ -2469,3 +2384,32 @@ p2 + p1
 ##
 
 ![](img/flights_peb.png)
+
+## Summary of the R Ecosystem
+
+- Analyze "standard" networks with {{< CRAN igraph >}}
+
+- Analyze two-mode network projections with {{< CRAN backbone >}}
+
+- Analyze signed networks with {{< signnet >}}
+
+- Missing something? try {{< CRAN netUtils >}}
+
+- Need toy data? use [networkdata](https://github.com/schochastics/networkdata)
+
+- Need a GUI to analyze networks in RStudio? try {{< CRAN snahelper >}}
+
+- "I like my networks tidy" {{< CRAN tidygraph >}}
+
+- "Is there a ggplot2 for networks?" {{< CRAN ggraph >}}
+
+- ...
+
+
+## Resources for this talk
+
+- Tutorial for Network Visualization: <https://www.mr.schochastics.net/material/netVizR/>
+
+- Tutorial for Network Analysis: <https://www.mr.schochastics.net/material/netAnaR/>
+
+- Tutorial for Tidy Network Analysis: <https://www.mr.schochastics.net/material/tidynetAnaR/>

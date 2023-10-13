@@ -2,3 +2,4 @@ hexwall.R
 index_files/
 /.quarto/
 index_cache/
+/.luarc.json
