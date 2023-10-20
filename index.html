@@ -10,7 +10,7 @@
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="index_files/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="index_files/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.361">
 
   <meta name="author" content="David Schoch">
   <title>Network Analysis in R</title>
@@ -677,9 +677,9 @@ positive and negative relations</p>
 <div class="cell" data-hash="index_cache/revealjs/igraph_obj_03e5becdcc366c454c3ccd61c2e75fb0">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 4ff3396 UN-- 5 6 -- 
+<pre><code>IGRAPH eacb4ac UN-- 5 6 -- 
 + attr: name (v/c)
-+ edges from 4ff3396 (vertex names):
++ edges from eacb4ac (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -720,7 +720,7 @@ Ross--Rachel</code></pre>
 <div class="cell" data-hash="index_cache/revealjs/eadd_attr_675a13e573c5217b6ad51225080abeb5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 6/6 edges from 4ff3396 (vertex names):
+<pre><code>+ 6/6 edges from eacb4ac (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -734,9 +734,9 @@ Ross--Rachel</code></pre>
 <div class="cell" data-hash="index_cache/revealjs/igraph_obj1_dc36023a86ae1913af3f66672ff400ce">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 4ff3396 UNW- 5 6 -- 
+<pre><code>IGRAPH eacb4ac UNW- 5 6 -- 
 + attr: name (v/c), gender (v/c), weight (e/n)
-+ edges from 4ff3396 (vertex names):
++ edges from eacb4ac (vertex names):
 [1] Joey    --Chandler Joey    --Monica   Joey    --Ross     Chandler--Ross    
 [5] Monica  --Ross     Ross    --Rachel  </code></pre>
 </div>
@@ -754,7 +754,7 @@ Nodes: 5, Edges: 6, Density: 0.6, Components: 1, Isolates: 0
  gender(c): M, M, F, M, F ...
 ---
 -Edge Attributes:
- weight(n): 4, 2, 4, 4, 1, 3 ...
+ weight(n): 2, 1, 4, 4, 4, 3 ...
 ---
 -Edges: 
  Joey--Chandler Joey--Monica Joey--Ross Chandler--Ross Monica--Ross
@@ -815,9 +815,9 @@ Steve   1   1     0</code></pre>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weighted =</span> <span class="cn">NULL</span>,</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH e930fc9 UN-- 3 3 -- 
+<pre><code>IGRAPH 0ef69f3 UN-- 3 3 -- 
 + attr: name (v/c)
-+ edges from e930fc9 (vertex names):
++ edges from 0ef69f3 (vertex names):
 [1] Bob--Ann   Bob--Steve Ann--Steve</code></pre>
 </div>
 </div>
@@ -825,9 +825,9 @@ Steve   1   1     0</code></pre>
 <div class="cell" data-hash="index_cache/revealjs/from_edgelist_206f3fa39884d8f27dc92ec578711a92">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_from_edgelist</span>(el, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH adabc74 UN-- 3 3 -- 
+<pre><code>IGRAPH 06bfabb UN-- 3 3 -- 
 + attr: name (v/c)
-+ edges from adabc74 (vertex names):
++ edges from 06bfabb (vertex names):
 [1] Bob--Ann   Bob--Steve Ann--Steve</code></pre>
 </div>
 </div>
@@ -862,11 +862,11 @@ No extra work</p>
 <div class="column" style="width:50%;">
 <div class="cell" data-hash="index_cache/revealjs/el_df_f8a367251e38692dd381b4f6a8f530b3">
 <div class="cell-output-display">
-<table>
+<table data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;">from</th>
-<th style="text-align: left;">to</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">from</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">to</th>
 </tr>
 </thead>
 <tbody>
@@ -896,17 +896,19 @@ No extra work</p>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-hash="index_cache/revealjs/node_df_8d6ada18a728b4c80fed52117c19a668">
 <div class="cell-output-display">
-<table>
+<table data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;">name</th>
-<th style="text-align: left;">sex</th>
-<th style="text-align: right;">birthyear</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sex</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">birthyear</th>
 </tr>
 </thead>
 <tbody>
@@ -942,6 +944,8 @@ No extra work</p>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 </div>
@@ -1361,20 +1365,20 @@ Modularity is defined as the fraction of edges that fall within given groups min
 <span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">&lt;-</span> <span class="fu">membership</span>(clu)</span>
 <span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>mem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 1 1 2 2 2 1 3 1 2 1 1 1 3 3 2 1 3 1 3 1 3 4 4 4 3 4 4 3 3 4 3 3</code></pre>
+<pre><code> [1] 1 1 1 1 2 2 2 1 3 3 2 1 1 1 3 3 2 1 3 1 3 1 3 4 4 4 3 4 4 3 3 4 3 3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clusters as list</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">communities</span>(clu)</span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`1`
- [1]  1  2  3  4  8 10 12 13 14 18 20 22
+ [1]  1  2  3  4  8 12 13 14 18 20 22
 
 $`2`
 [1]  5  6  7 11 17
 
 $`3`
- [1]  9 15 16 19 21 23 27 30 31 33 34
+ [1]  9 10 15 16 19 21 23 27 30 31 33 34
 
 $`4`
 [1] 24 25 26 28 29 32</code></pre>
@@ -1447,7 +1451,7 @@ BRENDA       1   0    1    1    1    1    1    1   0    0    0   0     0   0
 CHARLOTTE    0   0    1    1    1    0    1    0   0    0    0   0     0   0
 FRANCES      0   0    1    0    1    1    0    1   0    0    0   0     0   0
 ELEANOR      0   0    0    0    1    1    1    1   0    0    0   0     0   0
- [ reached getOption("max.print") -- omitted 1 row ]</code></pre>
+PEARL        0   0    0    0    0    1    0    1   1    0    0   0     0   0</code></pre>
 </div>
 </div>
 <p><span class="cran-pkg"><a href="https://cran.r-project.org/package=tnet">tnet</a><i class="fa-brands fa-r-project fa-2xs"></i></span> and <span class="cran-pkg"><a href="https://cran.r-project.org/package=bipartite">bipartite</a><i class="fa-brands fa-r-project fa-2xs"></i></span> offer some methods to analyse two mode networks <strong>directly</strong>, by adapting tools for standard networks.</p>
@@ -1748,7 +1752,7 @@ $criterion
 </div>
 <div class="fragment">
 <div class="absolute" style="bottom: 0px; right: -120px; ">
-<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-1_bd1bc4dc6c657ca0639637fbd4c0fa93">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-1_565e77b0a12c26784e2a2ddb9b86314d">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/mtcars-plot-1-1.png" alt="A scatterplot of the variables mpg and disp from the mtcars dataset" width="576"></p>
 </div>
@@ -1829,7 +1833,7 @@ $criterion
 </div>
 </div>
 <div class="absolute" style="bottom: 0px; right: -120px; ">
-<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-2_c025165550bf2a47906c1890ede33ca3">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-2_8a422c623b921bb2af05d77738832018">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/mtcars-plot-2-1.png" alt="A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl." width="576"></p>
 </div>
@@ -1909,7 +1913,7 @@ $criterion
 </div>
 </div>
 <div class="absolute" style="bottom: 0px; right: -120px; ">
-<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-3_113cf25d1d36467ee7f9b7160af6d74e">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-3_42ee2dc53a65d4cb68e83b88bbc9cdb7">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/mtcars-plot-3-1.png" alt="A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl and the size is proportional to hp." width="576"></p>
 </div>
@@ -1989,7 +1993,7 @@ $criterion
 </div>
 </div>
 <div class="absolute" style="bottom: 0px; right: -120px; ">
-<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-4_8044a64ae0b314dc1472f1cdada1b71f">
+<div class="cell" data-hash="index_cache/revealjs/mtcars-plot-4_0d1eb4f78a203cea335ecc36d5cf8d0d">
 <div class="cell-output-display">
 <p><img data-src="index_files/figure-revealjs/mtcars-plot-4-1.png" alt="A boxplot of the variable drat grouped by cyl from the mtcars dataset" width="576"></p>
 </div>
@@ -2797,13 +2801,12 @@ constrained stress layout algorithm</p>
 <li><p>…</p></li>
 </ul>
 </section>
-<section id="resources" class="slide level2">
-<h2>Resources</h2>
-<p><strong>My tutorials</strong>:</p>
+<section id="resources-for-this-talk" class="slide level2">
+<h2>Resources for this talk</h2>
 <ul>
-<li><p>Network Visualization: <a href="https://www.mr.schochastics.net/material/netVizR/" class="uri">https://www.mr.schochastics.net/material/netVizR/</a></p></li>
-<li><p>Network Analysis: <a href="https://www.mr.schochastics.net/material/netAnaR/" class="uri">https://www.mr.schochastics.net/material/netAnaR/</a></p></li>
-<li><p>Tidy Network Analysis: <a href="https://www.mr.schochastics.net/material/tidynetAnaR/" class="uri">https://www.mr.schochastics.net/material/tidynetAnaR/</a></p></li>
+<li><p>Tutorial for Network Visualization: <a href="https://www.mr.schochastics.net/material/netVizR/" class="uri">https://www.mr.schochastics.net/material/netVizR/</a></p></li>
+<li><p>Tutorial for Network Analysis: <a href="https://www.mr.schochastics.net/material/netAnaR/" class="uri">https://www.mr.schochastics.net/material/netAnaR/</a></p></li>
+<li><p>Tutorial for Tidy Network Analysis: <a href="https://www.mr.schochastics.net/material/tidynetAnaR/" class="uri">https://www.mr.schochastics.net/material/tidynetAnaR/</a></p></li>
 </ul>
 <div class="footer footer-default">
 <p><i class="fa-brands fa-r-project" aria-label="r-project"></i> https://schochastics.github.io/netAnaR2023 <i class="fa-brands fa-r-project" aria-label="r-project"></i></p>
