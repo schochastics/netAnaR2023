@@ -1,0 +1,16 @@
+install.packages("igraph")
+install.packages("ggraph")
+install.packages("graphlayouts")
+install.packages("netrankr")
+install.packages("netUtils")
+install.packages("centiserve")
+install.packages("backbone")
+install.packages("oaqc")
+install.packages("signnet")
+# install.packages("remotes")
+remotes::install_github("schochastics/networkdata")
+
+# optional
+install.packages("ggforce")
+install.packages("edgebundle")
+install.packages("sna")
