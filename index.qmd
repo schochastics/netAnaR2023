@@ -2,8 +2,8 @@
 title: "Network Analysis in R"
 subtitle: ""
 author: "David Schoch"
-footer: "{{< fa brands r-project >}} https://schochastics.github.io/netAnaR2023 {{< fa brands r-project >}}"
-institute: "Workshop series for Ukraine"
+footer: "Workshop series for Ukraine {{< fa brands r-project >}}"
+institute: "GESIS - Leibniz Institute for the Social Sciences"
 shortcodes:
   - misc.lua
 format: 
@@ -189,20 +189,7 @@ homophily, balance theory
 :::
 
 
-## A tiny bit of math
-
-network data are represented as **graphs**  
-"graph" and "network" are technically different
-
-:::{.frame-box}
-A graph $G$ consists of a tuple $(V,E)$ where  
-$V=\{1,2,\ldots,n\}$ are the nodes (or vertices)  
-$E\subseteq \{(i,j): i,j \in V\}$ are the edges (or ties)
-:::
-
-**Most methods rely on concepts from graph theory**
-
-# R Ecosystem for Networks
+# R Ecosystem for Network Analysis
 
 ##
 
@@ -216,6 +203,7 @@ $E\subseteq \{(i,j): i,j \in V\}$ are the edges (or ties)
 ```{r}
 #| label: cranet
 #| echo: false
+#| fig-cap: "CRAN dependencies on igraph, graph, network" 
 g <- readRDS("dependnet.RDS")
 ggraph(g, "stress") +
     geom_edge_link0(
@@ -420,16 +408,14 @@ str(g2)
 
 ## Attributes
 
-:::{.fragment}
 **node attributes**
 ```{r vadd_attr}
 V(g2)$name
 V(g2)$gender <- c("M","M","F","M","F") 
 # g2 <- set_vertex_attr("gender", c("M","M","F","M","F"))
 ```
-:::
+. . .
 
-:::{.fragment}
 **edge attributes**
 
 ```{r eadd_attr}
@@ -437,7 +423,6 @@ E(g2)
 E(g2)$weight <- sample(1:5,size = 6, replace = TRUE)
 # g2 <- set_edge_attr("weight", sample(1:5,size = 6, replace = TRUE))
 ```
-:::
 
 ## Attributes
 
@@ -826,48 +811,6 @@ Being central means being connected to other central nodes
 **PageRank**  
 Similar to eigenvector, just for directed networks 
 
-## Toy example I
-
-```{r load_dbces}
-data("dbces11")
-```
-
-```{r dbces11_basic_plot}
-#| echo: false
-xy <- graphlayouts::layout_with_stress(dbces11)
-ggraph(dbces11,"manual",x=xy[,1],y=xy[,2])+
-  geom_edge_link0()+
-  geom_node_point(shape=21,size=10,fill="grey66")+
-  geom_node_text(aes(label=name))+
-  theme_void()+
-  coord_equal(clip = "off")
-```
-
-## Toy example I
-
-```{r load_dbces1}
-#| eval: false
-data("dbces11")
-```
-
-```{r dbces11_plot}
-#| echo: false
-V(dbces11)$cent <- NA
-V(dbces11)$cent[which.max(degree(dbces11))] <- "DC"
-V(dbces11)$cent[which.max(betweenness(dbces11))] <- "BC"
-V(dbces11)$cent[which.max(closeness(dbces11))] <- "CC"
-V(dbces11)$cent[which.max(eigen_centrality(dbces11)$vector)] <- "EC"
-V(dbces11)$cent[which.max(subgraph_centrality(dbces11))] <- "SC"
-
-ggraph(dbces11,"manual",x=xy[,1],y=xy[,2])+
-  geom_edge_link0()+
-  geom_node_point(shape=21,size=10,aes(fill=cent),show.legend = FALSE)+
-  geom_node_text(aes(filter=!is.na(cent),label=cent))+
-  theme_void()+
-  coord_equal(clip = "off")
-```
-
-
 ## Implemented indices {.smaller}
 
 `igraph` contains the following 10 indices:
@@ -922,8 +865,6 @@ Tools which allow an indexfree assessment of centrality, including:
 Tutorials and material for using netrankr can be found at [https://schochastics.github.io/netrankr/](https://schochastics.github.io/netrankr/)
 
 :::
-
-# 
 
 ## Cohesive groups
 
@@ -1186,37 +1127,6 @@ delete all edge with a weight less than x
 statistical tools using null models: {{< CRAN backbone >}}  
 [Introduction to the package](https://arxiv.org/abs/1912.12779)
 
-## "Backbone" null models
-
-Compare an edge's observed weight in the projection to the distribution of weights expected in a projection obtained from a random bipartite network where both the row vertex degrees and column vertex degrees are ...
-
-**Fixed degree sequence model**  
-... *exactly* fixed at their original values
-
-**Stochastic degree sequence model**  
-... *approximately* fixed at their original values
-
-## "Backbone" example
-
-```{r southern_backbone}
-library(backbone)
-sw_bb <- sdsm(southern_women,alpha = 0.4)
-```
-
-```{r sw_bb_plot}
-#| echo: false
-#| fig.width: 12
-#| fig.height: 8
-#| fig.align: center
-ggraph(sw_bb,"stress")+
-  geom_edge_link(edge_width=0.6,edge_color="grey66",show.legend = FALSE)+
-  geom_node_point(shape=21,fill="grey66",size=8,show.legend = FALSE)+
-  geom_node_text(aes(label=name))+
-  scale_edge_width(range = c(1,4))+
-  theme_void()+
-  coord_cartesian(clip = "off")
-```
-
 ## Signed networks
 
 <br>
@@ -1229,19 +1139,6 @@ typical research questions involve (implemented in {{< CRAN signnet >}}):
 - structural balance
 - blockmodeling
 - (centrality)
-
-## Structural balance theory
-<br>
-
-**developed by Heider in 1940s**:  
-
-- mental discomfort when actors hold contradictory beliefs
-- there is a preference for ’balance’ (consistency) states
-- states of imbalance and mental discomfort create ’tension’
-- imbalanced states are unstable
-- imbalanced states move towards balance
-
-**formalised with graph theory by Cartwright Harary (1950s)**
 
 ## Structural balance theory
 
@@ -1274,7 +1171,7 @@ ggsigned(tribes)
 
 :::{.column width="49%"}
 ```{r tribes_w}
-ggsigned(tribes,weights = T)
+ggsigned(tribes,weights = TRUE)
 ```
 :::
 :::
@@ -1369,7 +1266,7 @@ c(general$criterion,traditional$criterion)
 ![](img/tidygraph-meme.jpg)
 :::
 
-## tidygrabh II
+## tidygraph II
 
 > It more or less wraps the full functionality of `igraph` in a tidy API giving you access to almost all of the dplyr verbs plus a few more, developed for use with relational data.
 
@@ -1380,117 +1277,6 @@ c(general$criterion,traditional$criterion)
 :::
 
 # Network Visualization
-
-## Visualizing "ordinary" data {.smaller}
-:::{ .absolute top=70 left=0}
-```{r mtcars1}
-#| echo: false
-
-mtcars[,1:5] |> 
-  head() |> 
-  knitr::kable() |>
-  column_spec(c(2,4), bold = T,color = "black", background = highlight_col)
-```
-:::
-
-:::{.fragment}
-:::{.absolute bottom=0 right=-120}
-```{r mtcars-plot-1}
-#| echo: false
-#| fig.width: 6
-#| fig.height: 4
-#| fig-alt: "A scatterplot of the variables mpg and disp from the mtcars dataset"
-mtcars |> 
-  ggplot(aes(mpg,disp))+
-  geom_point(size=4) + 
-  theme_minimal() +
-  theme(text = element_text(size = 18))
-```
-:::
-:::
-
-## Visualizing "ordinary" data {.smaller}
-:::{ .absolute top=70 left=0}
-```{r mtcars2}
-#| echo: false
-
-mtcars[,1:5] |> 
-  head() |> 
-  knitr::kable() |>
-  column_spec(2:4, bold = T,color = "black", background = highlight_col)
-```
-:::
-
-:::{.absolute bottom=0 right=-120}
-```{r mtcars-plot-2}
-#| echo: false
-#| fig.width: 6
-#| fig.height: 4
-#| fig-alt: "A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl."
-mtcars |> 
-  ggplot(aes(mpg,disp,col=as.factor(cyl)))+
-  geom_point(size=4) + 
-  theme_minimal() +
-  theme(text = element_text(size = 18),legend.position = "none")
-```
-:::
-
-## Visualizing "ordinary" data {.smaller}
-:::{ .absolute top=70 left=0}
-```{r mtcars3}
-#| echo: false
-
-mtcars[,1:5] |> 
-  head() |> 
-  knitr::kable() |>
-  column_spec(2:5, bold = T,color = "black", background = highlight_col)
-```
-:::
-
-:::{.absolute bottom=0 right=-120}
-```{r mtcars-plot-3}
-#| echo: false
-#| fig.width: 6
-#| fig.height: 4
-#| fig-alt: "A scatterplot of the variables mpg and disp from the mtcars dataset. Dots are colored according to the variable cyl and the size is proportional to hp."
-mtcars |> 
-  ggplot(aes(mpg,disp,col=as.factor(cyl),size=hp))+
-  geom_point() + 
-  scale_size_continuous(range=c(3,9))+
-  theme_minimal() +
-  theme(text = element_text(size = 18),legend.position = "none")
-```
-:::
-
-## Visualizing "ordinary" data {.smaller}
-:::{ .absolute top=70 left=0}
-```{r mtcars4}
-#| echo: false
-
-mtcars[,1:5] |> 
-  head() |> 
-  knitr::kable() |>
-  column_spec(c(3,6), bold = T,color = "black", background = highlight_col)
-```
-:::
-
-:::{.absolute bottom=0 right=-120}
-```{r mtcars-plot-4}
-#| echo: false
-#| fig.width: 6
-#| fig.height: 4
-#| fig-alt: "A boxplot of the variable drat grouped by cyl from the mtcars dataset"
-mtcars %>% 
-  ggplot(aes(as.factor(cyl),drat))+
-  geom_boxplot() + 
-  theme_minimal() +
-  theme(
-    legend.position="none",
-    text = element_text(size = 18)
-  )+
-  labs(x="cyl")
-```
-:::
 
 ## Visualizing networks is hard(er) {.smaller}
 
@@ -1505,7 +1291,7 @@ mtcars %>%
 **network data**
 
 - different data formats (adjacency matrix, edgelist, adjaceny list, ...)
-- how to choose a proper layout algorithm?
+- **how to choose a proper layout algorithm?**
 - more degrees of freedom
 - can we draw any conclusions from a network plot?
 :::
@@ -1532,6 +1318,8 @@ plays well with other packages
 **thoughtful API**  
 extension of ggplot2  
 grammar of graphics
+
+## First full example (dont panic)
 
 ```{r sw_plot}
 #| echo: true
@@ -1622,103 +1410,6 @@ geom_edge_*type*2: can interpolate node parameters
 `geom_edge_link0()` and `geom_edge_parallel0()` suffice
 :::
 
-## 2) edges: geom type examples
-
-```{r geom_edge}
-#| echo: true
-#| fig.height: 4
-#| fig.width: 4
-#| fig.align: center
-#| code-line-numbers: "1-6"
-# create a simple graph of three nodes where all nodes are connected
-g <- graph.full(3) 
-V(g)$type <- c("a", "b", "c")
-
-ggraph(g, "stress") +
-  geom_edge_link(edge_width = 2, aes(color = stat(index)))
-```
-
-## 2) edges: geom type examples
-
-```{r geom_edgen2}
-#| echo: true
-#| fig.height: 4
-#| fig.width: 4
-#| fig.align: center
-#| code-line-numbers: "6"
-# create a simple graph of three nodes where all nodes are connected
-g <- graph.full(3) 
-V(g)$type <- c("a", "b", "c")
-
-ggraph(g, "stress") +
-  geom_edge_link(edge_width = 2, aes(color = stat(index)), n = 3)
-```
-
-## 2) edges: geom type examples
-
-```{r geom_edge2}
-#| echo: true
-#| fig.height: 4
-#| fig.width: 4
-#| fig.align: center
-#| code-line-numbers: "6"
-# create a simple graph of three nodes where all nodes are connected
-g <- graph.full(3)
-V(g)$type <- c("a", "b", "c")
-
-ggraph(g, "stress") +
-  geom_edge_link2(edge_width = 2, aes(color = node.type))
-```
-
-## 2) edges: geom type examples
-
-```{r geom_edge2n2}
-#| echo: true
-#| fig.height: 4
-#| fig.width: 4
-#| fig.align: center
-#| code-line-numbers: "6"
-# create a simple graph of three nodes where all nodes are connected
-g <- graph.full(3)
-V(g)$type <- c("a", "b", "c")
-
-ggraph(g, "stress") +
-  geom_edge_link2(edge_width = 2, aes(color = node.type), n = 3)
-```
-
-## 2) edges: geom type examples
-
-```{r geom_edge0}
-#| echo: true
-#| fig.height: 4
-#| fig.width: 4
-#| fig.align: center
-#| code-line-numbers: "6"
-# create a simple graph of three nodes where all nodes are connected
-g <- graph.full(3)
-V(g)$type <- c("a", "b", "c")
-
-ggraph(g, "stress") +
-  geom_edge_link0(edge_width = 2)
-
-```
-
-## 2) edges: geom type examples
-
-```{r geom_parallel0}
-#| echo: true
-#| fig.height: 4
-#| fig.width: 4
-#| fig.align: center
-# add another edge between nodes one and two to obtain a multi edge.
-g <- add.edges(g, c(1,2))
-
-
-ggraph(g, "stress") +
-  geom_edge_parallel0(edge_width = 0.5)
-
-```
-
 ## 2) edges: aesthetics
 
 :::{.fragment}
@@ -1746,6 +1437,7 @@ edge_colo(u)r, edge_width, edge_linetype, edge_alpha
 #| echo: true
 #| fig.height: 4
 #| fig.width: 4
+#| code-line-numbers: "1-6"
 #| fig.align: center
 # create a simple graph of three nodes where all nodes are connected
 g <- graph.full(3) 
@@ -2122,28 +1814,6 @@ change appearance of geoms in legend (highly optional!)
 **themes**  
 `theme_graph()`
 
-## first full example (revisited)
-
-```{r sw_plot2}
-#| echo: true
-#| eval: false
-#| code-line-numbers: "1|2,3|4,5,6,7|8,9,10|11|12,13|14"
-ggraph(graph = sw1,layout = "stress") + 
-  geom_edge_link0(edge_colour = "grey25",
-                  aes(edge_width = weight)) +
-  geom_node_point(shape = 21, color = "black",stroke = 1,
-                  aes(fill = sex,size = interactions)) +
-  geom_node_text(color = "black", size = 4, repel = FALSE, 
-                 aes(filter = (interactions>=65),label = name))+
-  scale_edge_width(range = c(0.1,1.5),guide = "none")+
-  scale_size(range = c(3,10),guide = "none")+
-  scale_fill_manual(values = sw_palette, na.value = "grey",name = "")+
-  coord_fixed()+
-  theme_graph() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(override.aes = list(size = 6)))
-```
-
 ## go beyond the standard layout
 
 layout stress is sufficient for most network visualization tasks
@@ -2280,27 +1950,7 @@ facebook friendships of a university. Node colour corresponds to dormitory of st
 
 ## large networks
 
-`layout="sparse_stress"` and `layout="pmds"` work well for up to 50k nodes
-
-:::{.text05}
-```{r runtimes}
-#| echo: false
-
-tibble::tribble(
-  ~graph, ~`stress`, ~`sparsestress(50)`, ~`sparsestress(100)`, ~`drl(igraph)`, ~`mds(igraph)`,
-  ~`pivotmds(50)`, ~`pivotmds(100)`,
-     "1138bus (n=1138, m=1458)", "2.6s",     "0.4s",      "0.7s",    "1.7s",    "1.4s",      "0.05s",       "0.08s",
- "3elt (n=4720, m=13722)", "113s",     "3.4s",      "5.2s",    "8.4s",     "95s",   "1s",        "1.1s",
-  "power grid (n=4941, m=6594)", "134s",     "3.4s",      "5.6s",    "6.9s",    "114s",   "1s",        "1.1s",
- "pesa (n=11738 m=67828)",    "-",    "18.3s",     "26.5s",     "21s",       "-",       "6.3s",        "6.8s",
-    "cond-mat(n=13861 m=44619)",    "-",    "22.9s",     "33.5s",   "24.8s",       "-",       "8.0s",        "8.7s"
-  ) %>% knitr::kable(format='html') %>%  column_spec(c(3,4,7,8), bold = T,color = "black", background = highlight_col)
-```
-:::
-
-:::{.fragment}
 ![](img/squad_network2022.png){.absolute left=85 top=75 width=900 height=900}
-:::
 
 ## layout summary
 
@@ -2403,10 +2053,10 @@ p2 + p1
 
 - "Is there a ggplot2 for networks?" {{< CRAN ggraph >}}
 
-- ...
+- I cannot do x because it is not implemented in R {{< CRAN netUtils >}}
 
 
-## Resources for this talk
+## Resources beyond this talk
 
 - Tutorial for Network Visualization: <https://www.mr.schochastics.net/material/netVizR/>
 
